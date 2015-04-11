@@ -31,7 +31,7 @@ EXOMIZER_MAX_OFFSET=16384
 	$(AS65) $(AS65FLAGS) $<
 
 
-all: u4gold.d81 u4gold.d71 u4gold-a.d64 u4gold-b.d64 u4gold.crt
+all: u4remastered.d81 u4remastered.d71 u4remastered-a.d64 u4remastered-b.d64 u4remastered.crt
 
 
 # Tools.
@@ -93,7 +93,7 @@ EXTRACTED_MAP_FILES = $(patsubst %,files/extracted/%.bin,$(MAP_FILES))
 EXTRACTED_TLK_FILES = $(patsubst %,files/extracted/%.bin,$(TLK_FILES))
 EXTRACTED_DNG_FILES = $(patsubst %,files/extracted/%.bin,$(DNG_FILES))
 
-EXTRACT_TMP := $(shell mktemp -d -u -t u4gold)
+EXTRACT_TMP := $(shell mktemp -d -u -t u4remastered)
 
 files/extracted: $(DISK_IMAGES) files/filemap.txt tools/extract_files.py
 	rm -rf $(EXTRACT_TMP)
@@ -801,7 +801,7 @@ src/crackintro/startup.o: files/compressed/loader
 src/crackintro/intro.prg: $(INTRO_OBJS) src/crackintro/intro.cfg
 	$(LD65) -m $(patsubst %.prg,%.map,$@) -C src/crackintro/intro.cfg -o $@ $(LD65FLAGS) $(INTRO_OBJS)
 
-files/compressed/u4gold: src/crackintro/intro.prg | files/compressed
+files/compressed/u4remastered: src/crackintro/intro.prg | files/compressed
 	exomizer sfx sys -m $(EXOMIZER_MAX_OFFSET) -q -o $@ $<
 
 
@@ -810,7 +810,7 @@ src/crackintro/startup1541.o: files/compressed/loader1541
 src/crackintro/intro1541.prg: $(INTRO1541_OBJS) src/crackintro/intro.cfg
 	$(LD65) -m $(patsubst %.prg,%.map,$@) -C src/crackintro/intro.cfg -o $@ $(LD65FLAGS) $(INTRO1541_OBJS)
 
-files/compressed/u4gold1541: src/crackintro/intro1541.prg | files/compressed
+files/compressed/u4remastered1541: src/crackintro/intro1541.prg | files/compressed
 	exomizer sfx sys -q -m $(EXOMIZER_MAX_OFFSET) -o $@ $<
 
 
@@ -827,11 +827,11 @@ clean_intro:
 	rm -f $(INTRO_OBJS)
 	rm -f src/crackintro/intro.prg
 	rm -f src/crackintro/intro.map
-	rm -f files/compressed/u4gold
+	rm -f files/compressed/u4remastered
 	rm -f $(INTRO1541_OBJS)
 	rm -f src/crackintro/intro1541.prg
 	rm -f src/crackintro/intro1541.map
-	rm -f files/compressed/u4gold1541
+	rm -f files/compressed/u4remastered1541
 	rm -f $(INTROEF_OBJS)
 	rm -f src/crackintro/introef.prg
 	rm -f src/crackintro/introef.map
@@ -840,15 +840,15 @@ clean_intro:
 
 # Create disk images.
 
-APPS = files/compressed/u4gold files/compressed/editor
+APPS = files/compressed/u4remastered files/compressed/editor
 IFFL_COMMON = files/iffl/map_iffl files/iffl/tlk_iffl files/iffl/dng_iffl
 
-u4gold.d81: files/compressed/u4gold files/compressed/editor $(IFFL_COMMON) files/iffl/gam_iffl $(SAVEGAME_FILES)
+u4remastered.d81: files/compressed/u4remastered files/compressed/editor $(IFFL_COMMON) files/iffl/gam_iffl $(SAVEGAME_FILES)
 	@echo "Creating $@"
 	@rm -f $@
 	@c1541 >/dev/null -format "u4 remastered/gp,mv" d81 $@
 	@c1541 >/dev/null -attach $@ \
-		-write files/compressed/u4gold "ultima iv" \
+		-write files/compressed/u4remastered "ultima iv" \
 		-write files/compressed/editor "save game editor" \
 		-write files/savegame/$(SAVEGAME)/s1a "s1a" \
 		-write files/savegame/$(SAVEGAME)/s7e "s7e" \
@@ -859,12 +859,12 @@ u4gold.d81: files/compressed/u4gold files/compressed/editor $(IFFL_COMMON) files
 		-write files/iffl/dng_iffl "dng" \
 		-write files/iffl/gam_iffl "gam"
 
-u4gold.d71: files/compressed/u4gold files/compressed/editor $(IFFL_COMMON) files/iffl/gam_iffl $(SAVEGAME_FILES)
+u4remastered.d71: files/compressed/u4remastered files/compressed/editor $(IFFL_COMMON) files/iffl/gam_iffl $(SAVEGAME_FILES)
 	@echo "Creating $@"
 	@rm -f $@
 	@c1541 >/dev/null -format "u4 remastered/gp,mv" d71 $@
 	@c1541 >/dev/null -attach $@ \
-		-write files/compressed/u4gold "ultima iv" \
+		-write files/compressed/u4remastered "ultima iv" \
 		-write files/compressed/editor "save game editor" \
 		-write files/savegame/$(SAVEGAME)/s1a "s1a" \
 		-write files/savegame/$(SAVEGAME)/s7e "s7e" \
@@ -875,15 +875,15 @@ u4gold.d71: files/compressed/u4gold files/compressed/editor $(IFFL_COMMON) files
 		-write files/iffl/dng_iffl "dng" \
 		-write files/iffl/gam_iffl "gam"
 
-u4gold-a.d64: files/compressed/u4gold1541 $(IFFL_COMMON) files/iffl/gam_program_iffl
+u4remastered-a.d64: files/compressed/u4remastered1541 $(IFFL_COMMON) files/iffl/gam_program_iffl
 	@echo "Creating $@"
 	@rm -f $@
 	@c1541 >/dev/null -format "u4 remastered/gp,4a" d64 $@
 	@c1541 >/dev/null -attach $@ \
-		-write files/compressed/u4gold1541 "ultima iv 1541" \
+		-write files/compressed/u4remastered1541 "ultima iv 1541" \
 		-write files/iffl/gam_program_iffl "gam" \
 
-u4gold-b.d64: files/compressed/editor $(IFFL_COMMON) files/iffl/gam_play_iffl $(SAVEGAME_FILES)
+u4remastered-b.d64: files/compressed/editor $(IFFL_COMMON) files/iffl/gam_play_iffl $(SAVEGAME_FILES)
 	@echo "Creating $@"
 	@rm -f $@
 	@c1541 >/dev/null -format "u4 remastered/gp,4b" d64 $@
@@ -899,7 +899,7 @@ u4gold-b.d64: files/compressed/editor $(IFFL_COMMON) files/iffl/gam_play_iffl $(
 		-write files/iffl/gam_play_iffl "gam"
 
 clean_diskimages:
-	rm -f u4gold-a.d64 u4gold-b.d64 u4gold.d71 u4gold.d81
+	rm -f u4remastered-a.d64 u4remastered-b.d64 u4remastered.d71 u4remastered.d81
 
 
 # Create cartridge image.
@@ -956,7 +956,7 @@ src/easyflash/padded.bin: src/easyflash/efs.bin
 src/easyflash/efssg.bin: $(SAVEGAME_FILES)
 	tools/makeefssg.py $(EASYFLASH_SAVE_SIZE) $@ $(SAVEGAME_FILES)
 
-u4gold.crt: $(CRT_BINS)
+u4remastered.crt: $(CRT_BINS)
 	cat $^ > src/easyflash/easyflash.bin
 	tools/gen_ef_crt.py src/easyflash/easyflash.bin $@
 	rm -f src/easyflash/easyflash.bin
@@ -975,7 +975,7 @@ clean_cartridge:
 	rm -f src/easyflash/efs.bin
 	rm -f src/easyflash/efssg.bin
 	rm -f src/easyflash/padded.bin
-	rm -f u4gold.crt
+	rm -f u4remastered.crt
 
 
 .PHONY: clean
