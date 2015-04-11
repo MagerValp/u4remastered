@@ -45,6 +45,7 @@ src/talk/lord_british_talk.prg
 src/talk/talk.prg
 src/tiles/font.bin
 src/tiles/tileset.bin
+src/u4loader/filemap.s
 src/use/use_*.prg
 test*.sh
 tools/backpack
