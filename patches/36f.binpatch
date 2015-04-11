@@ -1,0 +1,46 @@
+# Patch file 6f, food shop.
+
+offset(0006) match("WELCOME TO")       replace("Welcome to")
+
+offset(0030) match(" SAYS:")           replace(" says:")
+offset(0037) match("GOOD DAY, AND")    replace("Good day, and")
+offset(0045) match("WELCOME FRIEND.")  replace("welcome friend.")
+offset(0056) match("MAY I INTEREST")   replace("May i interest")
+offset(0065) match("YOU IN SOME")      replace("you in some")
+offset(0071) match("RATIONS?")         replace("rations?")
+
+offset(0088) match("WE HAVE THE")      replace("We have the")
+offset(0094) match("BEST ADVENTURE")   replace("best adventure")
+offset(00a3) match("RATIONS, 25 FOR")  replace("rations, 25 for")
+offset(00b3) match("ONLY ")            replace("only ")
+
+offset(00d0) match("HOW MANY PACKS")   replace("How many packs")
+offset(00df) match("OF 25 WOULD")      replace("of 25 would")
+offset(00eb) match("YOU LIKE?")        replace("you like?")
+
+offset(014b) match("THANK YOU,")       replace("Thank you,")
+offset(0156) match("ANYTHING ELSE?")   replace("anything else?")
+
+offset(0173) match("GOODBYE,")         replace("Goodbye,")
+offset(017c) match("COME AGAIN!")      replace("come again!")
+
+offset(01a5) match("YOU CANNOT")       replace("You cannot")
+offset(01b0) match("AFFORD ANY!")      replace("afford any!")
+
+offset(01c3) match("YOU CAN ONLY")     replace("You can only")
+offset(01d0) match("AFFORD ")          replace("afford ")
+offset(01e3) match(" PACKS.")          replace(" packs.")
+
+offset(0276) match("THE SAGE DELI")    replace("The Sage Deli")
+offset(0284) match("ADVENTURE FOOD")   replace("Adventure Food")
+offset(0293) match("THE DRY GOODS")    replace("The Dry Goods")
+offset(02a1) match("FOOD FOR THOUGHT") replace("Food for Thought")
+offset(02b2) match("THE MARKET")       replace("The Market")
+offset(02bd) match("SHAMAN")           replace("Shaman")
+offset(02c4) match("WINDRICK")         replace("Windrick")
+offset(02cd) match("DONNAR")           replace("Donnar")
+offset(02d4) match("MINTOL")           replace("Mintol")
+offset(02db) match("MAX")              replace("Max")
+
+offset(0357) match("GOOD, WHAT")       replace("Good, what")
+offset(0362) match("ELSE?")            replace("else?")

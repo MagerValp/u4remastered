@@ -1,0 +1,20 @@
+* text=auto
+
+*.s text
+*.i text
+*.c text
+*.h text
+*.cfg text
+*.binpatch text
+*.sh text
+*.py text
+*.json text
+*.markdown text
+*.txt text
+
+*.prg binary
+*.bin binary
+*.d64 binary
+*.koa binary
+*.png binary
+*.sid binary

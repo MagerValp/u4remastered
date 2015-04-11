@@ -1,0 +1,180 @@
+# Patch file 6d, weapon shop.
+
+offset(0006) match("WELCOME TO")       replace("Welcome to")
+
+offset(0030) match(" SAYS:")           replace(" says:")
+
+offset(0037) match("WELCOME FRIEND,")  replace("Welcome friend,")
+offset(0047) match("ART THOU HERE TO") replace("art thou here to")
+offset(005c) match("BUY OR SELL?")     replace("buy or sell?")
+
+offset(007b) match("VERY GOOD,")       replace("Very good,")
+offset(008a) match("WE HAVE:")         replace("we have:")
+
+offset(0093) match("A-NOTHING")        replace("A-Nothing")
+
+offset(00d2) match("YOUR INTEREST?")   replace("Your interest?")
+
+offset(0121) match("WOULD YOU LIKE")   replace("Would you like")
+offset(0130) match("TO BUY ONE?")      replace("to buy one?")
+
+offset(014f) match("TOO BAD.")         replace("Too bad.")
+
+offset(015c) match("ANYTHING ELSE?")   replace("Anything else?")
+
+offset(0187) match(" SAYS:")           replace(" says:")
+
+offset(018e) match("FARE THEE WELL!")  replace("Fare thee well!")
+
+offset(01c7) match("I FEAR YOU")       replace("I fear you")
+offset(01d2) match("HAVE NOT THE")     replace("have not the")
+offset(01df) match("FUNDS, PERHAPS")   replace("funds, perhaps")
+offset(01ee) match("SOMETHING ELSE.")  replace("something else.")
+
+offset(0234) match(" SAYS:")           replace(" says:")
+offset(023b) match("A FINE CHOICE!")   replace("A fine choice!")
+offset(024a) match("ANYTHING ELSE?")   replace("Anything else?")
+
+offset(0261) match("EXCELLENT, WHAT")  replace("Excellent, what")
+offset(0271) match("WOULDST THOU")     replace("wouldst thou")
+offset(027e) match("LIKE TO SELL?")    replace("like to sell?")
+
+offset(02af) match("THOU DOST NOT")    replace("Thou dost not")
+offset(02bd) match("OWN THAT.")        replace("own that.")
+
+offset(02c7) match("WHAT ELSE MIGHT")  replace("What else might")
+offset(02d7) match("YOU SELL?")        replace("you sell?")
+
+offset(0309) match("I WILL GIVE YOU")  replace("I will give you")
+
+offset(032b) match("gp FOR THAT")      replace("gp for that")
+
+offset(0346) match("DEAL?")            replace("Deal?")
+
+offset(035a) match("HMMPH, WHAT")      replace("Hmmph, what")
+offset(0366) match("ELSE THEN?")       replace("else then?")
+
+offset(03a6) match("FINE, WHAT")       replace("Fine, what")
+offset(03b1) match("ELSE?")            replace("else?")
+
+offset(0473) match("WINDSOR WEAPONRY") replace("Windsor Weaponry")
+offset(0484) match("WILLARD'S")        replace("Willard's")
+offset(048e) match("WEAPONRY")         replace("Weaponry")
+offset(0497) match("THE IRON WORKS")   replace("The Iron Works")
+offset(04a6) match("DUELLING WEAPONS") replace("Duelling Weapons")
+offset(04b7) match("HOOK'S ARMS")      replace("Hook's Arms")
+offset(04c3) match("VILLAGE ARMS")     replace("Village Arms")
+offset(04d0) match("WINSTON")          replace("Winston")
+offset(04d8) match("WILLARD")          replace("Willard")
+offset(04e0) match("PETER")            replace("Peter")
+offset(04e6) match("JUMAR")            replace("Jumar")
+offset(04ec) match("HOOK")             replace("Hook")
+offset(04f1) match("WENDY")            replace("Wendy")
+
+#offset(04f7) match("HANDS")            replace("HANDS")
+#offset(04fd) match("STAFF")            replace("STAFF")
+#offset(0503) match("DAGGER")           replace("DAGGER")
+#offset(050a) match("SLING")            replace("SLING")
+#offset(0510) match("MACE")             replace("MACE")
+#offset(0515) match("AXE")              replace("AXE")
+#offset(0519) match("SWORD")            replace("SWORD")
+#offset(051f) match("BOW")              replace("BOW")
+#offset(0523) match("CROSSBOW")         replace("CROSSBOW")
+#offset(052c) match("FLAMING OIL")      replace("FLAMING OIL")
+#offset(0538) match("HALBERD")          replace("HALBERD")
+#offset(0540) match("MAGIC AXE")        replace("MAGIC AXE")
+#offset(054a) match("MAGIC SWORD")      replace("MAGIC SWORD")
+#offset(0556) match("MAGIC BOW")        replace("MAGIC BOW")
+#offset(0560) match("MAGIC WAND")       replace("MAGIC WAND")
+#offset(056b) match("MYSTIC SWORD")     replace("MYSTIC SWORD")
+#offset(0578) match("HANDS")            replace("HANDS")
+
+offset(057f) match("WE ARE THE ONLY")  replace("We are the only")
+offset(058f) match("STAFF MAKERS IN")  replace("staff makers in")
+offset(059f) match("BRITANNIA, YET")   replace("Britannia, yet")
+offset(05ae) match("SELL THEM FOR")    replace("sell them for")
+offset(05bc) match("ONLY 20gp.")       replace("only 20gp.")
+
+offset(05c8) match("WE SELL THE")      replace("We sell the")
+offset(05d4) match("MOST DEADLY OF")   replace("most deadly of")
+offset(05e3) match("DAGGERS, A")       replace("daggers, a")
+offset(05ee) match("BARGAIN AT")       replace("bargain at")
+offset(05f9) match("ONLY 2gp EACH.")   replace("only 2gp each.")
+
+offset(0609) match("OUR SLINGS ARE")   replace("Our slings are")
+offset(0618) match("MADE FROM ONLY")   replace("made from only")
+offset(0627) match("THE FINEST GUT")   replace("the finest gut")
+offset(0636) match("AND LEATHER,")     replace("and leather,")
+offset(0643) match("'TIS YOURS")       replace("'tis yours")
+offset(064e) match("FOR 25gp.")        replace("for 25gp.")
+
+offset(0659) match("THESE MACES HAVE") replace("These maces have")
+offset(066a) match("A HARDENED SHAFT") replace("a hardened shaft")
+offset(067b) match("AND A 5lb HEAD")   replace("and a 5lb head")
+offset(068a) match("FAIRLY PRICED")    replace("fairly priced")
+offset(0698) match("AT 100gp.")        replace("at 100gp.")
+
+offset(06a3) match("NOTICE THE FINE")  replace("Notice the fine")
+offset(06b3) match("WORKMANSHIP ON")   replace("workmanship on")
+offset(06c2) match("THIS AXE, YOU'LL") replace("this axe, you'll")
+offset(06d3) match("AGREE 225gp IS")   replace("agree 225gp is")
+offset(06e2) match("A GOOD PRICE.")    replace("a good price.")
+
+offset(06f1) match("THE FINE WORK")    replace("The fine work")
+offset(06ff) match("ON THESE SWORDS")  replace("on these swords")
+offset(070f) match("WILL BE THE")      replace("will be the")
+offset(071b) match("DREAD OF THY")     replace("dread of thy")
+offset(0728) match("FOES, FOR 300gp.") replace("foes, for 300gp.")
+
+offset(073a) match("OUR BOWS ARE")     replace("Our bows are")
+offset(0747) match("MADE OF FINEST")   replace("made of finest")
+offset(0756) match("YEW, AND THE")     replace("yew, and the")
+offset(0763) match("ARROWS WILLOW, A") replace("arrows willow, a")
+offset(0774) match("STEAL AT 250gp.")  replace("steal at 250gp.")
+
+offset(0785) match("CROSSBOWS MADE")   replace("Crossbows made")
+offset(0794) match("BY IOLO THE BARD") replace("by Iolo the Bard")
+offset(07a5) match("ARE THE FINEST")   replace("are the finest")
+offset(07b4) match("IN THE WORLD,")    replace("in the world,")
+offset(07c2) match("YOURS FOR 600gp.") replace("yours for 600gp.")
+
+offset(07d4) match("FLASKS OF OIL")    replace("Flasks of oil")
+offset(07e2) match("MAKE GREAT")       replace("make great")
+offset(07ed) match("WEAPONS AND")      replace("weapons and")
+offset(07f9) match("CREATES A WALL")   replace("creates a wall")
+offset(0808) match("OF FIRE TOO,")     replace("of fire too,")
+offset(0815) match("5gp EACH.")        replace("5gp each.")
+
+offset(0820) match("A HALBERD IS")     replace("A halberd is")
+offset(082d) match("A MIGHTY WEAPON")  replace("a mighty weapon")
+offset(083d) match("TO ATTACK OVER")   replace("to attack over")
+offset(084c) match("OBSTACLES; A")     replace("obstacles; a")
+offset(0859) match("MUST AND")         replace("must and")
+offset(0862) match("ONLY 350gp.")      replace("only 350gp.")
+
+offset(086f) match("THIS MAGICAL AXE") replace("This magical axe")
+offset(0880) match("CAN BE THROWN AT") replace("can be thrown at")
+offset(0891) match("THY ENEMY AND")    replace("thy enemy and")
+offset(089f) match("WILL THEN RETURN") replace("will then return")
+offset(08b0) match("ALL FOR 1500gp.")  replace("all for 1500gp.")
+
+offset(08c1) match("MAGICAL SWORDS")   replace("Magical swords")
+offset(08d0) match("SUCH AS THESE")    replace("such as these")
+offset(08de) match("ARE RARE INDEED")  replace("are rare indeed")
+offset(08ee) match("I WILL PART WITH") replace("i will part with")
+offset(08ff) match("ONE FOR 2500gp.")  replace("one for 2500gp.")
+
+offset(0910) match("A MAGICAL BOW")    replace("A magical bow")
+offset(091e) match("WILL KEEP THY")    replace("will keep thy")
+offset(092c) match("ENEMIES FAR AWAY") replace("enemies far away")
+offset(093d) match("OR DEAD! A")       replace("or dead! a")
+offset(0948) match("MUST FOR 2000gp!") replace("must for 2000gp!")
+
+offset(095a) match("THIS MAGIC WAND")  replace("This magic wand")
+offset(096a) match("CASTS MIGHTY")     replace("casts mighty")
+offset(0977) match("BLUE BOLTS TO")    replace("blue bolts to")
+offset(0985) match("STRIKE DOWN THY")  replace("strike down thy")
+offset(0995) match("FOES, 5000gp.")    replace("foes, 5000gp.")
+
+offset(09a4) match("MYSTIC SWORDS")    replace("Mystic swords")
+offset(09b2) match("ARE AN UNKNOWN")   replace("are an unknown")

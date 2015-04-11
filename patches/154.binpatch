@@ -1,0 +1,10 @@
+# Patch file 80, save game roster.
+
+offset(0002) match("MARIAH")    replace("Mariah")
+offset(0022) match("IOLO")      replace("Iolo")
+offset(0042) match("GEOFFREY")  replace("Geoffrey")
+offset(0062) match("JAANA")     replace("Jaana")
+offset(0082) match("JULIA")     replace("Julia")
+offset(00a2) match("DUPRE")     replace("Dupre")
+offset(00c2) match("SHAMINO")   replace("Shamino")
+offset(00e2) match("KATRINA")   replace("Katrina")

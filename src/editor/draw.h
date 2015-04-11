@@ -1,0 +1,13 @@
+void list_players(void);
+void draw_player(unsigned char p);
+void draw_player_template(void);
+void draw_template(void);
+void draw_party_size(void);
+void draw_food_gold(void);
+void draw_mixtures(void);
+void draw_reagents(void);
+void draw_virtues(void);
+void draw_items(void);
+void draw_all(void);
+void draw_help(void);
+void draw_error(unsigned char *msg);

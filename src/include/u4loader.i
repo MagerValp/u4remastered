@@ -1,0 +1,12 @@
+u4loader_jmptab	= $a100
+j_fileio		= u4loader_jmptab + 0
+j_readblock		= u4loader_jmptab + 3
+j_loadtitle		= u4loader_jmptab + 6
+j_togglesnd		= u4loader_jmptab + 9
+j_kernalin		= u4loader_jmptab + 12
+j_setirqv		= u4loader_jmptab + 15
+j_clearkbd		= u4loader_jmptab + 18
+j_irqhandler		= u4loader_jmptab + 21
+j_init_tempmap_cache	= u4loader_jmptab + 24
+j_flush_tempmap_cache	= u4loader_jmptab + 27
+j_save_7e_7f		= u4loader_jmptab + 30

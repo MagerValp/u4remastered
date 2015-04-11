@@ -1,0 +1,4 @@
+# Patch file 61, Britain.
+
+# Fix Thevel's talk file.
+offset(04ef) match(07) replace(06)

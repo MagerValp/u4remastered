@@ -1,0 +1,102 @@
+P_BLACK		= $90
+P_WHITE		= $05
+P_RED		= $1c
+P_CYAN		= $9f
+P_PURPLE	= $9c
+P_GREEN		= $1e
+P_BLUE		= $1f
+P_YELLOW	= $9e
+P_ORANGE	= $81
+P_BROWN		= $95
+P_LIGHT_RED	= $96
+P_DARK_GRAY	= $97
+P_GRAY		= $98
+P_LIGHT_GREEN	= $99
+P_LIGHT_BLUE	= $9A
+P_LIGHT_GRAY	= $9B
+
+P_LOWER_CASE	= $0e
+P_UPPER_CASE	= $0e
+P_DISABLE_CASE	= $08
+P_ENABLE_CASE	= $09
+
+P_RETURN	= $0d
+P_DELETE	= $14
+P_INSERT	= $94
+P_REV_ON	= $12
+P_REV_OFF	= $92
+P_HOME		= $13
+P_CLEAR		= $93
+
+P_CRSR_DOWN	= $11
+P_CRSR_RIGHT	= $1d
+P_CRSR_UP	= $91
+P_CRSR_LEFT	= $9d
+
+P_F1		= $85
+P_F3		= $86
+P_F5		= $87
+P_F7		= $88
+P_F2		= $89
+P_F4		= $8a
+P_F6		= $8b
+P_F8		= $8c
+
+P_ARROW_UP	= $5e
+P_ARROW_LEFT	= $5f
+
+	; A-Z
+	.charmap $41, $c1
+	.charmap $42, $c2
+	.charmap $43, $c3
+	.charmap $44, $c4
+	.charmap $45, $c5
+	.charmap $46, $c6
+	.charmap $47, $c7
+	.charmap $48, $c8
+	.charmap $49, $c9
+	.charmap $4a, $ca
+	.charmap $4b, $cb
+	.charmap $4c, $cc
+	.charmap $4d, $cd
+	.charmap $4e, $ce
+	.charmap $4f, $cf
+	.charmap $50, $d0
+	.charmap $51, $d1
+	.charmap $52, $d2
+	.charmap $53, $d3
+	.charmap $54, $d4
+	.charmap $55, $d5
+	.charmap $56, $d6
+	.charmap $57, $d7
+	.charmap $58, $d8
+	.charmap $59, $d9
+	.charmap $5a, $da
+
+	; a-z
+	.charmap $61, $41
+	.charmap $62, $42
+	.charmap $63, $43
+	.charmap $64, $44
+	.charmap $65, $45
+	.charmap $66, $46
+	.charmap $67, $47
+	.charmap $68, $48
+	.charmap $69, $49
+	.charmap $6a, $4a
+	.charmap $6b, $4b
+	.charmap $6c, $4c
+	.charmap $6d, $4d
+	.charmap $6e, $4e
+	.charmap $6f, $4f
+	.charmap $70, $50
+	.charmap $71, $51
+	.charmap $72, $52
+	.charmap $73, $53
+	.charmap $74, $54
+	.charmap $75, $55
+	.charmap $76, $56
+	.charmap $77, $57
+	.charmap $78, $58
+	.charmap $79, $59
+	.charmap $7a, $5a

@@ -1,0 +1,66 @@
+# Patch file 74, guild shop.
+
+offset(0006) match("AVAST YE MATE")    replace("Avast ye mate")
+offset(0014) match("SHURE YE WISHES")  replace("shure ye wishes")
+offset(0024) match("TO BUY FROM OL'")  replace("to buy from ol'")
+
+offset(0059) match("SAYS: WELCOME TO") replace("says: Welcome to")
+offset(0077) match("LIKE TO SEE MY")   replace("like to see my")
+offset(0086) match("GOODS?")           replace("goods?")
+
+offset(00a6) match("SAYS: GOOD MATE!") replace("says: Good mate!")
+offset(00b7) match("YA SEE I GOTS:")   replace("Ya see I gots:")
+offset(00c6) match("A-TORCHES")        replace("A-Torches")
+offset(00d0) match("B-MAGIC GEMS")     replace("B-Magic gems")
+offset(00dd) match("C-MAGIC KEYS")     replace("C-Magic keys")
+offset(00ea) match("WAT'L IT BE?")     replace("Wat'l it be?")
+
+offset(0122) match("WILL YA BUY?")     replace("Will ya buy?")
+
+offset(013a) match("HMMM...GRMBL...")  replace("Hmmm...grmbl...")
+
+offset(0181) match("WHAT? CAN'T PAY!") replace("What? Can't pay!")
+offset(0192) match("BUZZ OFF SWINE!")  replace("Buzz off swine!")
+
+offset(01ba) match("FINE...FINE...")   replace("Fine...fine...")
+offset(01df) match("SAYS: SEE MORE?")  replace("says: See more?")
+
+offset(0208) match("SAYS: SEE YA")     replace("says: See ya")
+offset(0215) match("MATIE!")           replace("matie!")
+
+offset(0284) match("PIRATES GUILD")    replace("Pirates Guild")
+offset(0292) match("THE GUILD SHOP")   replace("The Guild Shop")
+offset(02a1) match("ONE EYED WILLEY")  replace("One Eyed Willey")
+offset(02b1) match("LONG JOHN LEARY")  replace("Long John Leary")
+
+offset(02c1) match("I CAN GIVE YA 5")  replace("I can give ya 5")
+offset(02d1) match("LONG LASTING")     replace("long lasting")
+offset(02de) match("TORCHES FOR A")    replace("torches for a")
+offset(02ec) match("MERE 50gp.")       replace("mere 50gp.")
+
+offset(02f8) match("I'VE GOT MACICAL") replace("I've got macical")
+offset(0309) match("MAPPING GEMS")     replace("mapping gems")
+offset(0316) match("5 FOR ONLY 60gp.") replace("5 for only 60gp.")
+
+offset(0328) match("MAGICAL KEYS 1")   replace("Magical keys 1")
+offset(0337) match("USE EACH, A FAIR") replace("use each, a fair")
+offset(0348) match("PRICE AT 60gp.")   replace("price at 60gp.")
+offset(0357) match("FOR 6.")           replace("for 6.")
+
+offset(035f) match("SO...YA WANT A")   replace("So...ya want a")
+offset(036e) match("SEXTANT...WELL I") replace("sextant...Well I")
+offset(037f) match("GOTS ONE WHICH I") replace("gots one which I")
+offset(0390) match("MIGHT PART WITH")  replace("might part with")
+offset(03a0) match("FER 900 GOLD!")    replace("fer 900 gold!")
+
+offset(03bd) match("EQUIPMENT")        replace("equipment")
+offset(03d9) match("-TORCHES")         replace("-Torches")
+offset(03f3) match("-GEMS")            replace("-Gems")
+offset(040a) match("-KEYS")            replace("-Keys")
+
+offset(0423) match("-SEXTANTS")        replace("-Sextants")
+
+offset(0449) match("TRO")              replace("Tro")
+offset(044d) match("ZAJAC")            replace("Zajac")
+offset(0453) match("TYRONE")           replace("Tyrone")
+offset(045a) match("TYMUS")            replace("Tymus")

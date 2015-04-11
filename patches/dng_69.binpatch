@@ -1,0 +1,8 @@
+# Patch dungeon room 9 in Hythloth.
+
+# Trigger.
+offset(0000) match(00 00 00 00) replace(16 98 05 04)
+
+# West entry.
+offset(0070) match(00 00 00 00 00 00 00 00) replace(01 01 02 03 03 03 04 01)
+offset(0078) match(00 00 00 00 00 00 00 00) replace(05 04 05 05 04 06 05 03)

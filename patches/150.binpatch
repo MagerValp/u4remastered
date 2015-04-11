@@ -1,0 +1,35 @@
+# Patch file 50, intro and main menu.
+
+# Skip music load.
+offset(0790) match(20) replace(2d)
+
+# Remove Number of drives menu option.
+offset(0811)
+    match(a2 0b a0 12)
+    replace(4c 29 68 ea)
+offset(082e) match(13) replace(12)
+offset(0844) match(14) replace(13)
+offset(088f)
+    match(c9 ce d0 03 4c 38 6e)
+    replace(ea ea ea ea ea ea ea)
+
+# Disable copy protection.
+offset(0c8e)
+    match(20 03 a1 b0 05 68 68 4c a2 67)
+    replace(ea ea ea ea ea ea ea ea ea ea)
+
+# Lower case name input.
+offset(0dca)
+    match(ad 77 02)
+    replace(20 e0 71)
+
+truncate(11e2)
+    append(ad 77 02)    # lda $0277
+    append(c9 41)       # cmp #$41
+    append(90 0b)       # bcc $7012
+    append(c9 5b)       # cmp #$5b
+    append(b0 07)       # bcs $7012
+    append(ae 8d 02)    # ldx $028d
+    append(d0 02)       # bne $7012
+    append(49 20)       # eor #$20
+    append(60)          # rts

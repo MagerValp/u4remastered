@@ -1,0 +1,139 @@
+# Patch file 70, pub.
+
+offset(0015) match(" SAYS:")           replace(" says:")
+offset(001c) match("WELCOME MATE TO")  replace("Welcome mate to")
+
+offset(0046) match(" SAYS:")           replace(" says:")
+offset(0051) match("WHAT'L IT BE,")    replace("What'l it be,")
+offset(0063) match("FOOD ER ALE?")     replace("food er ale?")
+
+offset(0082) match("OUR SPECIALTY IS") replace("Our specialty is")
+offset(00a0) match("WHICH COSTS ")     replace("which costs ")
+
+offset(00c4) match("HOW MANY PLATES")  replace("How many plates")
+offset(00d4) match("WOULD YOU")        replace("would you")
+offset(00de) match("LIKE?")            replace("like?")
+
+offset(013a) match("HERE YE ARR")      replace("Here ye arr")
+offset(0146) match("SOMETHIN ELSE?")   replace("somethin else?")
+
+offset(0166) match("SEE YA MATE!")     replace("See ya mate!")
+
+offset(0190) match("YA CANNOT")        replace("Ya cannot")
+offset(019a) match("AFFORD ANY!")      replace("afford any!")
+offset(01ad) match("YA CAN ONLY")      replace("Ya can only")
+offset(01b9) match("AFFORD ")          replace("afford ")
+offset(01c9) match(" PLATES.")         replace(" plates.")
+
+offset(01e7) match("HERE'S A MUG")     replace("Here's a mug")
+offset(01f4) match("OF OUR BEST")      replace("of our best")
+
+offset(0200) match("THAT'L BE 2gp.")   replace("That'l be 2gp.")
+
+offset(020f) match("YOU PAY?")         replace("You pay?")
+
+offset(022a) match("WON'T PAY, EH")    replace("Won't pay, eh")
+offset(0238) match("YA SCUM, BE GONE") replace("ya scum, be gone")
+offset(0249) match("FORE EY CALL")     replace("fore ey call")
+offset(0256) match("THE GUARDS!")      replace("the guards!")
+
+offset(026d) match("IT SEEMS THAT")    replace("It seems that")
+offset(027b) match("YOU HAVE NOT")     replace("you have not")
+offset(0288) match("THE GOLD,")        replace("the gold,")
+offset(0292) match("GOOD DAY!")        replace("good day!")
+
+offset(02ae) match("WHAT'D YA LIKE")   replace("What'd ya like")
+offset(02bd) match("TO KNOW FRIEND?")  replace("to know friend?")
+
+offset(0311) match("'FRAID I CAN'T")   replace("'fraid i can't")
+offset(0320) match("HELP YA THERE")    replace("help ya there")
+offset(032e) match("FRIEND!")          replace("friend!")
+
+offset(036f) match("THAT SUBJECT IS")  replace("That subject is")
+offset(037f) match("A BIT FOGGY,")     replace("a bit foggy,")
+offset(038c) match("PERHAPS MORE")     replace("perhaps more")
+offset(0399) match("GOLD WILL")        replace("gold will")
+offset(03a3) match("REFRESH MY")       replace("refresh my")
+offset(03ae) match("MEMORY.")          replace("memory.")
+offset(03bb) match("YOU GIVE:")        replace("You give:")
+
+offset(03d8) match("YER DON'T HAVE")   replace("Yer don't have")
+offset(03e7) match("THAT MATE!")       replace("that mate!")
+
+offset(0416) match(" SAYS:")           replace(" says:")
+offset(0430) match("SORRY, I COULD")   replace("Sorry, i could")
+offset(043f) match("NOT HEP YA MATE!") replace("not hep ya mate!")
+offset(0458) match("ANYTHIN' ELSE?")   replace("Anythin' else?")
+
+offset(048b) match(" SAYS:")           replace(" says:")
+offset(0492) match("SORRY, YOU SEEM")  replace("Sorry, you seem")
+offset(04a2) match("TO HAVE TOO")      replace("to have too")
+offset(04ae) match("MANY, BYE!")       replace("many, bye!")
+
+offset(054c) match("SAM")              replace("Sam")
+offset(0550) match("CELESTIAL")        replace("Celestial")
+offset(055a) match("TERRAN")           replace("Terran")
+offset(0561) match("GREG N ROB")       replace("Greg n Rob")
+offset(056c) match("THE CAP'N")        replace("The Cap'n")
+offset(0576) match("ARRON")            replace("Arron")
+offset(057c) match("JOLLY SPIRITS")    replace("Jolly Spirits")
+offset(058a) match("THE BLOODY PUB")   replace("The Bloody Pub")
+offset(0599) match("THE KEG TAP")      replace("The Keg Tap")
+offset(05a5) match("FOLLEY TAVERN")    replace("Folley Tavern")
+offset(05b3) match("CAPTAIN BLACK")    replace("Captain Black")
+offset(05c1) match("TAVERN")           replace("Tavern")
+offset(05c8) match("AXE N ALE")        replace("Axe n Ale")
+
+offset(05d2) match("LAMB CHOPS")       replace("lamb chops")
+offset(05dd) match("DRAGON TARTAR")    replace("dragon tartar")
+offset(05eb) match("BROWN BEANS")      replace("brown beans")
+offset(05f7) match("FOLLEY FILET")     replace("folley filet")
+offset(0604) match("DOG MEAT PIE")     replace("dog meat pie")
+offset(0611) match("GREEN GRANUKIT")   replace("green granukit")
+
+offset(0620) match("AH, THE BLACK")    replace("Ah, the black")
+offset(062e) match("STONE, YES I'VE")  replace("stone, yes i've")
+offset(063e) match("HEARD OF IT.")     replace("heard of it.")
+offset(064b) match("BUT, ONLY THE")    replace("But, only the")
+offset(0659) match("ONE WHO KNOWS")    replace("one who knows")
+offset(0667) match("WHERE IT LIES")    replace("where it lies")
+offset(0675) match("IS THE WIZARD")    replace("is the wizard")
+offset(0683) match("MERLIN.")          replace("Merlin.")
+
+offset(068c) match("FOR NAVAGATION")   replace("For navagation")
+offset(069b) match("A SEXTANT IS")     replace("a sextant is")
+offset(06a8) match("VITAL... ASK")     replace("vital... Ask")
+offset(06b5) match("FOR ITEM 'D'")     replace("for item 'D'")
+offset(06c2) match("IN THE GUILD")     replace("in the guild")
+offset(06cf) match("SHOPS!")           replace("shops!")
+
+offset(06d7) match("HMMM, NOW LET")    replace("Hmmm, now let")
+offset(06e5) match("ME SEE...")        replace("me see...")
+offset(06ef) match("YES, IT WAS THE")  replace("Yes, it was the")
+offset(06ff) match("OLD HERMIT...")    replace("old hermit...")
+offset(070d) match("SLOVEN! HE IS")    replace("Sloven! He is")
+offset(071b) match("TOUGH TO FIND,")   replace("tough to find,")
+offset(072a) match("LIVES NEAR LOCK")  replace("lives near Lock")
+offset(073a) match("LAKE I HEAR.")     replace("Lake i hear.")
+
+offset(0748) match("THE LAST PERSON")  replace("The last person")
+offset(0758) match("I KNEW THAT HAD")  replace("I knew that had")
+offset(0768) match("ANY MANDRAKE")     replace("any mandrake")
+offset(0775) match("WAS AN OLD")       replace("was an old")
+offset(0780) match("ALCHEMIST NAMED")  replace("alchemist named")
+offset(0790) match("CALUMNY.")         replace("Calumny.")
+
+offset(079a) match("IF THOU MUST")     replace("If thou must")
+offset(07a7) match("KNOW OF THAT")     replace("know of that")
+offset(07b4) match("EVILEST OF ALL")   replace("evilest of all")
+offset(07c3) match("THINGS... FIND")   replace("things... Find")
+offset(07d2) match("THE BEGGAR")       replace("the beggar")
+offset(07dd) match("JUDE. HE IS VERY") replace("Jude. He is very")
+offset(07ee) match("VERY POOR!")       replace("very poor!")
+
+offset(07fa) match("OF NIGHTSHADE I")  replace("Of nightshade i")
+offset(080a) match("KNOW BUT THIS...") replace("know but this...")
+offset(081b) match("SEEK OUT VIRGIL")  replace("seek out Virgil")
+offset(082b) match("OR THOU SHALT")    replace("or thou shalt")
+offset(0839) match("MISS!")            replace("miss!")
+offset(083f) match("TRY IN TRINSIC!")  replace("Try in trinsic!")

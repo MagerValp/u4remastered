@@ -1,0 +1,101 @@
+# Patch file 72, healing.
+
+offset(0006) match("WELCOME UNTO")     replace("Welcome unto")
+
+offset(0032) match(" SAYS:")           replace(" says:")
+offset(0039) match("PEACE AND JOY BE") replace("Peace and joy be")
+offset(004a) match("WITH YOU FRIEND.") replace("with you friend.")
+offset(005b) match("ARE YOU IN NEED")  replace("Are you in need")
+offset(006b) match("OF HELP?")         replace("of help?")
+
+offset(008c) match(" SAYS:")           replace(" says:")
+offset(0093) match("WE CAN PERFORM:")  replace("We can perform:")
+offset(00a3) match("A-CURING")         replace("A-Curing")
+offset(00ac) match("B-HEALING")        replace("B-Healing")
+offset(00b6) match("C-RESURRECTION")   replace("C-Resurrection")
+offset(00c5) match("YOUR NEED:")       replace("Your need:")
+
+offset(00fd) match("THOU SUFFERS NOT") replace("Thou suffers not")
+offset(010e) match("FROM POISON!")     replace("from poison!")
+
+offset(0123) match("A CURING WILL")    replace("A curing will")
+offset(0131) match("COST THEE 100gp.") replace("cost thee 100gp.")
+
+offset(014f) match("I SEE BY THY")     replace("I see by thy")
+offset(015c) match("PURSE THAT THOU")  replace("purse that thou")
+offset(016c) match("HAST NOT ENOUGH")  replace("hast not enough")
+offset(017c) match("GOLD.")            replace("gold.")
+
+offset(0189) match("I WILL")           replace("I will")
+offset(0190) match("CURE THEE FOR")    replace("cure thee for")
+offset(019e) match("FREE, BUT GIVE")   replace("free, but give")
+offset(01ad) match("UNTO OTHERS WHEN") replace("unto others when")
+offset(01be) match("EVER THOU MAY!")   replace("ever thou may!")
+
+offset(01ef) match("A HEALING WILL")   replace("A healing will")
+offset(01fe) match("COST THEE 200gp.") replace("cost thee 200gp.")
+
+offset(024d) match("THOU ART NOT")     replace("Thou art not")
+offset(025a) match("DEAD FOOL!")       replace("dead fool!")
+
+offset(026d) match("RESURECTION WILL") replace("Resurection will")
+offset(027e) match("COST THEE 300gp.") replace("cost thee 300gp.")
+
+offset(029b) match("I SEE BY THY")     replace("I see by thy")
+offset(02a8) match("PURSE THAT THOU")  replace("purse that thou")
+offset(02b8) match("HAST NOT ENOUGH")  replace("hast not enough")
+offset(02c8) match("GOLD. I CANNOT")   replace("gold. I cannot")
+offset(02d7) match("AID THEE.")        replace("aid thee.")
+
+offset(030a) match(" ASKS:")           replace(" asks:")
+offset(0311) match("WHO IS IN NEED?")  replace("Who is in need?")
+offset(032a) match("NO ONE?")          replace("No one?")
+
+offset(0350) match(" ASKS:")           replace(" asks:")
+offset(0357) match("DO YOU NEED")      replace("Do you need")
+offset(0363) match("MORE HELP?")       replace("more help?")
+
+offset(0395) match(" SAYS:")           replace(" says:")
+offset(039c) match("MAY THY LIFE")     replace("May thy life")
+offset(03a9) match("BE GUARDED BY")    replace("be guarded by")
+offset(03b7) match("THE POWERS OF")    replace("the powers of")
+offset(03c5) match("GOOD.")            replace("good.")
+
+offset(03d1) match("ART THOU WILLING") replace("Art thou willing")
+offset(03e2) match("TO GIVE 100pts")   replace("to give 100pts")
+offset(03f1) match("OF THY BLOOD TO")  replace("of thy blood to")
+offset(0401) match("AID OTHERS?")      replace("aid others?")
+
+offset(0430) match("THOU ART A")       replace("Thou art a")
+offset(043b) match("GREAT HELP, WE")   replace("great help, we")
+offset(044a) match("ARE IN DIRE")      replace("are in dire")
+offset(0456) match("NEED!")            replace("need!")
+
+offset(047f) match("WILT THOU PAY?")   replace("Wilt thou pay?")
+
+offset(049b) match("THEN I CANNOT")    replace("Then i cannot")
+offset(04a9) match("AID THEE.")        replace("aid thee.")
+
+offset(055e) match("THE ROYAL HEALER") replace("The Royal Healer")
+offset(056f) match("THE TRUTH HEALER") replace("The Truth Healer")
+offset(0580) match("THE LOVE HEALER")  replace("The Love Healer")
+offset(0590) match("COURAGE HEALER")   replace("Courage Healer")
+offset(059f) match("THE HEALER")       replace("The Healer")
+offset(05aa) match("WOUND HEALING")    replace("Wound Healing")
+offset(05b8) match("HEAL AND HEALTH")  replace("Heal and Health")
+offset(05c8) match("JUST HEALING")     replace("Just Healing")
+offset(05d5) match("THE MYSTIC HEAL")  replace("The Mystic Heal")
+offset(05e5) match("THE HEALER SHOP")  replace("The Healer Shop")
+offset(05f5) match("PENDRAGON")        replace("Pendragon")
+offset(05ff) match("STARFIRE")         replace("Starfire")
+offset(0608) match("SALLE'")           replace("Salle'")
+offset(060f) match("WINDWALKER")       replace("Windwalker")
+offset(061a) match("HARMONY")          replace("Harmony")
+offset(0622) match("CELEST")           replace("Celest")
+offset(0629) match("TRIPLET")          replace("Triplet")
+offset(0631) match("JUSTIN")           replace("Justin")
+offset(0638) match("SPIRAN")           replace("Spiran")
+offset(063f) match("QUAT")             replace("Quat")
+
+offset(06d5) match("THOU HAST LOST")   replace("Thou hast lost")
+offset(06e4) match("AN EIGHTH!")       replace("an eighth!")

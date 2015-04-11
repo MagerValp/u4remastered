@@ -1,0 +1,24 @@
+# Patch file 75, stable.
+
+offset(0006) match("WELCOME FRIEND!")  replace("Welcome friend!")
+offset(0016) match("CAN I INTEREST")   replace("Can I interest")
+offset(0025) match("THEE IN HORSES?")  replace("thee in horses?")
+
+offset(0040) match("A SHAME, THOU")    replace("A shame, thou")
+offset(004e) match("LOOKS LIKE COULD") replace("looks like could")
+offset(005f) match("USE A GOOD")       replace("use a good")
+offset(006a) match("HORSE!")           replace("horse!")
+
+offset(0077) match("FOR ONLY ")        replace("For only ")
+offset(0089) match("00g.p.")           replace("00g.p.")
+offset(0090) match("THOU CAN HAVE")    replace("thou can have")
+offset(009e) match("THE BEST! WILT")   replace("the best! Wilt")
+offset(00ad) match("THOU BUY?")        replace("thou buy?")
+
+offset(00cf) match("IT SEEMS THOU")    replace("It seems thou")
+offset(00dd) match("HAST NOT GOLD")    replace("hast not gold")
+offset(00eb) match("ENOUGH TO PAY!")   replace("enough to pay!")
+
+offset(0103) match("HERE, A BETTER")   replace("Here, a better")
+offset(0112) match("BREED THOU SHALT") replace("breed thou shalt")
+offset(0123) match("NOT FIND EVER!")   replace("not find ever!")

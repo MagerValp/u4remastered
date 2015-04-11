@@ -1,0 +1,3 @@
+# Patch file 55, music code.
+
+offset(0602) match(4b 01 01 01) truncate(0602)

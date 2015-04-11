@@ -1,0 +1,86 @@
+# Patch file 71, reagent shop.
+
+offset(0006) match("A BLIND WOMAN")    replace("A blind woman")
+offset(0014) match("TURNS TO YOU AND") replace("turns to you and")
+offset(0025) match("SAYS: WELCOME TO") replace("says: Welcome to")
+
+offset(0049) match("I AM ")            replace("I am ")
+
+offset(005b) match("ARE YOU IN NEED")  replace("Are you in need")
+offset(006b) match("OF REAGENTS?")     replace("of reagents?")
+
+offset(0093) match(" SAYS:")           replace(" says:")
+offset(009a) match("PERHAPS ANOTHER")  replace("Perhaps another")
+offset(00aa) match("TIME THEN....")    replace("time then....")
+offset(00b8) match("AND SLOWLY")       replace("and slowly")
+offset(00c3) match("TURNS AWAY.")      replace("turns away.")
+
+offset(00d5) match("VERY WELL,")       replace("Very well,")
+offset(00e4) match("I HAVE")           replace("I have")
+
+offset(00eb) match("A-SULFEROUS ASH")  replace("A-Sulferous ash")
+offset(00fb) match("B-GINSENG")        replace("B-Ginseng")
+offset(0105) match("C-GARLIC")         replace("C-Garlic")
+offset(010e) match("D-SPIDER SILK")    replace("D-Spider silk")
+offset(011c) match("E-BLOOD MOSS")     replace("E-Blood moss")
+offset(0129) match("F-BLACK PEARL")    replace("F-Black pearl")
+
+offset(0137) match("YOUR INTEREST:")   replace("Your interest:")
+
+offset(0165) match("VERY WELL,")       replace("Very well,")
+offset(0170) match("WE SELL")          replace("We sell")
+offset(017a) match("-")               replace("-")
+offset(0186) match("FOR ")             replace("for ")
+
+offset(01a9) match("gp.")              replace("gp.")
+
+offset(01ae) match("HOW MANY WOULD")   replace("How many would")
+offset(01bd) match("YOU LIKE,")        replace("you like,")
+
+offset(01d7) match("I SEE, THEN")      replace("I see, then")
+
+offset(01fb) match("VERY GOOD, THAT")  replace("Very good, that")
+offset(020b) match("WILL BE ")         replace("will be ")
+offset(021d) match("g.p.")             replace("g.p.")
+
+offset(0227) match("YOU PAY:")         replace("You pay:")
+
+offset(0242) match("HEY, COME ON")     replace("Hey, come on")
+offset(024f) match("LETS HEAR THE")    replace("lets hear the")
+offset(025d) match("GOLD DROP!")       replace("gold drop!")
+
+offset(028c) match("IT SEEMS YOU")     replace("It seems you")
+offset(0299) match("HAVE NOT THE")     replace("have not the")
+offset(02a6) match("GOLD!")            replace("gold!")
+
+offset(02dd) match("VERY GOOD,")       replace("Very good,")
+offset(02f2) match("ANYTHING ELSE?")   replace("anything else?")
+
+offset(030f) match("SHE SAYS:")        replace("She says:")
+offset(0319) match("PERHAPS ANOTHER")  replace("perhaps another")
+offset(0329) match("TIME.... AND")     replace("time.... and")
+offset(0336) match("SLOWLY TURNS")     replace("slowly turns")
+offset(0343) match("AWAY.")            replace("away.")
+
+offset(0401) match("MAGICAL HERBS")    replace("Magical Herbs")
+offset(040f) match("HERBS AND SPICE")  replace("Herbs and Spice")
+offset(041f) match("THE MAGICS")       replace("The Magics")
+offset(042a) match("MAGIC MENTAR")     replace("Magic Mentar")
+offset(0437) match("MARGOT")           replace("Margot")
+offset(043e) match("SASHA")            replace("Sasha")
+offset(0444) match("SHIELA")           replace("Shiela")
+offset(044b) match("SHANNON")          replace("Shannon")
+
+offset(0453) match("SULFER ASH")       replace("sulfer ash")
+offset(045e) match("GINSENG")          replace("ginseng")
+offset(0466) match("GARLIC")           replace("garlic")
+offset(046d) match("SPIDER SILK")      replace("spider silk")
+offset(0479) match("BLOOD MOSS")       replace("blood moss")
+offset(0484) match("BLACK PEARL")      replace("black pearl")
+offset(0490) match("NIGHTSHADE")       replace("nightshade")
+offset(049b) match("MANDRAKE")         replace("mandrake")
+
+offset(04cd) match("REAGENTS")         replace("reagents")
+
+offset(058a) match("THOU HAST LOST")   replace("Thou hast lost")
+offset(0599) match("AN EIGHTH!")       replace("an eighth!")

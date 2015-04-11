@@ -1,0 +1,21 @@
+# Patch file 7b, mix reagents.
+
+offset(000b) match("Mix reagents")     replace("Mix reagents")
+offset(001c) match("For spell:")       replace("For spell:")
+
+offset(0034) match("NONE!")            replace("None!")
+offset(0061) match("REAGENT:")         replace("Reagent:")
+
+offset(0083) match("NONE OWNED!")      replace("None owned!")
+
+offset(00aa) match("YOU MIX THE")      replace("You mix the")
+offset(00b6) match("REAGENTS AND...")  replace("reagents and...")
+offset(00d5) match("IT FIZZLES!")      replace("it fizzles!")
+offset(00eb) match("SUCCESS!")         replace("success!")
+
+offset(013a) match("REAGENTS")         replace("Reagents")
+
+offset(019d) match("MIXTURES")         replace("Mixtures")
+
+
+offset(0227) match(20 00 08 a9) truncate(0227)

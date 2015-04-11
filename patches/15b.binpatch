@@ -1,0 +1,279 @@
+# Patch file 5b, game main.
+
+offset(003e) match("NO ACTIVE GAME!")  replace("No active game!")
+
+offset(00fe) match("Zzzzz")            replace("Zzzzz")
+offset(010b) match("Pass")             replace("Pass")
+offset(0117) match("WHAT?")            replace("what?")
+offset(0129) match("NOT A PLAYER!")    replace("Not a player!")
+offset(013e) match("ONLY ON FOOT!")    replace("Only on foot!")
+offset(0153) match("NOTHING THERE!")   replace("Nothing there!")
+offset(0169) match("SLOW PROGRESS!")   replace("Slow progress!")
+offset(017d) match("NOT HERE!")        replace("Not here!")
+offset(018e) match("CAN'T!")           replace("Can't!")
+offset(019c) match("ABORTED!")         replace("Aborted!")
+offset(01af) match("DONE.")            replace("Done.")
+offset(01bc) match("YOU HAVE NONE!")   replace("You have none!")
+offset(01d2) match("DISABLED!")        replace("Disabled!")
+offset(01e3) match("BLOCKED!")         replace("Blocked!")
+offset(01fc) match("DRIFT ONLY!")      replace("Drift only!")
+offset(02f2) match("Advance")          replace("Advance")
+offset(032f) match("Retreat")          replace("Retreat")
+
+offset(040b) match("left")             replace("left")
+offset(04d3) match("right")            replace("right")
+
+offset(05a4) match("Turn ")            replace("Turn ")
+offset(05ae) match("Sail ")            replace("Sail ")
+
+offset(0617) match("LEAVING...")       replace("Leaving...")
+
+offset(083f) match("Cast spell:")      replace("Cast spell:")
+offset(084b) match("player-")          replace("player-")
+
+offset(0871) match("SPELL-")           replace("spell-")
+
+offset(08cb) match("M.P. TOO LOW!")    replace("M.P. too low!")
+
+offset(0943) match("WHO-")             replace("Who-")
+
+offset(09dc) match("WH0-")             replace("Who-")
+
+offset(0a92) match("TYPE-")            replace("Type-")
+
+offset(0b98) match("TO PHASE-")        replace("To phase-")
+
+offset(0bdc) match("WHO-")             replace("Who-")
+
+offset(0ca1) match("WHO-")             replace("Who-")
+
+offset(0e43) match("DUNGEON ONLY!")    replace("Dungeon only!")
+offset(0e5f) match("COMBAT ONLY!")     replace("Combat only!")
+offset(0e7c) match("OUTDOORS ONLY!")   replace("Outdoors only!")
+
+offset(0ebe) match("FAILED!")          replace("Failed!")
+offset(0ee8) match("DIRECTION-")       replace("Direction-")
+
+offset(10cb) match("ruin!")            replace("ruin!")
+offset(10d8) match("towne!")           replace("towne!")
+
+offset(1130) match("village!")         replace("village!")
+offset(1145) match("castle!")          replace("castle!")
+
+offset(116b) match("the")              replace("the")
+offset(116f) match("shrine of")        replace("shrine of")
+
+offset(1248) match("Fire-")            replace("Fire-")
+
+offset(1271) match("ONLY BROADSIDES!") replace("Only broadsides!")
+
+offset(1308) match("Get chest, who")   replace("Get chest, who")
+offset(1317) match("will open-")       replace("will open-")
+
+offset(13c8) match("ACID")             replace("Acid")
+offset(13d7) match("SLEEP")            replace("Sleep")
+offset(13e7) match("POISON")           replace("Poison")
+offset(13f4) match("BOMB")             replace("Bomb")
+offset(13fc) match(" TRAP!")           replace(" trap!")
+offset(1423) match("EVADED!")          replace("Evaded!")
+
+offset(1475) match("THE CHEST HOLDS:") replace("The chest holds:")
+offset(149a) match("-GOLD!")           replace(" gold!")
+offset(14a8) match("Hole up & camp")   replace("Hole up & camp")
+offset(14ce) match("MUST BE ON FOOT!") replace("Must be on foot!")
+
+offset(1509) match("Ignite torch!")    replace("Ignite torch!")
+offset(1535) match("Jimmy lock-")      replace("Jimmy lock-")
+offset(156d) match("Klimb ")           replace("Klimb ")
+
+offset(1594) match("up!")              replace("up!")
+offset(15a3) match("To level ")        replace("To level ")
+
+offset(15c4) match("altitude")         replace("altitude")
+
+offset(15ec) match("to")               replace("to")
+offset(15ef) match("second floor!")    replace("second floor!")
+
+offset(1613) match("Locate position")  replace("Locate position")
+
+offset(162c) match("WITH ")            replace("with ")
+offset(1638) match("with sextant:")    replace("with sextant:")
+offset(1647) match(" latitude:")       replace(" latitude:")
+
+offset(1672) match("longitude:")       replace("longitude:")
+
+offset(16a9) match("Mix reagents")     replace("Mix reagents")
+
+offset(16d1) match("New order:")       replace("New order:")
+offset(16dc) match("exchange #")       replace("exchange #")
+offset(170e) match("    with #")       replace("    with #")
+offset(1761) match("YOU MUST LEAD!")   replace("You must lead!")
+
+offset(1781) match("Open-")            replace("Open-")
+
+offset(17b7) match("OPENED!")          replace("Opened!")
+offset(17c6) match("Peer at ")         replace("Peer at ")
+offset(17dc) match("a gem!")           replace("a gem!")
+
+offset(1819) match("Quit & save...")   replace("Quit & save...")
+
+offset(18a9) match(" moves!")          replace(" moves!")
+offset(18c4) match("Ready a weapon")   replace("Ready a weapon")
+offset(18d3) match("for player-")      replace("for player-")
+offset(18f3) match("Weapon:")          replace("Weapon:")
+
+offset(197a) match("A ")               replace("A ")
+offset(198e) match("MAY NOT USE A")    replace("may not use a")
+offset(19ae) match("Search...")        replace("Search...")
+
+offset(19d3) match("Talk-")            replace("Talk-")
+
+offset(1a1b) match("FUNNY, NO")        replace("Funny, no")
+offset(1a25) match("RESPONSE!")        replace("response!")
+
+offset(1af9) match("Use...")           replace("Use...")
+
+offset(1b27) match("Volume ")          replace("Volume ")
+offset(1b3a) match("ON")               replace("on")
+offset(1b48) match("OFF")              replace("off")
+offset(1b53) match("Wear armour")      replace("Wear armour")
+offset(1b5f) match("for player-")      replace("for player-")
+offset(1b7f) match("Armour:")          replace("Armour:")
+
+offset(1c02) match("X-it ")            replace("X-it ")
+
+offset(1c73) match("Yell ")            replace("Yell ")
+offset(1c91) match("whoa!")            replace("whoa!")
+offset(1c9e) match("giddyup!")         replace("giddyup!")
+offset(1cae) match("Ztats for-")       replace("Ztats for-")
+offset(1cd8) match("PLR-")             replace("PLR-")
+
+offset(1d2f) match("MP:")              replace("MP:")
+offset(1d44) match("LV:")              replace("LV:")
+offset(1d59) match("STR:")             replace("STR:")
+offset(1d6f) match("DEX:")             replace("DEX:")
+offset(1d85) match("INT:")             replace("INT:")
+offset(1d9b) match("HP:")              replace("HP:")
+offset(1db7) match("HM:")              replace("HM:")
+offset(1dd3) match("EX:")              replace("EX:")
+offset(1def) match("W:")               replace("W:")
+offset(1e06) match("A:")               replace("A:")
+
+offset(1eb8) match("WEAPONS")          replace("Weapons")
+
+offset(1f1b) match("A-HANDS")          replace("A-Hands")
+offset(1f3a) match("ARMOUR")           replace("Armour")
+
+offset(1f95) match("A-NO ARMOUR")      replace("A-No armour")
+offset(1fb4) match("EQUIPMENT")        replace("Equipment")
+offset(1fcd) match("-TORCHES")         replace("-Torches")
+offset(1fe4) match("-GEMS")            replace("-Gems")
+offset(1ff8) match("-KEYS")            replace("-Keys")
+offset(200e) match("-SEXTANTS")        replace("-Sextants")
+offset(202a) match("ITEMS")            replace("Items")
+
+offset(2042) match("STONES:")          replace("Stones:")
+
+offset(206a) match("RUNES:")           replace("Runes:")
+
+offset(2096) match("BELL ")            replace("Bell ")
+offset(20a6) match("BOOK ")            replace("Book ")
+offset(20b6) match("CANDL")            replace("Candl")
+
+offset(20c7) match("3 PART KEY:")      replace("3 part key:")
+
+offset(2102) match("HORN")             replace("Horn")
+offset(2112) match("WHEEL")            replace("Wheel")
+offset(2125) match("SKULL")            replace("Skull")
+
+offset(2156) match("REAGENTS")         replace("Reagents")
+
+offset(21b9) match("MIXTURES")         replace("Mixtures")
+
+offset(22c9) match("BRIDGE TROLLS!")   replace("Bridge trolls!")
+
+offset(2388) match("WINDS!")           replace("Winds!")
+offset(239b) match("FALLING ROCKS!")   replace("Falling rocks!")
+offset(23b2) match("PIT!")             replace("Pit!")
+
+offset(2424) match("STARVING!!!")      replace("Starving!!!")
+
+offset(26f0) match("ATTACKED BY")      replace("Attacked by")
+
+offset(2cbe) match("IT'S DARK!")       replace("It's dark!")
+
+offset(2dcc) match("THE ALTER ROOM")   replace("The altar room")
+offset(2ddb) match("OF ")              replace("of ")
+offset(2dea) match("TRUTH")            replace("truth")
+offset(2df8) match("LOVE")             replace("love")
+offset(2e05) match("COURAGE")          replace("courage")
+
+
+offset(343c) match("FLEES!")           replace("flees!")
+
+offset(354c) match("BATTLE IS LOST!")  replace("Battle is lost!")
+offset(357c) match("LEAVE ROOM!")      replace("Leave room!")
+offset(35d2) match("INTO DUNGEON")     replace("into dungeon")
+
+
+offset(3605) match("VICTORY!")         replace("Victory!")
+
+offset(3782) match("IS KILLED!")       replace("is killed!")
+
+offset(37d3) match("North")            replace("North")
+
+offset(37ee) match("South")            replace("South")
+
+offset(3809) match("East")             replace("East")
+
+offset(3823) match("West")             replace("West")
+
+offset(391f) match("ALL MUST USE")     replace("All must use")
+offset(392c) match("THE SAME EXIT!")   replace("the same exit!")
+
+
+offset(3a09) match("RANGE-")           replace("Range-")
+
+offset(3a48) match("LAST ONE!")        replace("Last one!")
+
+offset(3b3a) match("KILLED!")          replace("killed!")
+
+offset(3b9d) match("FLEEING!")         replace("fleeing!")
+offset(3bb1) match("CRITICAL!")        replace("critical!")
+offset(3bc6) match("HEAVILY")          replace("heavily")
+offset(3bd8) match("LIGHTLY")          replace("lightly")
+offset(3be6) match("BARELY")           replace("barely")
+offset(3bf0) match(" WOUNDED!")        replace(" wounded!")
+
+offset(3c0e) match("MISSED!")          replace("Missed!")
+
+offset(3c7c) match("Cast, ")           replace("Cast, ")
+offset(3c89) match("Get chest!")       replace("Get chest!")
+
+offset(3cd0) match("Ready weapon:")    replace("Ready weapon:")
+offset(3ce5) match("Ztats")            replace("Ztats")
+
+offset(410a) match("POISONED!")        replace("Poisoned!")
+offset(4134) match("ELECTRIFIED!")     replace("Electrified!")
+offset(414d) match("FIERY ")           replace("Fiery ")
+offset(415e) match("SLEPT!")           replace("slept!")
+offset(4171) match("FAILED.")          replace("Failed.")
+
+offset(4199) match("LAVA ")            replace("Lava ")
+offset(41a9) match("MAGICAL ")         replace("Magical ")
+offset(41b8) match("HIT!")             replace("hit!")
+
+offset(4308) match("North")            replace("North")
+offset(4313) match("South")            replace("South")
+offset(431e) match("East")             replace("East")
+offset(4328) match("West")             replace("West")
+
+offset(4490) match("THOU HAST LOST")   replace("Thou hast lost")
+offset(449f) match("AN EIGHTH!")       replace("an eighth!")
+
+offset(45a8) match("THY SHIP SINKS!")  replace("Thy ship sinks!")
+
+offset(47c9) match("BRIDGE TROLLS!")   replace("Bridge trolls!")
+
+
+offset(47b2) match(a5 1b c9 01) truncate(47b2)

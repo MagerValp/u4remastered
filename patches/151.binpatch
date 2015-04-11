@@ -1,0 +1,13 @@
+# Patch file 51, initiate a new game.
+
+# SuperCPU patch for moongates.
+#offset(0052) match(40 67) replace(e6 96)
+#offset(005c) match(72 68) replace(f0 96)
+#truncate(32e8)
+#insert(8d 7a d0 20 40 67 8d 7b d0 60 8d 7a d0 20 72 68 8d 7b d0 60)
+
+# Fix crashes due to misplaced CLI.
+offset(0431) match(60) insert(58)
+offset(0420) delete(58)
+offset(0405) match(ad) insert(58)
+offset(03f7) delete(58)

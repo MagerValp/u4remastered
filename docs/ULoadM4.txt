@@ -1,0 +1,163 @@
+Ultima IV IFFL Loader
+=====================
+
+This is an overview of ULoad Model 4, the IFFL loader used in Ultima IV Remasterd.
+
+
+Ultima IV Filesystem
+--------------------
+
+The game's files are stored as raw, sequential 256-byte sectors on four disk sides:
+
+    Program     Loader, main menu, intro, main game code.
+    Britannia   Overworld map, save game files.
+    Towne       Castle, towne, and village maps, shops, and conversations.
+    Underworld  Dungeons, rooms, end game.
+
+The first sector on each disk contains a single 1-byte file that serves as the disk ID. The overworld map tiles, conversations, and dungeon rooms are stored on the following 256 or 176 sectors. The other game files are indexed by two tables, one for files that are less than 256 bytes long, and one for files that are a multiple of 256 bytes long. Short files are identified by a file index < $20, and long files use an index of >= $40. The start of each file is stored as a 16-bit sector number ($0000 is track 1 sector 0), a length byte, and a load address.
+
+Some files are common to several disks (e.g. the music), some use the same slot but differs in content (e.g. the code for using items). I have chosen to identify the files based on the disk they are extracted from (1-4) and the index in the file table. For example file 277, peer at a gem code, is from the Britannia disk and is at offset $77 - $40 = $37 in the table, which has a load address of $9000, is $05 sectors long, and starts at offset $26300 in the disk image (track 31, sector 13). 377 on the Towne disk contains the exact same data, but 477 instead contains the code for rendering dungeon maps. When there are duplicate files I keep the lowest numbered and discard any other (in this example 277 and 477 are kept).
+
+Tools used:
+
+* `extract_files.py` takes disk images of the original game and extracts all data to files.
+
+
+IFFL Format
+-----------
+
+The loader uses an IFFL system which packs up to 256 game files into each archive. The four IFFL archives used are:
+
+    MAP     Britannia disk map (256).
+    TLK     Towne disk conversations (256).
+    DNG     Underworld disk dungeon rooms (176).
+    GAM     Main files, extracted from the game's loader tables.
+
+Each game file is compressed with exomizer in raw mode with a maximum offset of 256 bytes. The 2-byte loadaddress of prg files in GAM are stripped before compressing, and re-added afterwards. The compressed files are then concatenated to create each IFFL archive, and the length of each compressed file is exported to an include file.
+
+GAM doesn't contain all the game's files, as some are loaded into memory once at startup.
+
+Tools used:
+
+* `exomize.sh` is a wrapper around exomizer that applies the correct arguments and handles prg load addresses.
+* `makeiffllong.py` is used to generate the GAM archive.
+* `makeifflshort.py` is used to generate MAP, TLK, and DNG.
+
+
+Scanner and Tables
+------------------
+
+The loader scans each archive at startup, and stores the starting track, sector, and byte offset as three bytes for each file. The loader then has a table that maps game file IDs to offsets in the IFFL tables.
+
+As the game has about 800 files the loader needs almost 3 kB for the IFFL table structures, which are stored in RAM under $d000.
+
+Tools used:
+
+* `gen_filemap.py` creates the file mapping table.
+
+
+1541 vs Larger Drives
+---------------------
+
+In the 1541 version of the loader there are two version of the GAM archive. On the first disk side are the files needed for the main menu and character creation, and the other files are stubbed out with zero length dummy files. The inverse is true on the flip side.
+
+The track and sector scanner stays resident in drive memory to facilitate rescanning of the IFFL tables when the disk is flipped.
+
+
+Loader Protocol
+---------------
+
+When loaderinit is called the current device is probed and identified by reading the drive's startup status message in ROM (see `src/ifflinit/drivedetect.s`). Then a common main routine is uploaded to the drive (`src/drivecode/drivecode.s`), followed by a model specific driver (`src/drivecode/drivecode_*.s`). The drive then enters a loop where it waits for a command byte followed by any argument bytes. There are five commands:
+
+
+* Load a file:
+    * Command: $01
+    * Args: filename length, filename
+    * Returns: $00 followed by data, or $80..$ff for error
+
+* Save and replace a file:
+    * Command: $02
+    * Args: filename length, filename
+    * Returns: $00 for ok, or $80..$ff for error
+
+* Read sector:
+    * Command: $03
+    * Args: track, sector, number of bytes to read
+    * Returns: $00 followed by data, or $80..$ff for error
+
+* Read next sector in chain:
+    * Command: $04
+    * Args: none
+    * Returns: $00 followed by data, or $80..$ff for error
+
+* Read track and sector links:
+    * Command: $05
+    * Args: track
+    * Returns: number of sectors in track followed by the first two bytes of every sector (sent backwards), or $80..$ff for error
+
+
+When loading a file the data is sent in blocks prefixed by a byte count, with a byte count of 0 indicating EOF. When saving a file data is also transferred in blocks, but the drive pulls data by sending an expected byte count, and the C64 then replies with the data bytes. A byte count of 0 indicates EOF here too.
+
+When reading a sector the loader sends data without any block framing.
+
+
+### Low Level Protocol
+
+The low level protocol is based on Lasse Öörni's Rant #7, and uses a classic timed 2-bit routine. Badlines must be avoided and sprites must be off.
+
+#### Receive byte from drive:
+
+            lda $dd00
+            and #$ef
+            sta $dd00               ; set CLK low to signal that we are receiving
+    loader_recv_palntsc:
+            beq :+                  ; 2 cycles for PAL, 3 for NTSC
+    :       nop
+    
+            and #3
+            sta @eor+1
+            sta $dd00               ; set CLK high to be able to read the
+            lda $dd00               ; bits the diskdrive sends
+            lsr
+            lsr
+            eor $dd00
+            lsr
+            lsr
+            eor $dd00
+            lsr
+            lsr
+    @eor:
+            eor #$00
+            eor $dd00
+
+#### Send byte to drive:
+
+            lda $dd00               ; release DATA to signal that data is coming
+            and #$df
+            sta $dd00
+    
+            lda sendtab,y           ; send the first two bits
+            sta $dd00
+    
+            lsr
+            lsr
+            and #%00110000          ; send the next two
+            sta $dd00
+    
+            pla                     ; get the next nybble
+            and #$0f
+            tay
+            lda sendtab,y
+            sta $dd00
+    
+            lsr                     ; send the last two bits
+            lsr
+            and #%00110000
+            sta $dd00
+    
+            nop                     ; slight delay, and...
+            nop
+            lda savedd00            ; restore $dd00 and $dd02
+            sta $dd00
+            lda #$3f
+            sta $dd02

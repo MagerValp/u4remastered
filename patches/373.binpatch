@@ -1,0 +1,106 @@
+# Patch file 73, inn.
+
+offset(000b) match("THE INNKEEPER")    replace("The innkeeper")
+offset(0019) match("SAYS: GET THAT")   replace("says: Get that")
+offset(0028) match("HORSE OUT OF")     replace("horse out of")
+offset(0035) match("HERE!!!")          replace("here!!!")
+
+offset(0043) match("THE INNKEEPER")    replace("The innkeeper")
+offset(0051) match("SAYS: WELCOME TO") replace("says: Welcome to")
+
+offset(0075) match("I AM ")            replace("I am ")
+
+offset(0087) match("ARE YOU IN NEED")  replace("Are you in need")
+offset(0097) match("OF LODGING?")      replace("of lodging?")
+
+offset(00be) match(" SAYS:")           replace(" says:")
+offset(00c5) match("THEN YOU HAVE")    replace("Then you have")
+offset(00d3) match("COME TO THE")      replace("come to the")
+offset(00df) match("WRONG PLACE!")     replace("wrong place!")
+offset(00ec) match("GOOD DAY.")        replace("Good day.")
+
+offset(010d) match("1, 2 OR 3 BEDS?")  replace("1, 2 or 3 beds?")
+
+offset(0144) match("TAKE IT?")         replace("Take it?")
+
+offset(0158) match("YOU WON'T FIND")   replace("You won't find")
+offset(0167) match("A BETTER DEAL IN") replace("a better deal in")
+offset(0178) match("THIS TOWNE!")      replace("this towne!")
+
+offset(0194) match("IF YOU CAN'T PAY") replace("If you can't pay")
+offset(01a5) match("YOU CAN'T STAY!")  replace("you can't stay!")
+offset(01b5) match("GOOD BYE.")        replace("Good bye.")
+
+offset(01c8) match("VERY GOOD, HAVE")  replace("Very good, have")
+offset(01d8) match("A PLEASANT")       replace("a pleasant")
+offset(01e3) match("NIGHT.")           replace("night.")
+
+offset(01f6) match("OH, AND DON'T")    replace("Oh, and don't")
+offset(0204) match("MIND THE STRANGE") replace("mind the strange")
+offset(0215) match("NOISES, IT'S")     replace("noises, it's")
+offset(0222) match("ONLY RATS!")       replace("only rats!")
+
+offset(02ac) match("IN THE MIDDLE")    replace("In the middle")
+offset(02ba) match("OF THE NIGHT")     replace("of the night")
+offset(02c7) match("WHILE OUT FOR A")  replace("while out for a")
+offset(02d7) match("STROLL...")        replace("stroll...")
+offset(02f9) match("YOU WAKE TO AN")   replace("you wake to an")
+offset(0308) match("EERIE NOISE!")     replace("eerie noise!")
+
+offset(033e) match("MORNING!")         replace("Morning!")
+
+offset(03c4) match("THE HONEST INN")   replace("The Honest Inn")
+offset(03d3) match("BRITANNIA MANOR")  replace("Britannia Manor")
+offset(03e3) match("THE INN OF ENDS")  replace("the Inn of Ends")
+offset(03f3) match("WAYFARERS INN")    replace("Wayfarers Inn")
+offset(0401) match("HONORABLE INN")    replace("Honorable Inn")
+offset(040f) match("THE INN OF")       replace("The Inn of")
+offset(041a) match("THE SPIRITS")      replace("the Spirits")
+offset(0426) match("THE SLEEP SHOP")   replace("The Sleep Shop")
+offset(0435) match("SCATU")            replace("Scatu")
+offset(043b) match("JASON")            replace("Jason")
+offset(0441) match("SMIRK")            replace("Smirk")
+offset(0447) match("ESTRO")            replace("Estro")
+offset(044d) match("ZAJAC")            replace("Zajac")
+offset(0453) match("TYRONE")           replace("Tyrone")
+offset(045a) match("TYMUS")            replace("Tymus")
+
+offset(0460) match("WE HAVE A ROOM")   replace("We have a room")
+offset(046f) match("WITH 2 BEDS")      replace("with 2 beds")
+offset(047b) match("THAT RENTS FOR")   replace("that rents for")
+offset(048a) match("20gp.")            replace("20gp.")
+
+offset(0490) match("WE HAVE A MODEST") replace("We have a modest")
+offset(04a1) match("SIZED ROOM WITH")  replace("sized room with")
+offset(04b1) match("1 BED FOR 15gp.")  replace("1 bed for 15gp.")
+
+offset(04c1) match("WE HAVE A VERY")   replace("We have a very")
+offset(04d0) match("SECURE ROOM OF")   replace("secure room of")
+offset(04df) match("MODEST SIZE AND")  replace("modest size and")
+offset(04ef) match("1 BED FOR 10gp.")  replace("1 bed for 10gp.")
+
+offset(04ff) match("WE HAVE THREE")    replace("We have three")
+offset(050d) match("ROOMS AVAILABLE,") replace("rooms available,")
+offset(051e) match("A 1, 2 AND 3 BED") replace("a 1, 2 and 3 bed")
+offset(052f) match("ROOM FOR 30, 60")  replace("room for 30, 60")
+offset(053f) match("AND 90gp EACH.")   replace("and 90gp each.")
+
+offset(054e) match("WE HAVE A SINGLE") replace("We have a single")
+offset(055f) match("BED ROOM WITH")    replace("bed room with")
+offset(056d) match("A BACK DOOR")      replace("a back door")
+offset(0579) match("FOR 15gp.")        replace("for 15gp.")
+
+offset(0583) match("UNFORTUNATLY, I")  replace("Unfortunatly, i")
+offset(0593) match("HAVE BUT ONLY")    replace("have but only")
+offset(05a1) match("A VERY SMALL")     replace("a very small")
+offset(05ae) match("ROOM WITH 1 BED,") replace("room with 1 bed,")
+offset(05bf) match("WORSE YET, IT IS") replace("worse yet, it is")
+offset(05d0) match("HAUNTED! IF YOU")  replace("haunted! If you")
+offset(05e0) match("DO WISH TO STAY")  replace("do wish to stay")
+offset(05f0) match("IT COSTS 5gp.")    replace("it costs 5gp.")
+
+offset(05fe) match("ALL WE HAVE IS")   replace("All we have is")
+offset(060d) match("THAT COT OVER")    replace("that cot over")
+offset(061b) match("THERE, BUT IT IS") replace("there, but it is")
+offset(062c) match("COMFORTABLE, AND") replace("comfortable, and")
+offset(063d) match("ONLY 1gp.")        replace("only 1gp.")

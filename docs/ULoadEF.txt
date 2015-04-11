@@ -1,0 +1,44 @@
+Ultima IV EasyFlash Loader
+==========================
+
+This is an overview of ULoad EasyFlash as used in Ultima IV Remasterd. For a general overview of the Ultima IV filesystem see `ULoadM4.txt`.
+
+
+Cartridge Structure
+-------------------
+
+The cartridge menu starts from bank 0, and the main game binary is copied from banks 1-4 when the game is started. The GAM/MAP/TLK/DNG archives are stored from bank 5 up, but only in the lower ROM ($8000-$9fff) since the Ultima IV loader code resides at $a000. The save files are written to banks 48-63, also only in the lower ROM.
+
+
+EFS
+---
+
+The main (read only) game files are stored in a simple ROM filesystem dubbed efs. Each filesystem starts at $8000 in a bank and supports up to 256 files. There are two variants, one called "long" which supports files of up to 65536 bytes, or "short" which supports max 256 bytes per file.
+
+    $8000-$80ff     Bank number, relative to the fs header bank.
+    $8100-$81ff     File address (low byte) in start bank ($8000-$9fff).
+    $8200-$82ff     File address (high byte).
+    $8300-$83ff     File size (low byte).
+    $8400-$84ff     File size (high byte, only in "long" format).
+
+The file data follows directly after the header.
+
+Tools used:
+
+* `makeefs.py` takes a list of up to 256 files and creates a filesystem, padded to fit the EF banking system.
+* `gen_efs_i.py` generates an include file with bank offsets for the efs files.
+
+
+EFSSG
+-----
+
+The game's save files are written to a flash filesystem in the upper banks of the cartridge. Each file entry has the following structure:
+
+    uint8_t file_id;    // $00 = deleted file, $01-$fe file ID, $ff free space.
+    uint8_t reserved;   // $ff
+    uint16_t size;
+    uint8_t data[];
+
+Files are simply appended after one another, and to find a particular file you have to start at the first one, check the file ID, and if it isn't the file you're searching for skip the size + 4 bytes to the next entry. To update a file the earlier entry is first deleted by changing the file ID to $00, and then the updated file is appended. When the filesystem fills up and reaches bank 63 the flash sectors are erased and files are saved starting in bank 48 again.
+
+* `makeefssg.py` takes save files, appends headers, and creates a padded rom image.
