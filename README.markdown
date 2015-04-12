@@ -40,4 +40,6 @@ The code is &copy; 2006-2015 Per Olofsson, and is available under an Apache 2.0 
 
 The new graphics are &copy; 2015 Vanja Utne.
 
+The crack intro music is &copy; 2015 Johan Samuelson.
+
 The original Ultima IV game is &copy; 1985 Origin Systems, Inc. However, no data from the original game is included in this repository.
