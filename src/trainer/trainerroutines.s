@@ -35,6 +35,9 @@
 	.export attack_fix
 	.export attack_creature_check
 	.export combat_animate_fix
+	.export combat_victory_fix
+	.export combat_battle_lost_fix
+	.export player_dead_fix
 
 
 player_xpos		= $10
@@ -76,6 +79,8 @@ cmd_done		= $621e
 generate_combat		= $6ea3
 combat_monster_turn	= $7181
 combat_check_sleep	= $714e
+combat_victory		= $75ff
+combat_battle_lost	= $7539
 check_awake		= $7daf
 print_object_name	= $8357
 getandprintkey		= $8398
@@ -878,3 +883,19 @@ combat_animate_fix:
 @dontanim:
 	lda #1
 	rts
+
+
+combat_victory_fix:
+	pla
+	pla
+	jmp combat_victory
+
+combat_battle_lost_fix:
+	pla
+	pla
+	jmp combat_battle_lost
+
+player_dead_fix:
+	pla
+	pla
+	jmp cmd_done
