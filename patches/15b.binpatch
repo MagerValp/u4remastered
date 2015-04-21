@@ -276,4 +276,4 @@ offset(45a8) match("THY SHIP SINKS!")  replace("Thy ship sinks!")
 offset(47c9) match("BRIDGE TROLLS!")   replace("Bridge trolls!")
 
 
-offset(47b2) match(a5 1b c9 01) truncate(47b2)
+offset(46f1) match(08 a4 58 b9) truncate(46f1)
