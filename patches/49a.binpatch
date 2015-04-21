@@ -1,3 +1,22 @@
 # Patch file 9a, ending.
 
 offset(1081) match(41 45 31 30) truncate(1081)
+
+# Load graphics at $b000 instead.
+offset(0d3a) match(4a) replace(ba)
+offset(0d3c) match(4b) replace(bb)
+offset(0d3e) match(4c) replace(bc)
+offset(0d40) match(4c) replace(bc)
+offset(0d42) match(4d) replace(bd)
+offset(0d44) match(4e) replace(be)
+offset(0d46) match(4f) replace(bf)
+offset(0d48) match(50) replace(c0)
+offset(0d4a) match(52) replace(c2)
+offset(0d4c) match(53) replace(c3)
+offset(0d4e) match(53) replace(c3)
+offset(0d50) match(54) replace(c4)
+offset(0d52) match(56) replace(c6)
+offset(0bd0) match(40) replace(b0)
+
+# Reload tiles instead of main game code.
+offset(08b5) match(5b) replace(41)

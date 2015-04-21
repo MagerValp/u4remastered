@@ -49,13 +49,15 @@ clean_tools:
 MAP_FILES = $(shell python -c 'for x in range(256): print "map_%02x" % x')
 TLK_FILES = $(shell python -c 'for x in range(256): print "tlk_%02x" % x')
 DNG_FILES = $(shell python -c 'for x in range(176): print "dng_%02x" % x')
+
+# Changing these requires a clean rebuild.
 BOOT_FILES = \
 	117 141 142 143 144 14c 14d 14f \
 	150 155 156 19e
 PROGRAM_FILES = \
-	118 145 146 147 148 149 14a 14b \
-	151 152 153 154 156 157 158 159 \
-	15a 15b 19f
+	118 141 145 146 147 148 149 14a \
+	14b 151 152 153 154 156 157 158 \
+	159 15a 15b 19f
 BRITANNIA_FILES = \
 	201 202 203 204 205 206 207 208 \
 	209 20a 20b 20c 20d 20e 20f 21c \
@@ -70,6 +72,7 @@ UNDERWORLD_FILES = \
 	40f 410 411 412 413 414 415 416 \
 	477 479 47a 48c 48d 48e 48f 490 \
 	491 492 493 495 49a 49b
+
 GAM_FILES = $(PROGRAM_FILES) $(BRITANNIA_FILES) $(TOWNE_FILES) $(UNDERWORLD_FILES)
 
 SAVEGAME_FILES = \
@@ -262,12 +265,24 @@ clean_gamemain:
 src/tiles/tileset.bin: src/tiles/tiles.png
 	tools/gen_tiles.py $< $@
 
+TILEBITMAP_OBJS = \
+	src/loadaddr.o \
+	src/tiles/tilecolors.o
+
+src/tiles/tilebitmap.prg: $(TILEBITMAP_OBJS) src/tiles/tilebitmap.cfg
+	$(LD65) -m $(patsubst %.prg,%.map,$@) -C src/tiles/tilebitmap.cfg \
+		-o $@ $(LD65FLAGS) $(TILEBITMAP_OBJS) || (rm -f $@ && exit 1)
+
+files/compressed/141: src/tiles/tilebitmap.prg
+	tools/backpack -s 2 $< $@
+
 src/tiles/font.bin: src/tiles/font.png
 	tools/gen_font.py $< $@
 
 clean_tiles:
 	rm -f src/tiles/font.bin
 	rm -f src/tiles/tileset.bin
+	rm -f src/tiles/tilebitmap.prg
 
 
 # Character creation.
@@ -671,6 +686,7 @@ files/iffl/gam_iffl: files/iffl/gam_iffl.i
 
 COMPRESSED_GAM_1541PROGRAM_FILES = \
 	files/compressed/118 \
+	files/zero/141 \
 	files/compressed/145 \
 	files/compressed/146 \
 	files/compressed/147 \
@@ -698,6 +714,7 @@ files/iffl/gam_program_iffl: files/iffl/gam_program_iffl.i
 
 COMPRESSED_GAM_1541PLAY_FILES = \
 	files/zero/118 \
+	files/compressed/141 \
 	files/zero/145 \
 	files/zero/146 \
 	files/zero/147 \
