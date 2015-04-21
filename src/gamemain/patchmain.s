@@ -27,7 +27,9 @@
 	.import active_char_check_command
 	.import enter_balloon
 	.import board_ship_check_britannia
-	.import attack_sick
+	.import attack_fix
+	.import attack_creature_check
+	.import combat_animate_fix
 
 
 	.segment "TRAINER"
@@ -152,7 +154,7 @@ patchchain_lo:
 	.byte <patch_music
 	.byte <patch_enter_balloon
 	.byte <patch_board_dungeon
-	.byte <patch_attack_sick
+	.byte <patch_attack
 npatches = < (* - patchchain_lo)
 
 patchchain_hi:
@@ -177,7 +179,7 @@ patchchain_hi:
 	.byte >patch_music
 	.byte >patch_enter_balloon
 	.byte >patch_board_dungeon
-	.byte >patch_attack_sick
+	.byte >patch_attack
 
 
 patch_magic:
@@ -438,9 +440,17 @@ patch_board_dungeon:
 	.byte 0
 
 
-patch_attack_sick:
+patch_attack:
 	.byte 3
 	.addr $4733
-	jsr attack_sick
+	jsr attack_fix
+
+	.byte 3
+	.addr $46e1
+	jsr attack_creature_check
+
+	.byte 3
+	.addr $0b6d
+	jsr combat_animate_fix
 
 	.byte 0

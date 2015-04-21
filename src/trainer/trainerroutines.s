@@ -32,7 +32,9 @@
 	.export active_char_check_command
 	.export enter_balloon
 	.export board_ship_check_britannia
-	.export attack_sick
+	.export attack_fix
+	.export attack_creature_check
+	.export combat_animate_fix
 
 
 player_xpos		= $10
@@ -81,6 +83,7 @@ getandprintkey		= $8398
 map_status		= $ac00
 object_tile		= $ac60
 
+monster_sleep		= $ad70
 player_tile		= $ada0
 
 music_ctl		= $af20
@@ -838,11 +841,40 @@ board_ship_check_britannia:
 	jmp board_find_object
 
 
-	.segment "ATTACKSICK"
+	.segment "ATTACKFIX"
 
-attack_sick:
+attack_fix:
 	lda object_tile,x
-	cmp #$38
+	cmp #$38		; Sick/sleeping.
 	bne :+
-	lda #$58
+	lda #$58		; Beggar.
+:
+	cmp #$02		; Water.
+	bne :+
+	lda #$01		; Deep water.
+:
+	cmp #$1f		; Avatar.
+	bne :+
+	lda #$2a		; Knight.
+:
+	rts
+
+
+attack_creature_check:
+	lda object_tile,x
+	cmp #$3c		; Chest.
+	bne :+
+	lda #$8c		; $8c/$8e can't be attacked.
 :	rts
+
+
+combat_animate_fix:
+	cmp #$3d		; Ankh.
+	beq @dontanim
+	cmp #$4b		; Camp fire.
+	beq @dontanim
+	lda monster_sleep,x
+	rts
+@dontanim:
+	lda #1
+	rts
