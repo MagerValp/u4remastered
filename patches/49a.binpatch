@@ -20,3 +20,11 @@ offset(0bd0) match(40) replace(b0)
 
 # Reload tiles instead of main game code.
 offset(08b5) match(5b) replace(41)
+
+# Fix stack when player is thrown out.
+offset(08da)
+	match(4c 09 40)
+	replace(4c 7f 98)
+append(68)		# pla
+append(68)		# pla
+append(4c 09 40)	# jmp $4009
