@@ -35,6 +35,8 @@
 	.export attack_fix
 	.export attack_creature_check
 	.export combat_animate_fix
+	.export attacked_by_fix
+	.export player_dead_fix
 
 
 player_xpos		= $10
@@ -71,6 +73,7 @@ cmd_error		= $411c
 print_only_on_foot	= $4139
 print_not_here		= $4178
 print_cant		= $4189
+prepare_combat		= $4731
 board_find_object	= $480b
 cmd_done		= $621e
 generate_combat		= $6ea3
@@ -878,3 +881,14 @@ combat_animate_fix:
 @dontanim:
 	lda #1
 	rts
+
+
+attacked_by_fix:
+	pla
+	pla
+	jmp prepare_combat
+
+player_dead_fix:
+	pla
+	pla
+	jmp cmd_done

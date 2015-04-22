@@ -11,3 +11,6 @@ offset(0431) match(60) insert(58)
 offset(0420) delete(58)
 offset(0405) match(ad) insert(58)
 offset(03f7) delete(58)
+
+# Fix stack when loading main game.
+offset(000d) match(20) replace(4c)

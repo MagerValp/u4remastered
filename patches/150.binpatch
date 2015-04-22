@@ -1,5 +1,9 @@
 # Patch file 50, intro and main menu.
 
+# Fix stack when loading main game and character creation.
+offset(0968) match(20) replace(4c)
+offset(0a29) match(20) replace(4c)
+
 # Skip music load.
 offset(0790) match(20) replace(2d)
 

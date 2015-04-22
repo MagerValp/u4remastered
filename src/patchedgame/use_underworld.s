@@ -401,7 +401,7 @@ use_stone_in_abyss:
 @load_end_game:
 	lda #$d2
 	ldx #$9a
-	jsr j_fileio
+	jmp j_fileio
 placed_stone_mask:
 	.byte 0
 placed_stone_counter:

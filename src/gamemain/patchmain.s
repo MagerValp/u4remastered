@@ -30,6 +30,8 @@
 	.import attack_fix
 	.import attack_creature_check
 	.import combat_animate_fix
+	.import attacked_by_fix
+	.import player_dead_fix
 
 
 	.segment "TRAINER"
@@ -155,6 +157,7 @@ patchchain_lo:
 	.byte <patch_enter_balloon
 	.byte <patch_board_dungeon
 	.byte <patch_attack
+	.byte <patch_stack
 npatches = < (* - patchchain_lo)
 
 patchchain_hi:
@@ -180,6 +183,7 @@ patchchain_hi:
 	.byte >patch_enter_balloon
 	.byte >patch_board_dungeon
 	.byte >patch_attack
+	.byte >patch_stack
 
 
 patch_magic:
@@ -454,3 +458,13 @@ patch_attack:
 	jsr combat_animate_fix
 
 	.byte 0
+
+
+patch_stack:
+	.byte 2
+	.addr $670d
+	.addr attacked_by_fix
+
+	.byte 2
+	.addr $83e1
+	.addr player_dead_fix
