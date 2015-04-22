@@ -35,8 +35,7 @@
 	.export attack_fix
 	.export attack_creature_check
 	.export combat_animate_fix
-	.export combat_victory_fix
-	.export combat_battle_lost_fix
+	.export attacked_by_fix
 	.export player_dead_fix
 
 
@@ -74,13 +73,12 @@ cmd_error		= $411c
 print_only_on_foot	= $4139
 print_not_here		= $4178
 print_cant		= $4189
+prepare_combat		= $4731
 board_find_object	= $480b
 cmd_done		= $621e
 generate_combat		= $6ea3
 combat_monster_turn	= $7181
 combat_check_sleep	= $714e
-combat_victory		= $75ff
-combat_battle_lost	= $7539
 check_awake		= $7daf
 print_object_name	= $8357
 getandprintkey		= $8398
@@ -885,15 +883,10 @@ combat_animate_fix:
 	rts
 
 
-combat_victory_fix:
+attacked_by_fix:
 	pla
 	pla
-	jmp combat_victory
-
-combat_battle_lost_fix:
-	pla
-	pla
-	jmp combat_battle_lost
+	jmp prepare_combat
 
 player_dead_fix:
 	pla

@@ -30,8 +30,7 @@
 	.import attack_fix
 	.import attack_creature_check
 	.import combat_animate_fix
-	.import combat_victory_fix
-	.import combat_battle_lost_fix
+	.import attacked_by_fix
 	.import player_dead_fix
 
 
@@ -463,12 +462,8 @@ patch_attack:
 
 patch_stack:
 	.byte 2
-	.addr $7527
-	.addr combat_victory_fix
-
-	.byte 2
-	.addr $7536
-	.addr combat_battle_lost_fix
+	.addr $670d
+	.addr attacked_by_fix
 
 	.byte 2
 	.addr $83e1
