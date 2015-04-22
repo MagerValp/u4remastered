@@ -473,3 +473,5 @@ patch_stack:
 	.byte 2
 	.addr $83e1
 	.addr player_dead_fix
+
+	.byte 0
