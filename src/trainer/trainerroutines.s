@@ -38,6 +38,7 @@
 	.export combat_animate_fix
 	.export attacked_by_fix
 	.export player_dead_fix
+	.export bridge_trolls_fix
 
 
 player_xpos		= $10
@@ -910,3 +911,8 @@ player_dead_fix:
 	pla
 	pla
 	jmp cmd_done
+
+bridge_trolls_fix:
+	pla
+	pla
+	jmp generate_combat

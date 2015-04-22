@@ -33,6 +33,7 @@
 	.import combat_animate_fix
 	.import attacked_by_fix
 	.import player_dead_fix
+	.import bridge_trolls_fix
 
 
 	.segment "TRAINER"
@@ -473,5 +474,9 @@ patch_stack:
 	.byte 2
 	.addr $83e1
 	.addr player_dead_fix
+
+	.byte 2
+	.addr $62e8
+	.addr bridge_trolls_fix
 
 	.byte 0
