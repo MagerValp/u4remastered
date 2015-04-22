@@ -13,6 +13,7 @@ CFLAGS=-O
 
 # Select source directory for game save files.
 SAVEGAME=untouched
+#SAVEGAME=test
 
 # Select which bins to include when creating crt.
 # Use these for testing:
