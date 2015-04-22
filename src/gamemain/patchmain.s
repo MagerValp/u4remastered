@@ -14,6 +14,7 @@
 	.import trainer_board
 	.import trainer_avoid
 	.import trainer_trolls
+	.import trainer_avoid_dungeon
 	.import trainer_balloon_north
 	.import trainer_balloon_south
 	.import trainer_balloon_west
@@ -231,6 +232,10 @@ patch_avoid:
 	jsr trainer_trolls
 	nop
 
+	.byte 3
+	.addr $6d15
+	jsr trainer_avoid_dungeon
+	
 	.byte 0
 
 

@@ -11,6 +11,7 @@
 	.export trainer_board
 	.export trainer_avoid
 	.export trainer_trolls
+	.export trainer_avoid_dungeon
 	.export trainer_balloon_north
 	.export trainer_balloon_south
 	.export trainer_balloon_west
@@ -81,6 +82,7 @@ combat_monster_turn	= $7181
 combat_check_sleep	= $714e
 check_awake		= $7daf
 print_object_name	= $8357
+print_creature_name	= $835c
 getandprintkey		= $8398
 
 map_status		= $ac00
@@ -456,6 +458,7 @@ trainer_avoid:
 	jsr print_object_name
 	jsr checkavoid
 	bcc :+
+plaplarts:
 	pla
 	pla
 :	rts
@@ -468,6 +471,21 @@ trainer_trolls:
 	pla
 :	lda #$a4
 	sta attacking_monster_type
+	rts
+
+
+trainer_avoid_dungeon:
+	pha
+	jsr j_primm
+	.byte "Attackd by", $8d, 0
+	pla
+	asl
+	adc #$8c
+	pha
+	jsr print_creature_name
+	jsr checkavoid
+	pla
+	bcs plaplarts
 	rts
 
 
