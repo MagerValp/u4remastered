@@ -1,0 +1,95 @@
+# Ultima IV Remastered Changelog
+
+
+## v2.2 (2015-04-22)
+
+* The game no longer hangs when playing the 1541 version and answering questions wrong in the codex.
+* Attacking static NPCs such as Ankhs, castle lords & ladies, the water in Castle Britannia, or the camp fire in Yew no longer leads to a glitching enemy in combat. Attacking chests dropped by townespeople is no longer possible.
+* Fixed stack handling for main menu, when being attacked by monsters, when dying, and the end game. This hopefully eliminates any crashes to the ready prompt.
+* The avoid combat trainer now works in dungeons too.
+
+
+## v2.1 (2015-04-09)
+
+* Saving to EasyFlash cartridges that don't use Am29F040 chips (including Chameleon) now works.
+* Exit solo mode if character leaves combat.
+* [Don't spawn a ship](/2015/04/02/u4-dungeon-frigate.html) when pressing B while standing on a ladder in a dungeon.
+* Joshua courage -> canrage typo.
+* Fixed east/west start positions in Destard rooms on level 8.
+* Removed glitch when attacking sick people in townes.
+* Play correct music after dying and being resurrected by Lord British.
+* Fixed wind status after loading a game in a dungeon and then exiting.
+* Clarified the recommendation for emulator users when flipping d64s.
+* Proper error message in editor if no savegame is found in cartridge.
+
+
+## v2.0 (2015-03-29)
+
+### Graphics Overhaul
+
+* Character creation intro has new graphics drawn by Vanja 'Mermaid' Utne.
+* The tileset has been updated with new and more colorful tiles, mainly backported from Ultima V.
+* When peering at a gem or casting view the map is now in color.
+* The dungeon renderer has been sped up, and items and monsters are drawn in color.
+
+### Text Overhaul
+
+* NPC dialogue and game text now uses mixed case.
+* Many dialogue bugs have been fixed:
+    * Fixed broken question trigger and added missing dialogue for Thevel in Britain.
+    * Added missing dialogue for Serpent's Hold gate guards.
+    * Changed keyword for Michelle to avoid conflict with health in Serpent's Hold.
+    * Fixed broken message trigger for Water in Castle British.
+    * Fixed misspelled keyword for Estro in the Lycaeum.
+    * Fixed misspelled keyword for a poor beggar in Yew.
+    * Fixed broken message trigger for Alkerion in Minoc.
+    * Fixed broken message trigger for Shamino in Skara Brae.
+    * Fixed broken message trigger for Charm in Cove.
+    * Dozens of minor fixes to spelling, grammar, and formatting.
+
+### New Game Features
+
+* Select active character in combat with 1-8, 0 returns to party mode.
+* You can quit and save in dungeons.
+* If you move outside the border of a towne, castle, or keep, the game asks if you want to exit to Britannia.
+* Joystick control.
+* Dungeons get darker when a torch is close to burning out.
+
+### Bug Fixes
+
+* Meditating at shrines now gives different hints for 1, 2, and 3 cycles.
+* Hythloth dungeon rooms on level 6 are now accessible.
+* Character creation no longer suffers from random hangs.
+* Loading a saved game restores balloon flying mode.
+* Allow backspace when giving gold or using stones.
+* Don't enter locations when flying in balloon.
+
+### Technical Enhancements
+
+* Fastloader with support for 1541, 1571, 1581, CMD FD, and CMD HD.
+* Runs from a single disk, no disk swapping when playing.
+* EasyFlash cartridge version.
+* Music is not interrupted when data is loaded from disk.
+* SuperCPU support.
+
+### Game Cheats
+
+* A save game editor is bundled with the game.
+* Unlimited magic.
+* Unlimited food.
+* Unlimited torches.
+* Unlimited keys.
+* Unlimited gems.
+* Avoid combat.
+* Control balloon.
+* Idle without pass.
+* Teleportation system, press T in Britannia and then (T)owne, (D)ungeon, (S)hrine, (L)ocation, or (C)oordinate.
+* Create transport if you try to (B)oard an empty tile, select (H)orse, (S)hip, or (B)alloon.
+
+### Additional Changes Since Ultima IV Gold
+
+* Disk drive no longer spins when there is no disk activity, and the game loads faster.
+* Balloon cheat has several bugs fixed.
+* Swapped lat/long for teleport cheat.
+* Added unlimited gems and idle cheats.
+* Fixed reagent editing in save game editor.
