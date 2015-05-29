@@ -1,6 +1,11 @@
 # Ultima IV Remastered Changelog
 
 
+## v2.2.1 (2015-05-29)
+
+* Fixed graphics corruption and potential crash during ending, thanks Trurl!
+
+
 ## v2.2 (2015-04-22)
 
 * The game no longer hangs when playing the 1541 version and answering questions wrong in the codex.
