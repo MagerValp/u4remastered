@@ -190,7 +190,7 @@ pagestart:
 page0:
 	screencode "                                        "
 	screencode "                                        "
-	screencode "        Ultima IV Remastered v2.2       "
+	screencode "       Ultima IV Remastered v2.2.1      "
 	screencode "                                        "
 	screencode "      (C) 1985 Origin Systems, Inc.     "
 	screencode "                                        "
