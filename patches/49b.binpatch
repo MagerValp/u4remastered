@@ -1,0 +1,4 @@
+# Patch file 9b, codex graphics.
+
+# Load graphics at $b000 instead.
+offset(0001) match(40) replace(b0)
