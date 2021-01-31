@@ -97,7 +97,7 @@ EXTRACTED_MAP_FILES = $(patsubst %,files/extracted/%.bin,$(MAP_FILES))
 EXTRACTED_TLK_FILES = $(patsubst %,files/extracted/%.bin,$(TLK_FILES))
 EXTRACTED_DNG_FILES = $(patsubst %,files/extracted/%.bin,$(DNG_FILES))
 
-EXTRACT_TMP := $(shell mktemp -d -u -t u4remastered)
+EXTRACT_TMP := $(shell mktemp -d -u -t u4remastered_XXXXXXXXXX)
 
 files/extracted: $(DISK_IMAGES) files/filemap.txt tools/extract_files.py
 	rm -rf $(EXTRACT_TMP)
