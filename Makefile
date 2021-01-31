@@ -370,6 +370,7 @@ clean_talk:
 
 clean_patchedgame: \
 		clean_lord_british \
+		clean_shops \
 		clean_search \
 		clean_use \
 		clean_shrine \
@@ -436,6 +437,28 @@ files/patched/288.prg: src/patchedgame/lord_british_help.prg | files/patched
 clean_lord_british:
 	rm -f files/patched/287.prg
 	rm -f files/patched/288.prg
+
+# Shops.
+# (Identical to original, except where BUG FIX noted in .s files,
+# reconstructed to allow more bytes for text corrections.)
+
+files/patched/36d.prg: src/patchedgame/shop_weapons.prg | files/patched
+	cp $< $@
+
+files/patched/36e.prg: src/patchedgame/shop_armour.prg | files/patched
+	cp $< $@
+
+files/patched/372.prg: src/patchedgame/shop_healer.prg | files/patched
+	cp $< $@
+
+files/patched/376.prg: src/patchedgame/seer.prg | files/patched
+	cp $< $@
+
+clean_shops:
+	rm -f files/patched/36d.prg
+	rm -f files/patched/36e.prg
+	rm -f files/patched/372.prg
+	rm -f files/patched/376.prg
 
 # Search.
 

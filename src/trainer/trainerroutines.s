@@ -916,3 +916,4 @@ bridge_trolls_fix:
 	pla
 	pla
 	jmp generate_combat
+

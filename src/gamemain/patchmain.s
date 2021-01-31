@@ -159,6 +159,7 @@ patchchain_lo:
 	.byte <patch_enter_balloon
 	.byte <patch_board_dungeon
 	.byte <patch_attack
+	.byte <patch_ztats_items
 	.byte <patch_stack
 npatches = < (* - patchchain_lo)
 
@@ -185,6 +186,7 @@ patchchain_hi:
 	.byte >patch_enter_balloon
 	.byte >patch_board_dungeon
 	.byte >patch_attack
+	.byte >patch_ztats_items
 	.byte >patch_stack
 
 
@@ -323,14 +325,14 @@ patch_shake:
 	.byte 23
 	.addr $85fd
   .org $85fd
-	sta $d07a
+	sta $d07a  ; SuperCPU speed normal
 	lda #$04
 	sta $8614
 	jsr $8645
 	jsr $8616
 	dec $8614
 	bne $8605
-	sta $d07b
+	sta $d07b  ; SuperCPU speed turbo
 	rts
   .reloc
 
@@ -466,6 +468,12 @@ patch_attack:
 	.byte 0
 
 
+patch_ztats_items:
+	.byte 1
+	.addr $60b0
+	.byte 09  ; fix branch offset, was 2C
+
+
 patch_stack:
 	.byte 2
 	.addr $670d
@@ -478,5 +486,28 @@ patch_stack:
 	.byte 2
 	.addr $62e8
 	.addr bridge_trolls_fix
+
+	.byte 1
+	.addr $7cea  ; Ztats during combat
+	.byte $4c    ; jmp, was jsr
+
+	.byte 1
+	.addr $4dfc  ; Z-down fail on level 8
+	.byte $4c    ; jmp, was jsr
+
+	.byte 2
+	.addr $7918  ; "All must use the same exit"
+	nop
+	nop
+
+	.byte 10
+	.addr $867b  ; enter moongate
+	pla
+	pla
+	nop
+	clc
+	lda $22   ; moon_phase_trammel
+	adc $23   ; moon_phase_felucca
+	cmp #$08  ; more compact than comparing each with 4. makes room for pla pla.
 
 	.byte 0

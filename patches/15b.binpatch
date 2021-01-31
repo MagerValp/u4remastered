@@ -1,5 +1,9 @@
 # Patch file 5b, game main.
 
+# Fix table indexing for enemy strength
+offset(3dac) match(1f 18) replace(1e 4a)
+
+
 offset(003e) match("NO ACTIVE GAME!")  replace("No active game!")
 
 offset(00fe) match("Zzzzz")            replace("Zzzzz")

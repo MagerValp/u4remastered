@@ -92,7 +92,7 @@ $7f	$ac00	$0100	$11000	smap		27f			save game map status
 $80	$aa00	$0200	$11100	spar		280			save game party stats
 $82	$8800	$0f00	$11a00	shri		282			code (shrine)
 $85	$8800	$0200	$25e00	camp		285		285	code (hole up and camp)
-$87	$8800	$1200	$13600	lbtk		287			code (Lord British conversaion)
+$87	$8800	$1200	$13600	lbtk		287			code (Lord British conversation)
 $88	$8800	$0a00	$14800	lbhp		288			code (Lord British help)
 $89	$8800	$0200	$15200	dead		289			code (death)
 $8c	$e800	$0200	$0b100	dng0				48c	dungeon (Deceit)

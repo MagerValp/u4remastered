@@ -1,0 +1,5 @@
+# Patch file 19, tables (shop index)
+
+# Fix healer in Serpent's Hold castle.
+# Y-position is hex 0x12 not decimal 12 :-)
+offset(1f) match(0c) replace(12)

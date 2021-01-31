@@ -25,6 +25,7 @@ horse_mode		= $0024
 player_has_spoken_to_lb = $0025
 last_humility_check	= $0027
 altar_room_principle	= $0028
+last_meditated		= $0029
 last_found_reagent	= $002a
 ship_hull		= $002b
 move_counter		= $002c
@@ -243,12 +244,12 @@ shrine:
 
 @virtue_shrine_match:
 	lda move_counter+2
-	cmp $29
+	cmp last_meditated
 	bne @begin
 	jmp still_weary
 
 @begin:
-	sta $29
+	sta last_meditated
 	jsr j_primm
 	.byte $8d
 	.byte "Begin meditation", $8d
@@ -439,7 +440,7 @@ partial_avatar:
 	.byte $8d
 	.byte "Thou hast", $8d
 	.byte "achieved partial", $8d
-	.byte "avatarhood in", $8d
+	.byte "Avatarhood in", $8d
 	.byte "the virtue of", $8d
 	.byte 0
 
@@ -640,15 +641,15 @@ hint_honesty_0:
 hint_honesty_1:
 	.byte 0, "Cheat not the", $8d
 	.byte "merchants and", $8d
-	.byte "peddlers for tis", $8d
-	.byte "an evil thing", $8d
-	.byte "to do!", $8d
+	.byte "peddlers for", $8d
+	.byte "'tis an evil", $8d
+	.byte "thing to do!", $8d
 hint_honesty_2:
 	.byte 0, "Second, read the", $8d
 	.byte "book of truth at", $8d
 	.byte "the entrance to", $8d
-	.byte "the great", $8d
-	.byte "stygian abyss!", $8d
+	.byte "the Great", $8d
+	.byte "Stygian Abyss!", $8d
 hint_compassion_0:
 	.byte 0, "Kill not the", $8d
 	.byte "non-evil beasts", $8d
@@ -665,8 +666,8 @@ hint_compassion_2:
 	.byte 0, "Third, light the", $8d
 	.byte "candle of love", $8d
 	.byte "at the entrance", $8d
-	.byte "to the great", $8d
-	.byte "stygian abyss!", $8d
+	.byte "to the Great", $8d
+	.byte "Stygian Abyss!", $8d
 hint_valor_0:
 	.byte 0, "Victories scored", $8d
 	.byte "over evil", $8d
@@ -683,8 +684,8 @@ hint_valor_2:
 	.byte 0, "First, ring the", $8d
 	.byte "bell of courage", $8d
 	.byte "at the entrance", $8d
-	.byte "to the great", $8d
-	.byte "stygian abyss!", $8d
+	.byte "to the Great", $8d
+	.byte "Stygian Abyss!", $8d
 hint_justice_0:
 	.byte 0, "To take the gold", $8d
 	.byte "of others is", $8d
@@ -709,18 +710,19 @@ hint_justice_2:
 hint_sacrifice_0:
 	.byte 0, "To give thy last", $8d
 	.byte "gold piece unto", $8d
-	.byte "the needy, shows", $8d
+	.byte "the needy shows", $8d
 	.byte "good measure of", $8d
 	.byte "self-sacrifice!", $8d
 hint_sacrifice_1:
 	.byte 0, "For thee to flee", $8d
 	.byte "and leave thy", $8d
 	.byte "companions is a", $8d
-	.byte "selfseeking action", $8d
-	.byte "to be avioded!", $8d
+	.byte "self-seeking", $8d
+	.byte "action to be", $8d
+	.byte "avoided!", $8d
 hint_sacrifice_2:
 	.byte 0, "To give of thy", $8d
-	.byte "lifes blood so", $8d
+	.byte "life's blood so", $8d
 	.byte "that others may", $8d
 	.byte "live is a virtue", $8d
 	.byte "of great praise!", $8d
@@ -750,9 +752,10 @@ hint_spirituality_0:
 	.byte "see into thy", $8d
 	.byte "inner being!", $8d
 hint_spirituality_1:
-	.byte 0, "Meditation leads", $8d
-	.byte "to enlightenment", $8d
-	.byte "seek ye all", $8d
+	.byte 0, "Meditation", $8d
+	.byte "leads to", $8d
+	.byte "enlightenment.", $8d
+	.byte "Seek ye all", $8d
 	.byte "wisdom and", $8d
 	.byte "knowledge!", $8d
 hint_spirituality_2:
@@ -768,7 +771,7 @@ hint_humility_0:
 	.byte "that which thou", $8d
 	.byte "art not, humble", $8d
 	.byte "actions speak", $8d
-	.byte "well thee!", $8d
+	.byte "well of thee!", $8d
 hint_humility_1:
 	.byte 0, "Strive not to", $8d
 	.byte "wield the great", $8d
