@@ -47,9 +47,9 @@ clean_tools:
 
 # Game files.
 
-MAP_FILES = $(shell python -c 'for x in range(256): print "map_%02x" % x')
-TLK_FILES = $(shell python -c 'for x in range(256): print "tlk_%02x" % x')
-DNG_FILES = $(shell python -c 'for x in range(176): print "dng_%02x" % x')
+MAP_FILES = $(shell python3 -c 'for x in range(256): print("map_%02x" % x)')
+TLK_FILES = $(shell python3 -c 'for x in range(256): print("tlk_%02x" % x)')
+DNG_FILES = $(shell python3 -c 'for x in range(176): print("dng_%02x" % x)')
 
 # Changing these requires a clean rebuild.
 BOOT_FILES = \
@@ -123,7 +123,7 @@ files/patched: files/extracted
 	touch $@
 
 files/patched/%.prg: src/charcreate/%.koa | files/patched
-	python -c 'import sys; sys.stdout.write("\x00\x40")' > $@
+	python3 -c 'import sys; sys.stdout.write("\x00\x40")' > $@
 	dd if=$< of=$@ bs=1 skip=2    seek=2    count=5888 2> /dev/null
 	dd if=$< of=$@ bs=1 skip=8002 seek=5890 count=768  2> /dev/null
 	dd if=$< of=$@ bs=1 skip=9002 seek=6658 count=768  2> /dev/null
@@ -968,7 +968,7 @@ src/easyflash/efs.bin: src/easyflash/menu.bin $(EFS_FILES)
 	cat $^ > $@
 
 src/easyflash/padded.bin: src/easyflash/efs.bin
-	python -c "import sys; sys.stdout.write('\xff' * 0x4000 * $(EASYFLASH_SAVE_BANK))" > $@
+	python3 -c "import sys; sys.stdout.write('\xff' * 0x4000 * $(EASYFLASH_SAVE_BANK))" > $@
 	dd if=$< of=$@ bs=16k conv=notrunc 2> /dev/null
 
 src/easyflash/efssg.bin: $(SAVEGAME_FILES)

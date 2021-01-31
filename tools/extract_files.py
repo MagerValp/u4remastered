@@ -1,14 +1,10 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 
 import os
 import sys
 import argparse
-
-
-def print8(*args):
-    print " ".join(unicode(x).encode(u"utf-8") for x in args)
 
 
 def decode_hex(s):
@@ -27,22 +23,22 @@ def main(argv):
     p.add_argument(u"filemap")
     p.add_argument(u"disk_images", nargs=4)
     p.add_argument(u"output_dir")
-    args = p.parse_args([x.decode(u"utf-8") for x in argv[1:]])
+    args = p.parse_args(argv[1:])
     
     # Read filemap.
     file_ids = list()
     short_files = [None] * 0x1d
     long_files = [None] * 0x60
-    with open(args.filemap, u"r") as f:
-        headers = f.readline().decode(u"utf-8").rstrip().split(u"\t")
+    with open(args.filemap, u"rt", encoding=u"utf-8") as f:
+        headers = f.readline().rstrip().split(u"\t")
         for line in f:
-            fields = line.decode(u"utf-8").rstrip().split(u"\t")
+            fields = line.rstrip().split(u"\t")
             filenum = decode_hex(fields.pop(0))
             start = decode_hex(fields.pop(0))
             length = decode_hex(fields.pop(0))
             offset = decode_hex(fields.pop(0))
             name = fields.pop(0)
-            files = list(decode_fileid(fields.pop(0)) for x in xrange(4))
+            files = list(decode_fileid(fields.pop(0)) for x in range(4))
             comment = fields.pop(0)
             
             if not name:
@@ -82,24 +78,24 @@ def main(argv):
             length, address, offset = long_files[file_num - 0x40]
         data = disk_data[offset:offset + length]
         with open(u"%s/%03x.prg" % (dir_path, file_id), u"wb") as f:
-            f.write(chr(address & 0xff))
-            f.write(chr(address >> 8))
+            f.write(bytes([address & 0xff]))
+            f.write(bytes([address >> 8]))
             f.write(data)
     
     # Extract Britannia map.
-    for i in xrange(256):
+    for i in range(256):
         map_tile = disk_datas[1][(i + 1) * 256:(i + 2) * 256]
         with open(os.path.join(args.output_dir, u"map_%02x.bin" % i), u"wb") as f:
             f.write(map_tile)
     
     # Extract conversations.
-    for i in xrange(256):
+    for i in range(256):
         talk = disk_datas[2][(i + 1) * 256:(i + 2) * 256]
         with open(os.path.join(args.output_dir, u"tlk_%02x.bin" % i), u"wb") as f:
             f.write(talk)
     
     # Extract dungeon rooms.
-    for i in xrange(176):
+    for i in range(176):
         dungeon = disk_datas[3][(i + 1) * 256:(i + 2) * 256]
         with open(os.path.join(args.output_dir, u"dng_%02x.bin" % i), u"wb") as f:
             f.write(dungeon)

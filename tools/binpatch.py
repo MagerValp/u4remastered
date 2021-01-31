@@ -1,14 +1,10 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 
 import sys
 import argparse
 import re
-
-
-def print8(*args):
-    print " ".join(unicode(x).encode(u"utf-8") for x in args)
 
 
 class PatcherError(Exception):
@@ -20,16 +16,16 @@ class Patcher(object):
     def __init__(self, source_path):
         super(Patcher, self).__init__()
         with open(source_path, "rb") as f:
-            self.data = list(ord(c) for c in f.read())
+            self.data = list(f.read())
         self.offset = 0
         self.match_len = 0
     
     def patch(self, patch_path):
         """Read and execute patch commands from file."""
         
-        with open(patch_path) as f:
+        with open(patch_path, "rt", encoding=u"utf-8") as f:
             for i, line in enumerate(f):
-                self.execute(line.decode(u"utf-8"), i + 1)
+                self.execute(line, i + 1)
     
     re_comment = re.compile(r'\s*#.*$')
     re_command = re.compile(r'\b(?P<command>\w+)\((?P<args>[^)]*)\)')
@@ -89,7 +85,7 @@ class Patcher(object):
                 else:
                     raise PatcherError(u"Unknown command '%s'" % cmd)
         except PatcherError as e:
-            raise PatcherError(u"Line %d: %s" % (linenum, unicode(e)))
+            raise PatcherError(u"Line %d: %s" % (linenum, e))
     
     def cmd_offset(self, args):
         if len(args) != 1:
@@ -153,7 +149,7 @@ class Patcher(object):
         """Saved patched file."""
         
         with open(target_path, "wb") as f:
-            f.write("".join(chr(c) for c in self.data))
+            f.write(bytes(self.data))
 
 
 def main(argv):
@@ -163,14 +159,14 @@ def main(argv):
     p.add_argument(u"source")
     p.add_argument(u"patch")
     p.add_argument(u"target")
-    args = p.parse_args([x.decode(u"utf-8") for x in argv[1:]])
+    args = p.parse_args(argv[1:])
     
     try:
         patcher = Patcher(args.source)
         patcher.patch(args.patch)
         patcher.save(args.target)
     except PatcherError as e:
-        print >>sys.stderr, unicode(e).encode(u"utf-8")
+        print(e, file=sys.stderr)
         return 1
     
     return 0
