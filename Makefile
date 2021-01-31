@@ -284,6 +284,7 @@ clean_tiles:
 	rm -f src/tiles/font.bin
 	rm -f src/tiles/tileset.bin
 	rm -f src/tiles/tilebitmap.prg
+	rm -f src/tiles/tilebitmap.map
 
 
 # Character creation.
