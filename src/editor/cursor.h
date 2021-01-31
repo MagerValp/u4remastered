@@ -7,7 +7,7 @@ typedef struct _highlight {
 } highlight;
 
 
-highlight *cursor_list[];
+extern highlight *cursor_list[];
 
 
 void select(unsigned char focus, unsigned char pos);
