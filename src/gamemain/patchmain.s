@@ -525,9 +525,9 @@ patch_stack:
 	pla
 	pla
 	nop
-	clc
 	lda $22   ; moon_phase_trammel
+	asl a
 	adc $23   ; moon_phase_felucca
-	cmp #$08  ; more compact than comparing each with 4. makes room for pla pla.
+	cmp #$0c  ; uniquely true when both are 4. makes room for pla pla.
 
 	.byte 0
