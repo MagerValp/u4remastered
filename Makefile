@@ -22,7 +22,7 @@ SAVEGAME=untouched
 CRT_BINS=src/easyflash/efs.bin
 
 # Tweak to trade off compressed size for compression speed.
-EXOMIZER_MAX_OFFSET=16384
+EXOMIZER_MAX_OFFSET=65535
 
 
 %.o: %.c
