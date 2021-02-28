@@ -274,7 +274,8 @@ trainercolors:
 	trainerrow
 	trainerrow
 	trainerrow
-	.res 120, 3
+	trainerrow
+	.res 80, 3
 	.res 80, 2
 	.res 120, 15
 

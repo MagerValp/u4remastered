@@ -46,6 +46,16 @@ key_east	= dirkey_trans_tab + 2
 key_west	= dirkey_trans_tab + 3
 
 
+; By default, value $ff disables the shop price
+;   modification and matches retail behavior, because
+;   "SEC, ADC $ff" is effectively NOP.
+; If trainer for "fair sales" is active,
+;   this value is replaced with decimal 99 to correctly
+;   carry the hundreds-place in BCD arithmetic.
+shop_price_carry:
+	.byte $ff
+
+
 game_startup_patch:
 	lda #$09		; Restore original jump address.
 	sta start_game + 1
@@ -146,6 +156,7 @@ patchchain_lo:
 	.byte <patch_balloon
 	.byte <patch_keys
 	.byte <patch_pass
+	.byte <patch_price
 	.byte <patch_save_britannia
 	.byte <patch_save_dungeon
 	.byte <patch_shake
@@ -173,6 +184,7 @@ patchchain_hi:
 	.byte >patch_balloon
 	.byte >patch_keys
 	.byte >patch_pass
+	.byte >patch_price
 	.byte >patch_save_britannia
 	.byte >patch_save_dungeon
 	.byte >patch_shake
@@ -286,6 +298,14 @@ patch_pass:
 	.byte 3
 	.addr $70f0
 	jmp $70eb
+
+	.byte 0
+
+
+patch_price:
+	.byte 1
+	.addr shop_price_carry
+	.byte 99
 
 	.byte 0
 

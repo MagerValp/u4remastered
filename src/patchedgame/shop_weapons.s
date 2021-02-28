@@ -40,6 +40,7 @@ stats = $ab00
 ;stats + 1 = $ab01
 weapons = $ab20
 inbuf = $af00
+shop_price_carry = $8700
 
 
 
@@ -275,6 +276,7 @@ sell_menu:
 @bye:
 	jmp bye
 
+; PRICE_FIX: mace costs 100, sell for 50 not 0
 @make_offer:
 	lda zptmp_item_type
 	asl 
@@ -282,11 +284,15 @@ sell_menu:
 	lda price,y
 	jsr decode_bcd_value
 	lsr 
+	php      ;PRICE_FIX
 	jsr encode_bcd_value
 	sta payment
 	lda price + 1,y
 	jsr decode_bcd_value
-	lsr 
+	plp      ;PRICE_FIX
+	bcc :+   ;PRICE_FIX
+	adc shop_price_carry  ;PRICE_FIX add 100
+:	lsr 
 	jsr encode_bcd_value
 	sta payment + 1
 	jsr j_primm
