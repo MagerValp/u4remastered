@@ -976,6 +976,7 @@ src/easyflash/efssg.bin: $(SAVEGAME_FILES)
 	tools/makeefssg.py $(EASYFLASH_SAVE_SIZE) $@ $(SAVEGAME_FILES)
 
 u4remastered.crt: $(CRT_BINS)
+	@echo "Creating $@"
 	cat $^ > src/easyflash/easyflash.bin
 	tools/gen_ef_crt.py src/easyflash/easyflash.bin $@
 	rm -f src/easyflash/easyflash.bin
