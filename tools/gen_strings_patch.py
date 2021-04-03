@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 
@@ -9,16 +9,12 @@ import tempfile
 import os
 
 
-def print8(*args):
-    print " ".join(unicode(x).encode(u"utf-8") for x in args)
-
-
 def main(argv):
     p = argparse.ArgumentParser()
     p.add_argument(u"-v", u"--verbose", action=u"store_true",
                    help=u"Verbose output.")
     p.add_argument(u"input")
-    args = p.parse_args([x.decode(u"utf-8") for x in argv[1:]])
+    args = p.parse_args(argv[1:])
     
     with open(args.input, u"rb") as f:
         data = f.read()
@@ -27,7 +23,7 @@ def main(argv):
     os.close(fh)
     
     with open(tempfname, "wb") as f:
-        f.write("".join(chr(ord(x) ^ 0x80) for x in data))
+        f.write(bytes(x ^ 0x80 for x in data))
     
     try:
         p = subprocess.Popen([u"/usr/bin/strings",
@@ -42,9 +38,9 @@ def main(argv):
     for line in out.splitlines():
         offsetstr, _, value = line.partition(" ")
         offset = int(offsetstr, 16)
-        print 'offset(%04x) match%-20s replace("%s")' % (offset,
+        print('offset(%04x) match%-20s replace("%s")' % (offset,
                                                          '("%s")' % value,
-                                                         value)
+                                                         value))
     
     return 0
     

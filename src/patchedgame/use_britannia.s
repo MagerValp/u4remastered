@@ -437,7 +437,7 @@ use_skull_at_abyss:
 	lda #$07
 	sta $6a
 @next_virtue:
-	ldy #$6a
+	ldy $6a ; BUG FIX, was #$6a in original
 	lda #$10
 	jsr inc_virtue
 	dec $6a

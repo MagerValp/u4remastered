@@ -1,5 +1,9 @@
 # Patch file 73, inn.
 
+# Sleeping character should have status become Good, not "A".
+offset(0275) match(c1)                 replace(c7)
+
+
 offset(000b) match("THE INNKEEPER")    replace("The innkeeper")
 offset(0019) match("SAYS: GET THAT")   replace("says: Get that")
 offset(0028) match("HORSE OUT OF")     replace("horse out of")
@@ -51,7 +55,7 @@ offset(033e) match("MORNING!")         replace("Morning!")
 
 offset(03c4) match("THE HONEST INN")   replace("The Honest Inn")
 offset(03d3) match("BRITANNIA MANOR")  replace("Britannia Manor")
-offset(03e3) match("THE INN OF ENDS")  replace("the Inn of Ends")
+offset(03e3) match("THE INN OF ENDS")  replace("The Inn of Ends")
 offset(03f3) match("WAYFARERS INN")    replace("Wayfarers Inn")
 offset(0401) match("HONORABLE INN")    replace("Honorable Inn")
 offset(040f) match("THE INN OF")       replace("The Inn of")
@@ -90,11 +94,11 @@ offset(055f) match("BED ROOM WITH")    replace("bed room with")
 offset(056d) match("A BACK DOOR")      replace("a back door")
 offset(0579) match("FOR 15gp.")        replace("for 15gp.")
 
-offset(0583) match("UNFORTUNATLY, I")  replace("Unfortunatly, i")
+offset(0583) match("UNFORTUNATLY, I")  replace("Unfortunately I")
 offset(0593) match("HAVE BUT ONLY")    replace("have but only")
 offset(05a1) match("A VERY SMALL")     replace("a very small")
-offset(05ae) match("ROOM WITH 1 BED,") replace("room with 1 bed,")
-offset(05bf) match("WORSE YET, IT IS") replace("worse yet, it is")
+offset(05ae) match("ROOM WITH 1 BED,") replace("room with 1 bed.")
+offset(05bf) match("WORSE YET, IT IS") replace("Worse yet, it is")
 offset(05d0) match("HAUNTED! IF YOU")  replace("haunted! If you")
 offset(05e0) match("DO WISH TO STAY")  replace("do wish to stay")
 offset(05f0) match("IT COSTS 5gp.")    replace("it costs 5gp.")

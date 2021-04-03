@@ -51,7 +51,7 @@ trainer:
 	sta line
 	sta $c6
 
-	ldx #7
+	ldx #ntrainers - 1
 	lda #0
 :	sta select,x
 	dex
@@ -60,7 +60,7 @@ trainer:
 	bmi waitkey
 
 all:
-	ldx #7
+	ldx #ntrainers - 1
 	lda #$ff
 :	sta select,x
 	dex
@@ -274,7 +274,8 @@ trainercolors:
 	trainerrow
 	trainerrow
 	trainerrow
-	.res 120, 3
+	trainerrow
+	.res 80, 3
 	.res 80, 2
 	.res 120, 15
 

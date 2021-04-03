@@ -1,16 +1,9 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 
 import sys
 import argparse
-
-
-def print8(*args):
-    print " ".join(unicode(x).encode(u"utf-8") for x in args)
-
-def printerr8(*args):
-    print >>sys.stderr, " ".join(unicode(x).encode(u"utf-8") for x in args)
 
 
 CRT_HEADER_SIZE = 0x40
@@ -20,7 +13,7 @@ CHIP_TYPE_FLASH = 0x0002
 
 
 def byte(b):
-    return chr(b)
+    return bytes([b])
 
 def word(w):
     return byte((w & 0xff00) >> 8) + byte(w & 0xff)
@@ -29,11 +22,11 @@ def longword(l):
     return word((l & 0xffff0000) >> 16) + word(l & 0xffff)
 
 def padstr(s, l):
-    return s[:l] + "\x00" * (l - len(s))
+    return s[:l] + b"\x00" * (l - len(s))
 
 def ef_crt_header(name):
-    return "".join([
-        "C64 CARTRIDGE   ",
+    return b"".join([
+        b"C64 CARTRIDGE   ",
         longword(CRT_HEADER_SIZE),
         word(CRT_VERSION),
         word(CRT_HWTYPE_EASYFLASH),
@@ -46,10 +39,10 @@ def ef_crt_header(name):
     ])
 
 def ef_chip_bank(data, banknum, loadaddr):
-    if data == "\xff" * len(data):
-        return ""
-    return "".join([
-        "CHIP",
+    if data == b"\xff" * len(data):
+        return b""
+    return b"".join([
+        b"CHIP",
         longword(len(data) + 0x10),
         word(CHIP_TYPE_FLASH),
         word(banknum),
@@ -64,17 +57,17 @@ def main(argv):
                    help=u"Verbose output.")
     p.add_argument(u"input")
     p.add_argument(u"output")
-    args = p.parse_args([x.decode(u"utf-8") for x in argv[1:]])
+    args = p.parse_args(argv[1:])
     
     with open(args.input, u"rb") as f:
         data = f.read()
     
     if len(data) % 0x4000 != 0:
-        printerr8(u"input must be a multiple of $4000 bytes long")
+        print(u"input must be a multiple of $4000 bytes long", file=sys.stderr)
         return 1
     
     output = [ef_crt_header(u"Ultima IV Remastered")]
-    for banknum, offset in enumerate(xrange(0, len(data), 0x4000)):
+    for banknum, offset in enumerate(range(0, len(data), 0x4000)):
         bank = data[offset:offset + 0x4000]
         output.append(ef_chip_bank(bank[:0x2000], banknum, 0x8000))
         output.append(ef_chip_bank(bank[0x2000:], banknum, 0xa000))

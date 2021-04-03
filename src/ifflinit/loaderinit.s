@@ -118,7 +118,7 @@ loader_init:
 	ldax #str_dtv2
 	bcs @gotmodel
 
-	ldy #0				; check for sings of C128
+	ldy #0				; check for signs of C128
 
 	lda $d030
 	cmp #$ff

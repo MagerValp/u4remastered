@@ -203,7 +203,7 @@ item_at_coordinate:
 	jmp find_mystic_armour
 
 @check_weapons:
-	jmp find_mysic_weapons
+	jmp find_mystic_weapons
 
 find_rune:
 	lda bitmask,y
@@ -358,7 +358,7 @@ find_mystic_armour:
 	jsr add_xp100
 	rts
 
-find_mysic_weapons:
+find_mystic_weapons:
 	ldx #$07
 	lda #$00
 @next_virtue:

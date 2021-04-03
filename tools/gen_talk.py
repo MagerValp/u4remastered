@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 
@@ -9,15 +9,11 @@ import os.path
 import itertools
 
 
-def print8(*args):
-    print " ".join(unicode(x).encode(u"utf-8") for x in args)
-
-
 def encode_string(s, lastbit=True):
     lines = s.split(u"\n")
     for line in lines:
         if len(line) > 16:
-            print8(u"Line too long: '%s'" % line)
+            print(u"Line too long: '%s'" % line)
     bytes = list(ord(c) | 0x80 for c in s.replace(u"\n", u"\r"))
     if lastbit:
         bytes[-1] &= 0x7f
@@ -60,8 +56,8 @@ def encode_conv(conv):
     humility = 1 if conv[u"humility_question"] else 0
     turnsaway = bcd(conv[u"turns_away_prob"])
     
-    bytes = strings + kw1 + kw2 + [trigger, humility, turnsaway]
-    return "".join(chr(x) for x in bytes)
+    bytelist = strings + kw1 + kw2 + [trigger, humility, turnsaway]
+    return bytes(bytelist)
 
 def main(argv):
     p = argparse.ArgumentParser()
@@ -69,9 +65,9 @@ def main(argv):
                    help=u"Verbose output.")
     p.add_argument(u"talk_json")
     p.add_argument(u"output_dir")
-    args = p.parse_args([x.decode(u"utf-8") for x in argv[1:]])
+    args = p.parse_args(argv[1:])
     
-    with open(args.talk_json, u"r") as f:
+    with open(args.talk_json, u"rt", encoding=u"utf-8") as f:
         talk = json.load(f)
     
     for i, conv in enumerate(talk):

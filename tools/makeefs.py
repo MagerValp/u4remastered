@@ -1,14 +1,10 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 
 import sys
 import argparse
 import os.path
-
-
-def print8(*args):
-    print " ".join(unicode(x).encode(u"utf-8") for x in args)
 
 
 def main(argv):
@@ -18,7 +14,7 @@ def main(argv):
     p.add_argument(u"longshort", choices=[u"long", u"short"])
     p.add_argument(u"output")
     p.add_argument(u"files", nargs=u"+")
-    args = p.parse_args([x.decode(u"utf-8") for x in argv[1:]])
+    args = p.parse_args(argv[1:])
     
     lengths = list()
     files = list()
@@ -28,7 +24,7 @@ def main(argv):
             lengths.append(len(files[-1]))
     
     if len(files) < 256:
-        files.extend([""] * (256 - len(files)))
+        files.extend([b""] * (256 - len(files)))
         lengths.extend([0] * (256 - len(lengths)))
     
     banks = list()
@@ -46,20 +42,20 @@ def main(argv):
             bank += 1
     
     output = [
-        "".join(chr(x) for x in banks),
-        "".join(chr(x & 0xff) for x in offsets),
-        "".join(chr(x >> 8) for x in offsets),
-        "".join(chr(x & 0xff) for x in lengths),
+        bytes(x for x in banks),
+        bytes(x & 0xff for x in offsets),
+        bytes(x >> 8 for x in offsets),
+        bytes(x & 0xff for x in lengths),
     ]
     if args.longshort == u"long":
-        output.append("".join(chr(x >> 8) for x in lengths))
+        output.append(bytes(x >> 8 for x in lengths))
     
     output.extend(files)
-    data = "".join(output)
-    pad = "\xff"
+    data = b"".join(output)
+    pad = b"\xff"
     padded_data = data + pad * 0x2000
     with open(args.output, "wb") as f:
-        for offset in xrange(0, len(data), 0x2000):
+        for offset in range(0, len(data), 0x2000):
             f.write(padded_data[offset:offset + 0x2000])
             f.write(pad * 0x2000)
     

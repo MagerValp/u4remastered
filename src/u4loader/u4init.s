@@ -57,10 +57,12 @@ init:
 
 	jsr trainer
 
+; black border + background
 	ldx #0
 	stx $d020
 	stx $d021
 
+; copy original load screen into render buffer
 	;ldx #0
 :	lda $9600,x
 	sta $0400,x
@@ -70,6 +72,7 @@ init:
 	sta $0600,x
 	lda $9900,x
 	sta $0700,x
+; wipe the trainer font (why bother?)
 	lda #1
 	sta $d800,x
 	sta $d900,x

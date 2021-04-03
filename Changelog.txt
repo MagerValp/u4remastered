@@ -1,6 +1,42 @@
 # Ultima IV Remastered Changelog
 
 
+## v2.3.0 (2021-03-25)
+
+* Added fixes from Sean Gugler for the following issues.
+
+### Critical Bugs
+
+* Stack overflow every moongate jump.
+* Stack overflow using Ztats during combat.
+* Stack overflow using Z-down spell at bottom of dungeon.
+* Stack underflow if characters attempt to take different exits from dungeon room.
+* Morning after inn wakes sleeping characters with invalid status 'A'.
+
+### Other Errors
+
+* Cannot talk to the healer in Serpent's Hold castle.
+* Enemy strength for non-monsters was calculated wrong.
+* Completion of skull quest grants awards to wrong area of memory.
+* NPC questions worded as humility tests were not flagged to affect virtue: Browning, Aristotle, Santayana, Slysam.
+* Following advice from cycle 1 at shrine of sacrifice mistakenly awards honor points.
+* Trainer improperly initializes "Idle" cheat.
+
+### Cosmetic Mistakes
+
+* Katrina prints both excuses if virtue is too low ("Thou art not humbleexperienced enough").
+* Ztats display of 3-part key is truncated if you have bell or book but not candle.
+* Spells cast by healer shopkeepers are supposed to have the display inversion effect.
+* Spelling, capitalization, and grammar.
+* Added more disassembly to fix text issues that can't be patched in place.
+
+### Enhancements
+
+* Additional torch brightness level in dungeon, full white as in original game.
+* Trainer for fair buy-back prices.
+* Documented zero-page flag "last_meditated".
+
+
 ## v2.2.1 (2015-05-29)
 
 * Fixed graphics corruption and potential crash during ending, thanks Trurl!

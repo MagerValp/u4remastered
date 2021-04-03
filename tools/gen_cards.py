@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 
@@ -7,24 +7,17 @@ import argparse
 import os
 
 
-def print8(*args):
-    print " ".join(unicode(x).encode(u"utf-8") for x in args)
-
-def printerr8(*args):
-    print >>sys.stderr, " ".join(unicode(x).encode(u"utf-8") for x in args)
-
-
 def cut_card(xstart, bitmap, colors, d800):
     b = list()
     c = list()
     d = list()
-    for y in xrange(14):
+    for y in range(14):
         boff = y * 320 + xstart * 8
         b.append(bitmap[boff:boff + 10 * 8])
         coff = y * 40 + xstart
         c.append(colors[coff:coff + 10])
         d.append(d800[coff])
-    return ("".join(b), "".join(c), "".join(d))
+    return (b"".join(b), b"".join(c), bytes(d))
 
 
 def read_koala(path):
@@ -45,7 +38,7 @@ def main(argv):
     p.add_argument(u"cards2")
     p.add_argument(u"bitmap")
     p.add_argument(u"colors")
-    args = p.parse_args([x.decode(u"utf-8") for x in argv[1:]])
+    args = p.parse_args(argv[1:])
     
     cards = list()
     bitmap, colors, d800 = read_koala(args.cards1)
@@ -60,12 +53,12 @@ def main(argv):
     cards.append(cut_card(30, bitmap, colors, d800))
     
     with open(args.bitmap, u"wb") as f:
-        f.write(chr(0x00) + chr(0x40))
-        f.write("".join(x[0] for x in cards))
+        f.write(b'\x00\x40')
+        f.write(b"".join(x[0] for x in cards))
     with open(args.colors, u"wb") as f:
-        f.write(chr(0x00) + chr(0x98))
-        f.write("".join(x[1] + chr(0) * 4 for x in cards))
-        f.write("".join(x[2] + chr(0) * 2 for x in cards))
+        f.write(b'\x00\x98')
+        f.write(b"".join(x[1] + b'\x00' * 4 for x in cards))
+        f.write(b"".join(x[2] + b'\x00' * 2 for x in cards))
     
     return 0
     

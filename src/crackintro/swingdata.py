@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 
@@ -7,27 +7,19 @@ import argparse
 import math
 
 
-def print8(*args):
-    print " ".join(unicode(x).encode(u"utf-8") for x in args)
-
-def printerr8(*args):
-    print >>sys.stderr, " ".join(unicode(x).encode(u"utf-8") for x in args)
-
-
-
 def main(argv):
     p = argparse.ArgumentParser()
     p.add_argument(u"-v", u"--verbose", action=u"store_true",
                    help=u"Verbose output.")
     p.add_argument(u"amplitude", type=int)
     p.add_argument(u"output")
-    args = p.parse_args([x.decode(u"utf-8") for x in argv[1:]])
+    args = p.parse_args(argv[1:])
     
     swing_amp = float(args.amplitude) - 0.0000001
     swing_center = swing_amp
     swing_data = list()
     size = 512
-    for x in xrange(size):
+    for x in range(size):
         swing_data.append(swing_center + swing_amp * math.cos(float(x) * math.pi / float(size / 2)))
     
     output = [
@@ -46,8 +38,8 @@ def main(argv):
     output.append(u"testsinus_end:")
     
     output.append(u"")
-    with open(args.output, u"w") as f:
-        f.write((u"\n".join(output)).encode(u"utf-8"))
+    with open(args.output, u"wt", encoding=u"utf-8") as f:
+        f.write(u"\n".join(output))
     
     return 0
     

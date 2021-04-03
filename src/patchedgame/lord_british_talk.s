@@ -438,7 +438,7 @@ answer_hone:
 	jsr print_he_says
 	jsr j_primm
 	.byte "The fair towne", $8d
-	.byte "of Moonglow on", $8d
+	.byte "of Moonglow, on", $8d
 	.byte "Verity Isle, is", $8d
 	.byte "where the virtue", $8d
 	.byte "of honesty", $8d
@@ -578,7 +578,7 @@ answer_prid:
 answer_avat:
 	jsr print_lb_says
 	jsr j_primm
-	.byte "To be an avatar", $8d
+	.byte "To be an Avatar", $8d
 	.byte "is to be the", $8d
 	.byte "embodiment of", $8d
 	.byte "the eight", $8d
@@ -602,8 +602,8 @@ answer_avat:
 answer_ques:
 	jsr print_lb_says
 	jsr j_primm
-	.byte "The quest of", $8d
-	.byte "the avatar is", $8d
+	.byte "The Quest of", $8d
+	.byte "the Avatar is", $8d
 	.byte "is to know and", $8d
 	.byte "become the", $8d
 	.byte "embodiment of", $8d
@@ -643,8 +643,8 @@ answer_brit:
 	.byte $8d
 	.byte "If but one soul", $8d
 	.byte "could complete", $8d
-	.byte "the quest of the", $8d
-	.byte "avatar, our", $8d
+	.byte "the Quest of the", $8d
+	.byte "Avatar, our", $8d
 	.byte "people would", $8d
 	.byte "have a new hope,", $8d
 	.byte "a new goal for", $8d
@@ -674,7 +674,7 @@ answer_ankh:
 	.byte "who strives for", $8d
 	.byte "virtue, keep it", $8d
 	.byte "with thee at", $8d
-	.byte "times for by", $8d
+	.byte "all times for by", $8d
 	.byte "this mark thou", $8d
 	.byte "shalt be known!", $8d
 	.byte 0
@@ -695,7 +695,7 @@ answer_abys:
 	.byte "is the darkest", $8d
 	.byte "pocket of evil", $8d
 	.byte "remaining in", $8d
-	.byte "britannia!", $8d
+	.byte "Britannia!", $8d
 	.byte 0
 
 	jsr j_waitkey
@@ -718,7 +718,7 @@ answer_abys:
 	.byte "may enter this", $8d
 	.byte "chamber, one", $8d
 	.byte "such as an", $8d
-	.byte "avatar!!!", $8d
+	.byte "Avatar!!!", $8d
 	.byte 0
 
 	jmp next_question
@@ -752,7 +752,7 @@ answer_virt:
 	jsr j_primm
 	.byte "The eight", $8d
 	.byte "virtues of the", $8d
-	.byte "avatar are:", $8d
+	.byte "Avatar are:", $8d
 	.byte 0
 
 	jsr j_waitkey
