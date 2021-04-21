@@ -118,12 +118,12 @@ check_xp:
 	lda (ptr1),y
 	jsr decode_bcd_value
 	ldx #$01
-@sqrt:
+@log_2:
 	cmp #$00
 	beq @check_level
 	lsr a
 	inx
-	jmp @sqrt
+	jmp @log_2
 
 @check_level:
 	txa

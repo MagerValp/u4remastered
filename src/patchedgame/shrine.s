@@ -598,9 +598,9 @@ virtues_and_mantras:
 
 print_hint:
 	tay
-	lda #$fa
+	lda #<string_table
 	sta ptr1
-	lda #$8c
+	lda #>string_table
 	sta ptr1+1
 	ldx #$00
 @checknext:
@@ -632,6 +632,7 @@ print_hint:
 	inc ptr1+1
 :	rts
 
+string_table:
 hint_honesty_0:
 	.byte 0, "Take not the", $8d
 	.byte "gold of others", $8d
