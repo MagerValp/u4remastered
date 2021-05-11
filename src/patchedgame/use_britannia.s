@@ -563,7 +563,7 @@ shake_down:
 	bne @copy
 	jsr j_rand
 	bmi @skip
-	bit j_togglesnd
+	jsr j_togglesnd  ;BUGFIX: opcode was 'bit'
 @skip:
 	dex
 	bne @next
@@ -591,7 +591,7 @@ shake_up:
 	bne @copy
 	jsr j_rand
 	bmi @skip
-	bit j_togglesnd
+	jsr j_togglesnd  ;BUGFIX: opcode was 'bit'
 @skip:
 	inx
 	cpx #$ae

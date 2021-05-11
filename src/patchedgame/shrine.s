@@ -264,7 +264,8 @@ shrine:
 	jsr j_console_out
 	dec $70
 	bne @print
-	bit $c010
+	;bit $c010      ; harmless MISTAKE, copied verbatim from Apple II.
+	jsr j_clearkbd  ; BUGFIX for mistake
 	lda #$00
 	sta key_buf_len
 	jsr j_primm
