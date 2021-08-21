@@ -120,7 +120,7 @@
     }, 
     {
         "description": "a wise mage.", 
-        "health": "I am old,\nvery old...", 
+        "health": "I am old,\nvery old....", 
         "humility_question": false, 
         "job": "I am here\nto help thee.", 
         "keyword_1": "HELP", 
@@ -574,7 +574,7 @@
         "question": "Dost thou\nseek love?", 
         "question_no_answer": "Then thou shalt\nnot find it!", 
         "question_trigger": "keyword 2", 
-        "question_yes_answer": "Then may thou\nfind it!", 
+        "question_yes_answer": "Then mayst thou\nfind it!", 
         "turns_away_prob": 0
     }, 
     {

@@ -1218,7 +1218,8 @@ string_table:
 	.byte "What dost thou", $8d
 	.byte "possess if all", $8d
 	.byte "may rely upon", $8d
-	.byte "your every word?", $8d
+	.byte "thine every", $8d
+	.byte "word?", $8d
 	.byte 0
 ; STRING $02 (2)
 	.byte $8d

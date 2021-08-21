@@ -507,8 +507,8 @@ dec_virtue:
 @lost_an_eight:
 	jsr j_primm
 	.byte $8d
-	.byte "THOU HAST LOST", $8d
-	.byte "AN EIGHTH!", $8d
+	.byte "Thou hast lost", $8d
+	.byte "an eighth!", $8d
 	.byte 0
 
 	lda #$99

@@ -192,7 +192,7 @@ use:
 print_not_usable:
 	jsr j_primm
 	.byte $8d
-	.byte "Not usable!", $8d
+	.byte "Not usable item!", $8d
 	.byte 0
 
 	jmp return_to_dungeon
@@ -329,7 +329,7 @@ use_stone:
 	ora threepartkey
 	sta threepartkey
 	jsr j_primm
-	.byte "Thou doth find", $8d
+	.byte "Thou dost find", $8d
 	.byte "one third of the", $8d
 	.byte "three part key!", $8d
 	.byte 0
@@ -350,7 +350,7 @@ use_stone_in_abyss:
 	jsr j_primm
 	.byte $8d
 	.byte "As thou", $8d
-	.byte "doth approach", $8d
+	.byte "dost approach", $8d
 	.byte 0
 
 	jsr ask_virtue
@@ -456,8 +456,10 @@ use_skull:
 	bmi j_print_no_effect
 	jsr j_primm
 	.byte $8d
-	.byte "Holding the evil", $8d
-	.byte "skull aloft...", $8d
+	.byte "You hold the", $8d
+	.byte "evil skull of", $8d
+	.byte "Mondain the", $8d
+	.byte "wizard aloft....", $8d
 	.byte 0
 
 	jsr shake_screen
@@ -681,7 +683,8 @@ dec_virtue:
 @lost_an_eight:
 	jsr j_primm
 	.byte $8d
-	.byte "An eighth lost!", $8d
+	.byte "Thou hast lost", $8d
+	.byte "an eighth!", $8d
 	.byte 0
 
 	lda #$99
@@ -708,7 +711,7 @@ ask_virtue:
 	.byte $8d
 	.byte "A voice rings", $8d
 	.byte "out: What virtue", $8d
-	.byte "dost stem from", $8d
+	.byte "doth stem from", $8d
 	.byte 0
 
 	ldx dungeon_level
@@ -783,7 +786,7 @@ ask_virtue:
 	.byte "virtue exists", $8d
 	.byte "independently of", $8d
 	.byte "truth, love and", $8d
-	.byte "courage!", $8d
+	.byte "courage?", $8d
 	.byte 0
 
 @get_reply:

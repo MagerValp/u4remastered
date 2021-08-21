@@ -206,7 +206,8 @@ moongate_disappear:
 
 	.segment "PART5"
 
-	slice_of_151 $6bf6, $96e6
+	;Leave room for up to 8 extra chars of patched text
+	slice_of_151 $6bf6, $96e6 + $08
 
 
 	.segment "MOONGATEIRQ"

@@ -181,8 +181,8 @@ check_xp:
 @what:
 	jsr j_primm
 	.byte $8d
-	.byte "What would thou", $8d
-	.byte "ask of me?", $8d
+	.byte "What wouldst", $8d
+	.byte "thou ask of me?", $8d
 	.byte 0
 
 	jmp main_prompt
@@ -513,7 +513,7 @@ answer_spir:
 	jsr j_primm
 	.byte "In Skara Brae", $8d
 	.byte "the spiritual", $8d
-	.byte "path is taught,", $8d
+	.byte "path is taught.", $8d
 	.byte "find it on an", $8d
 	.byte "isle near", $8d
 	.byte "Spiritwood!", $8d
@@ -672,7 +672,7 @@ answer_ankh:
 	.byte "The ankh is the", $8d
 	.byte "symbol of one", $8d
 	.byte "who strives for", $8d
-	.byte "virtue, keep it", $8d
+	.byte "virtue. Keep it", $8d
 	.byte "with thee at", $8d
 	.byte "all times for by", $8d
 	.byte "this mark thou", $8d
@@ -772,7 +772,7 @@ answer_virt:
 lb_intro:
 	jsr j_primm
 	.byte "Lord British", $8d
-	.byte "rises and says", $8d
+	.byte "rises and says:", $8d
 	.byte "at long last!", $8d
 	.byte 0
 
@@ -807,13 +807,13 @@ lb_intro:
 	.byte $8d
 	.byte "A champion of", $8d
 	.byte "virtue is called", $8d
-	.byte "for. Thou may be", $8d
-	.byte "this champion,", $8d
-	.byte "but only time", $8d
-	.byte "shall tell. I", $8d
-	.byte "will aid thee", $8d
-	.byte "any way that I", $8d
-	.byte "can!", $8d
+	.byte "for. Thou mayst", $8d
+	.byte "be this", $8d
+	.byte "champion, but", $8d
+	.byte "only time shall", $8d
+	.byte "tell. I will aid", $8d
+	.byte "thee any way", $8d
+	.byte "that I can!", $8d
 	.byte 0
 
 	jsr j_waitkey

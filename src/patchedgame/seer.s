@@ -78,7 +78,7 @@ welcome:
 	jsr j_primm
 	.byte $8d
 	.byte "For what path", $8d
-	.byte "doth thou seek", $8d
+	.byte "dost thou seek", $8d
 	.byte "enlightenment?", $8d
 	.byte 0
 	jmp input_word
@@ -419,7 +419,7 @@ string_table:
 	.byte 0
 	.byte "Thou art cruel", $8d
 	.byte "and unjust, in", $8d
-	.byte "time thou will", $8d
+	.byte "time thou wilt", $8d
 	.byte "suffer for thy", $8d
 	.byte "crimes!", $8d
 	.byte 0
