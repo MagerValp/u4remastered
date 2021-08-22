@@ -37,7 +37,7 @@
 	.export attack_creature_check
 	.export combat_animate_fix
 	.export attacked_by_fix
-	.export player_dead_fix
+	.export players_dead_fix
 	.export bridge_trolls_fix
 
 
@@ -85,6 +85,7 @@ check_awake		= $7daf
 print_object_name	= $8357
 print_creature_name	= $835c
 getandprintkey		= $8398
+run_file_dead		= $83c7
 
 map_status		= $ac00
 object_tile		= $ac60
@@ -907,9 +908,18 @@ attacked_by_fix:
 	pla
 	jmp prepare_combat
 
-player_dead_fix:
-	pla
-	pla
+players_dead_fix:
+; Reset stack. Impossible to know if we should pop 1, 3, or 4 frames
+; because we could have arrived here via any of the following JSR stacks:
+;     check_water_hazards > enter_whirlpool > damage_party, "thy ship sinks"
+;     check_water_hazards > enter_twister > damage_party, "thy ship sinks"
+;     mobs_act > mob_world_take_turn, fire_cannon_pirate > damage_party, "thy ship sinks"
+;     mobs_act > mob_world_take_turn > fire_red_missile > damage_party, "thy ship sinks"
+;     cmd_done > anyone_awake, all dead
+;     cmd_done, next_turn > anyone_awake, all dead
+; However, we do know that cmd_done is the top-most frame from which nothing ever RTS.
+	ldx #$FF
+	txs
 	jmp cmd_done
 
 bridge_trolls_fix:

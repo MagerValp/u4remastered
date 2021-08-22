@@ -32,7 +32,7 @@
 	.import attack_creature_check
 	.import combat_animate_fix
 	.import attacked_by_fix
-	.import player_dead_fix
+	.import players_dead_fix
 	.import bridge_trolls_fix
 
 
@@ -501,7 +501,7 @@ patch_stack:
 
 	.byte 2
 	.addr $83e1
-	.addr player_dead_fix
+	.addr players_dead_fix
 
 	.byte 2
 	.addr $62e8
