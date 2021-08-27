@@ -58,6 +58,7 @@ lt_rwflag		= $0062
 lt_addr_hi		= $0063
 monster_type		= $0066
 game_mode_temp		= $0068
+zp_index		= $006a
 moongate_tile		= $006d
 moongate_xpos		= $006e
 moongate_ypos		= $006f
@@ -157,8 +158,16 @@ map_status		= $ac00
 object_xpos		= $ac20
 object_ypos		= $ac40
 object_tile		= $ac60
+object_dng_level	= $acc0
+combat_foe_cur_x	= $ad00
+combat_foe_cur_y	= $ad10
+combat_foe_hp		= $ad40
+combat_foe_tile_type	= $ad50
 cbt_player_xpos 	= $ad80
 cbt_player_ypos 	= $ad90
+attack_sprite		= $adfd
+target_x		= $adfe
+target_y		= $adff
 currmap 		= $ae00
 tempmap 		= $ae80
 inbuffer		= $af00
@@ -170,6 +179,13 @@ chrlineaddr_lo		= $e180
 chrlineaddr_hi		= $e198
 tile_color		= $e1b0
 music_init		= $ec00
+
+foes_max = $0f
+dng_tile_type_mask = $f0
+loc_dng_abyss = $18
+sound_damage = $06
+tile_attack_red = $4f
+tile_lord_british = $5e
 
 
 	.segment "OVERLAY"
@@ -452,8 +468,14 @@ use_skull:
 	jmp print_none_owned
 
 @have_skull:
-	lda game_mode
-	bmi j_print_no_effect
+;	lda game_mode
+;	bmi j_print_no_effect
+; ENHANCED: skull should still not work in the abyss,
+; but no reason it shouldn't behave normally in other dungeons.
+	lda current_location
+	cmp #loc_dng_abyss
+	beq j_print_no_effect
+
 	jsr j_primm
 	.byte $8d
 	.byte "You hold the", $8d
@@ -467,14 +489,33 @@ use_skull:
 	jsr shake_screen
 	jsr j_invertview
 	jsr shake_screen
+	
+	lda game_mode   ; ENHANCED: skull in combat
+	bmi @combat     ; ENHANCED: skull in combat
+
 	ldx #$1f
-	lda #$00
+; BUGFIX: in dungeon, skull must clear tile states, not just object table
+; (also, seems reasonable to only clear current level, not entire dungeon)
 @clear:
+	lda object_dng_level,x
+	cmp dungeon_level
+	bne @next_object
+	lda object_xpos,x
+	sta new_x
+	lda object_ypos,x
+	sta new_y
+	jsr j_gettile_dungeon
+	and #dng_tile_type_mask
+	sta (ptr1),y
+; BUGFIX end
+	lda #$00
 	sta object_tile,x
 	sta map_status,x
+@next_object:
 	dex
 	bpl @clear
 	jsr j_update_view
+@penalty:
 	lda #$07
 	sta $6a
 @next_virtue:
@@ -485,6 +526,36 @@ use_skull:
 	bpl @next_virtue
 	jsr j_update_status
 	jmp return_to_dungeon
+
+
+; ENHANCED: skull in combat kills combatants, not out-of-combat mobs
+@combat:
+	ldx #foes_max
+@next:
+	lda combat_foe_tile_type,x
+	beq @skip
+	cmp #tile_lord_british
+	beq @skip
+@kill_foe:
+	stx zp_index
+	lda combat_foe_cur_x,x
+	sta target_x
+	lda combat_foe_cur_y,x
+	sta target_y
+	lda #tile_attack_red
+	sta attack_sprite
+	jsr j_update_view_combat
+	lda #sound_damage
+	jsr j_playsfx
+	ldx zp_index
+	lda #$00
+	sta attack_sprite
+	sta combat_foe_hp,x
+	sta combat_foe_tile_type,x
+@skip:
+	dex
+	bpl @next
+	bmi @penalty
 
 get_input:
 	lda #$bf
