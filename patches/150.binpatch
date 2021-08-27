@@ -37,3 +37,36 @@ truncate(11e2)
     append(d0 02)       # bne $7012
     append(49 20)       # eor #$20
     append(60)          # rts
+
+
+# Gender neutral support.
+# In response to question
+# "Art thou Male or Female?"
+# allow answer N for "no" or "non-binary"
+offset(0a09)
+
+    match(c9 cd f0 08 c9 c6 d0 f5 a9 7b d0 02 a9 5c)
+# $6A04: 20 25 69    @ask    JSR input_char
+# $6A07: C9 CD               CMP #char_M
+# $6A09: F0 08               BEQ @male
+# $6A0B: C9 C6               CMP #char_F
+# $6A0D: D0 F5               BNE @ask
+# $6A0F: A9 7B               LDA #glyph_female
+# $6A11: D0 02               BNE @chosen
+# $6A13: A9 5C       @male   LDA #glyph_male
+# $6A15: 85 3C       @chosen STA gender_chosen
+
+    replace(a2 03 ca 30 f8 dd f3 71 d0 f8 ea bd f6 71)
+# $6A04: 20 25 69    @ask    JSR input_char
+# $6A07: A2 03               LDX #3
+# $6A09: CA          @next   DEX
+# $6A0A: 30 F8               BMI @ask
+# $6A0C: DD F3 71            CMP gender_key,x
+# $6A0F: D0 F8               BNE @next
+# $6A11: EA                  NOP
+# $6A12: BD F6 71            LDA gender_glyph,x
+# $6A15: 85 3C       @chosen STA gender_chosen
+
+    # append begins at 11f5 ($71f3)
+    append(cd c6 ce)  # chars  M F N
+    append(5c 7b 1b)  # glyphs
