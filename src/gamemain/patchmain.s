@@ -28,6 +28,7 @@
 	.import active_char_check_command
 	.import enter_balloon
 	.import board_ship_check_britannia
+	.import attack_lost_virtue
 	.import attack_fix
 	.import attack_creature_check
 	.import combat_animate_fix
@@ -473,6 +474,10 @@ patch_board_dungeon:
 
 
 patch_attack:
+	.byte 3
+	.addr $472e
+	jsr attack_lost_virtue
+
 	.byte 3
 	.addr $4733
 	jsr attack_fix

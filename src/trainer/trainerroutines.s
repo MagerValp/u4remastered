@@ -33,6 +33,7 @@
 	.export active_char_check_command
 	.export enter_balloon
 	.export board_ship_check_britannia
+	.export attack_lost_virtue
 	.export attack_fix
 	.export attack_creature_check
 	.export combat_animate_fix
@@ -865,6 +866,11 @@ board_ship_check_britannia:
 
 
 	.segment "ATTACKFIX"
+
+attack_lost_virtue:
+	jsr $8472       ; dec_virtue
+	jmp j_update_status   ; BUGFIX: if lost eighth, show that in status icon
+	;rts  implicit in jmp
 
 attack_fix:
 	lda object_tile,x
