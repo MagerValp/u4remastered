@@ -11,6 +11,8 @@
 	.export trainer_board
 	.export trainer_avoid
 	.export trainer_trolls
+	.export trainer_cmd_attack
+	.export trainer_dng_check_attacked
 	.export trainer_avoid_dungeon
 	.export trainer_balloon_north
 	.export trainer_balloon_south
@@ -79,6 +81,7 @@ print_cant		= $4189
 prepare_combat		= $4731
 board_find_object	= $480b
 cmd_done		= $621e
+dng_check_attacked	= $6cf2
 generate_combat		= $6ea3
 combat_monster_turn	= $7181
 combat_check_sleep	= $714e
@@ -477,18 +480,37 @@ trainer_trolls:
 	rts
 
 
+player_did_attack:
+	.byte 0
+
+trainer_cmd_attack:
+	lda #1
+	sta player_did_attack
+	jsr dng_check_attacked
+	jmp cmd_unknown
+	
+	
+trainer_dng_check_attacked:
+	lda #0
+	sta player_did_attack
+	jmp dng_check_attacked
+
+
 trainer_avoid_dungeon:
-	pha
-	jsr j_primm
-	.byte "Attackd by", $8d, 0
-	pla
 	asl
 	adc #$8c
+	ldx player_did_attack
+	bne @allow
+	pha
+	jsr j_primm
+	.byte "Attacked by", $8d, 0
+	pla
 	pha
 	jsr print_creature_name
 	jsr checkavoid
 	pla
 	bcs plaplarts
+@allow:
 	rts
 
 

@@ -14,6 +14,8 @@
 	.import trainer_board
 	.import trainer_avoid
 	.import trainer_trolls
+	.import trainer_cmd_attack
+	.import trainer_dng_check_attacked
 	.import trainer_avoid_dungeon
 	.import trainer_balloon_north
 	.import trainer_balloon_south
@@ -247,6 +249,14 @@ patch_avoid:
 	.addr $62d7
 	jsr trainer_trolls
 	nop
+
+	.byte 3
+	.addr $46cc
+	jmp trainer_cmd_attack
+
+	.byte 3
+	.addr $6299
+	jsr trainer_dng_check_attacked
 
 	.byte 3
 	.addr $6d15
