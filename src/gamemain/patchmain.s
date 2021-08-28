@@ -246,7 +246,7 @@ patch_avoid:
 	.addr trainer_avoid
 
 	.byte 4
-	.addr $62d7
+	.addr $62dc
 	jsr trainer_trolls
 	nop
 
@@ -519,7 +519,7 @@ patch_stack:
 	.addr players_dead_fix
 
 	.byte 2
-	.addr $62e8
+	.addr $62ed
 	.addr bridge_trolls_fix
 
 	.byte 1

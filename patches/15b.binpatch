@@ -3,6 +3,10 @@
 # Fix table indexing for enemy strength
 offset(3dac) match(1f 18) replace(1e 4a)
 
+# No attack by bridge trolls while drifting across in the balloon.
+offset(22ec) delete(a5 74 10 01 60)
+offset(22b2) insert(a5 74 10 01 60)
+
 
 offset(003e) match("NO ACTIVE GAME!")  replace("No active game!")
 
@@ -194,7 +198,7 @@ offset(2156) match("REAGENTS")         replace("Reagents")
 
 offset(21b9) match("MIXTURES")         replace("Mixtures")
 
-offset(22c9) match("BRIDGE TROLLS!")   replace("Bridge trolls!")
+offset(22ce) match("BRIDGE TROLLS!")   replace("Bridge trolls!")
 
 offset(2388) match("WINDS!")           replace("Winds!")
 offset(239b) match("FALLING ROCKS!")   replace("Falling rocks!")
