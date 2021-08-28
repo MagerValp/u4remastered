@@ -302,11 +302,11 @@ trainer_teleport:
 teleport:
 	sta player_xpos
 	sty player_ypos
-	ldx #0
-	txa
-:	sta map_status,x
-	inx
-	bne :-
+	ldx #7
+	lda #$00
+:	sta object_tile,x
+	dex
+	bpl :-
 	jsr j_player_teleport
 	jmp cmd_done
 
