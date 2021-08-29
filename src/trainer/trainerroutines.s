@@ -910,6 +910,10 @@ attack_fix:
 	bne :+
 	lda #$2a		; Knight.
 :
+	cmp #$15		; Horse East.
+	bne :+
+	lda #$14		; Horse West.
+:
 	rts
 
 
