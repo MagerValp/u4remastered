@@ -35,6 +35,9 @@
 	.import attack_creature_check
 	.import combat_animate_fix
 	.import npc_names
+	.import combat_immobile
+	.import combat_immobile_size
+	.import attack_ranged
 	.import attacked_by_fix
 	.import players_dead_fix
 	.import bridge_trolls_fix
@@ -506,6 +509,26 @@ patch_attack:
 	nop
 	nop
 	jmp npc_names
+
+	.byte 8
+	.addr $8036
+	jsr attack_ranged
+	bcc @attack_fire
+@attack_fire = * + $8093 - $8036 - 5
+	beq @attack_blue
+@attack_blue = * + $809c - $8036 - 7
+	nop
+
+	.byte 14
+	.addr $7325
+	ldx #<combat_immobile_size
+:	dex
+	bmi @continue
+	cmp combat_immobile,x
+	bne :-
+	jmp $73c4	;check_tile_effect
+	nop
+@continue:
 
 	.byte 0
 

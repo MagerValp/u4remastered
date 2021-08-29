@@ -40,6 +40,9 @@
 	.export attack_creature_check
 	.export combat_animate_fix
 	.export npc_names
+	.export combat_immobile
+	.export combat_immobile_size
+	.export attack_ranged
 	.export attacked_by_fix
 	.export players_dead_fix
 	.export bridge_trolls_fix
@@ -939,8 +942,12 @@ combat_animate_fix:
 
 tile_water_coast	= $01
 tile_horse_west		= $14
+tile_class_mage		= $20
 tile_anhk		= $3d
 tile_camp_fire		= $4b
+tile_lord_british	= $5e
+tile_mimic			= $ac
+tile_reaper			= $b0
 
 string_phantom		= $13
 string_water		= $9e
@@ -969,6 +976,27 @@ special_string:
 	.byte string_horse
 	.byte string_ankh
 	.byte string_camp_fire
+
+
+combat_immobile:
+	.byte tile_mimic
+	.byte tile_reaper
+	.byte tile_camp_fire	; ADDED
+combat_immobile_size = * - combat_immobile
+
+
+attack_ranged:
+	cmp #tile_class_mage
+	beq @done   ; C=1, Z=1 : blue
+	cmp #tile_lord_british
+	beq @done   ; C=1, Z=1 : blue
+	cmp #tile_camp_fire		; ADDED
+	bne @done   ; C=1, Z=0 : none, continue
+	clc         ; C=0, Z=1 : fire
+	rts
+@done:
+	sec
+	rts
 
 
 attacked_by_fix:
