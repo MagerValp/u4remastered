@@ -39,6 +39,7 @@
 	.export attack_fix
 	.export attack_creature_check
 	.export combat_animate_fix
+	.export npc_names
 	.export attacked_by_fix
 	.export players_dead_fix
 	.export bridge_trolls_fix
@@ -894,6 +895,7 @@ attack_lost_virtue:
 	jmp j_update_status   ; BUGFIX: if lost eighth, show that in status icon
 	;rts  implicit in jmp
 
+
 attack_fix:
 	lda object_tile,x
 	cmp #$38		; Sick/sleeping.
@@ -929,6 +931,40 @@ combat_animate_fix:
 @dontanim:
 	lda #1
 	rts
+
+
+tile_water_coast	= $01
+tile_horse_west		= $14
+tile_anhk		= $3d
+tile_camp_fire		= $4b
+
+string_phantom		= $13
+string_water		= $9e
+string_horse		= $9f
+string_ankh		= $a0
+string_camp_fire	= $a1
+
+npc_names:
+	ldx #4
+:	cmp special_type,x
+	beq :+
+	dex
+	bne :-
+:	lda special_string,x
+	jmp $8366  ;@print
+
+special_type:
+	.byte 0
+	.byte tile_water_coast
+	.byte tile_horse_west
+	.byte tile_anhk
+	.byte tile_camp_fire
+special_string:
+	.byte string_phantom
+	.byte string_water
+	.byte string_horse
+	.byte string_ankh
+	.byte string_camp_fire
 
 
 attacked_by_fix:

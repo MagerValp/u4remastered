@@ -34,6 +34,7 @@
 	.import attack_fix
 	.import attack_creature_check
 	.import combat_animate_fix
+	.import npc_names
 	.import attacked_by_fix
 	.import players_dead_fix
 	.import bridge_trolls_fix
@@ -499,6 +500,12 @@ patch_attack:
 	.byte 3
 	.addr $0b6d
 	jsr combat_animate_fix
+
+	.byte 5
+	.addr $8393
+	nop
+	nop
+	jmp npc_names
 
 	.byte 0
 
