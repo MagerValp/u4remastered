@@ -41,6 +41,7 @@
 	.import attacked_by_fix
 	.import players_dead_fix
 	.import bridge_trolls_fix
+	.import cmd_volume_sfx
 
 
 	.segment "TRAINER"
@@ -174,6 +175,7 @@ patchchain_lo:
 	.byte <patch_init_new_game
 	.byte <patch_active_char
 	.byte <patch_music
+	.byte <patch_volume
 	.byte <patch_enter_balloon
 	.byte <patch_board_dungeon
 	.byte <patch_attack
@@ -202,6 +204,7 @@ patchchain_hi:
 	.byte >patch_init_new_game
 	.byte >patch_active_char
 	.byte >patch_music
+	.byte >patch_volume
 	.byte >patch_enter_balloon
 	.byte >patch_board_dungeon
 	.byte >patch_attack
@@ -467,6 +470,47 @@ patch_music:
 	.byte 1			; Dead
 	.addr $83dc
 	.byte $c3
+
+	.byte 0
+
+
+patch_volume:
+
+music_volume = $4d
+j_primm = $0821
+cmd_volume = $5b22
+cmd_done = $621e
+
+	.byte 3
+	.addr $408f
+	jsr cmd_volume_sfx
+
+	.byte 3
+	.addr $70eb
+	jsr cmd_volume_sfx
+
+	.byte 44
+	.addr cmd_volume
+;Refactored to share "print_volume" entry point with cmd_volume_sfx
+	lda music_volume
+	eor #$ff
+	sta music_volume
+print_volume:
+	php
+	jsr j_primm
+	.byte "Volume ", 0
+	plp
+	bpl @print_off
+@print_on:
+	jsr j_primm
+	.byte "ON", $8d, 0
+	jmp cmd_done
+@print_off:
+	jsr j_primm
+	.byte "OFF", $8d, 0
+	jmp cmd_done
+	nop
+	nop
 
 	.byte 0
 

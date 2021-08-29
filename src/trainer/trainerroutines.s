@@ -46,7 +46,12 @@
 	.export attacked_by_fix
 	.export players_dead_fix
 	.export bridge_trolls_fix
+	.export cmd_volume_sfx
 
+
+
+opcode_BIT = $2c
+opcode_STA = $8d
 
 player_xpos		= $10
 player_ypos		= $11
@@ -77,6 +82,8 @@ j_request_disk		= $0842
 j_update_status		= $0845
 j_update_view		= $084b
 
+sfx_play_opcode		= $19ea
+
 cmd_unknown		= $4112
 cmd_error		= $411c
 print_only_on_foot	= $4139
@@ -84,6 +91,7 @@ print_not_here		= $4178
 print_cant		= $4189
 prepare_combat		= $4731
 board_find_object	= $480b
+print_volume		= $5b28
 cmd_done		= $621e
 dng_check_attacked	= $6cf2
 generate_combat		= $6ea3
@@ -94,6 +102,8 @@ print_object_name	= $8357
 print_creature_name	= $835c
 getandprintkey		= $8398
 run_file_dead		= $83c7
+
+sfx_toggle_opcode	= $a03e
 
 map_status		= $ac00
 object_tile		= $ac60
@@ -946,8 +956,8 @@ tile_class_mage		= $20
 tile_anhk		= $3d
 tile_camp_fire		= $4b
 tile_lord_british	= $5e
-tile_mimic			= $ac
-tile_reaper			= $b0
+tile_mimic		= $ac
+tile_reaper		= $b0
 
 string_phantom		= $13
 string_water		= $9e
@@ -976,13 +986,6 @@ special_string:
 	.byte string_horse
 	.byte string_ankh
 	.byte string_camp_fire
-
-
-combat_immobile:
-	.byte tile_mimic
-	.byte tile_reaper
-	.byte tile_camp_fire	; ADDED
-combat_immobile_size = * - combat_immobile
 
 
 attack_ranged:
@@ -1023,3 +1026,30 @@ bridge_trolls_fix:
 	pla
 	jmp generate_combat
 
+
+	.segment "IMMOBILE"
+
+combat_immobile:
+	.byte tile_mimic
+	.byte tile_reaper
+	.byte tile_camp_fire	; ADDED
+combat_immobile_size = * - combat_immobile
+
+
+	.segment "SFXVOLUME"
+
+cmd_volume_sfx:
+	jsr j_waitkey
+	cmp #$be    ;Ctrl+V
+	beq @toggle_sfx
+	rts
+@toggle_sfx:
+	pla
+	pla
+	jsr j_primm
+	.byte "FX ", 0
+	lda sfx_toggle_opcode
+	eor #(opcode_STA ^ opcode_BIT)
+	sta sfx_toggle_opcode
+	sta sfx_play_opcode
+	jmp print_volume
