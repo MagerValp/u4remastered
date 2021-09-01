@@ -18,6 +18,8 @@
 	.export trainer_balloon_south
 	.export trainer_balloon_west
 	.export trainer_balloon_east
+	.export trainer_balloon_klimb
+	.export trainer_balloon_descend
 	.export quit_and_save_dungeon
 	.export load_dungeon
 	.export supercpu_idle
@@ -179,7 +181,8 @@ askexit:
 
 
 initiate_new_game:
-	jmp *
+;	jmp *
+
 ;	lda #0
 ;	sta game_mode
 ;	lda #1
@@ -601,39 +604,70 @@ print_west		= $8323
 print_drift_only	= $41f7
 
 
-not_flying:
+not_steering:
 	jmp print_drift_only
 
 
 trainer_balloon_north:
-	lda balloon_flying
-	beq not_flying
+	lda movement_mode
+	bpl not_steering
 	jsr print_north
 	jsr j_move_north
 	jmp cmd_done
 
 
 trainer_balloon_south:
-	lda balloon_flying
-	beq not_flying
+	lda movement_mode
+	bpl not_steering
 	jsr print_south
 	jsr j_move_south
 	jmp cmd_done
 
 
 trainer_balloon_west:
-	lda balloon_flying
-	beq not_flying
+	lda movement_mode
+	bpl not_steering
 	jsr print_west
 	jsr j_move_west
 	jmp cmd_done
 
 
 trainer_balloon_east:
-	lda balloon_flying
-	beq not_flying
+	lda movement_mode
+	bpl not_steering
 	jsr print_east
 	jsr j_move_east
+	jmp cmd_done
+
+
+	.segment "BALLOONKLIMB"
+
+trainer_balloon_klimb:
+	; $00 (no fly) =>  $ff  (steer)
+	; $ff (flying) =>  $01  (drift)
+	lda balloon_flying
+	eor #$ff
+	ora #$01
+	sta movement_mode
+	lda #$ff
+	rts
+
+
+	.segment "BALLOONDESCEND"
+
+trainer_balloon_descend:
+	ldx movement_mode
+	dex
+	bpl @drifting
+	jmp j_primm  ;return to normal "Land Balloon" logic
+@drifting:
+	dex
+	stx movement_mode ;steer
+	jsr j_primm
+	.byte "Descend", $8d
+	.byte "altitude", $8d, 0
+	pla
+	pla
 	jmp cmd_done
 
 
@@ -665,7 +699,6 @@ load_dungeon:
 	beq @dungeon
 	lda $1d			; Restore balloon mode.
 	sta $74
-	lda #0
 	rts
 
 @dungeon:

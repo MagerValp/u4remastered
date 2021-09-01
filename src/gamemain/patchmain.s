@@ -21,6 +21,8 @@
 	.import trainer_balloon_south
 	.import trainer_balloon_west
 	.import trainer_balloon_east
+	.import trainer_balloon_klimb
+	.import trainer_balloon_descend
 	.import quit_and_save_dungeon
 	.import load_dungeon
 	.import dirkey_trans_tab
@@ -273,6 +275,12 @@ patch_avoid:
 
 
 patch_balloon:
+	; MODIFY value meanings of 'movement_mode'
+	;  Trainer  OFF  ON
+	;  Landed   $00 $00
+	;  Drifting $ff $01
+	;  Steering --- $ff
+
 	.byte 2
 	.addr $424e
 	.addr trainer_balloon_north
@@ -289,9 +297,33 @@ patch_balloon:
 	.addr $44f1
 	.addr trainer_balloon_east
 
+	.byte 4
+	.addr $55cc
+	jsr trainer_balloon_klimb
+	nop
+
+	.byte 3
+	.addr $4f45
+	jsr trainer_balloon_descend
+
 	.byte 1
-	.addr $0b15
-	.byte $60
+	.addr $6282	;mobs_act
+	.byte $d0	;bne  (was bmi)
+
+	.byte 1
+	.addr $62b2	;tile_effect (relocated by 15b.binpatch)
+	.byte $f0	;beq  (was bpl)
+
+	.byte 9
+	.addr $0b15 ;update_balloon (wind)
+	nop
+	nop
+	nop
+	nop
+	nop
+	ldx $74	;movement_mode
+	dex
+	.byte $30	;bmi  (was beq)
 
 	.byte 0
 
@@ -353,8 +385,7 @@ patch_save_dungeon:
 	.addr $405c
 	jsr load_dungeon
 	nop
-	nop
-	nop
+	lda #0
 
 	.byte 0
 
@@ -414,9 +445,9 @@ patch_exit_east:
 
 
 patch_init_new_game:
-	.byte 3
-	.addr $404d
-	jmp initiate_new_game
+;	.byte 3
+;	.addr $404d
+;	jmp initiate_new_game
 
 	.byte 0
 
