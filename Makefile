@@ -1021,6 +1021,12 @@ clean_cartridge:
 	rm -f u4remastered.crt
 
 
+clean_tempfiles:
+	find . -name '*.bak' -delete
+	find . -name '*.orig' -delete
+	find . -name '*.\~*' -delete
+
+
 .PHONY: clean
 clean: 		clean_patched \
 		clean_compressed \
