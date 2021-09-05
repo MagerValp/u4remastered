@@ -45,6 +45,7 @@
 	.export combat_immobile
 	.export combat_immobile_size
 	.export attack_ranged
+	.export loot_drop_fix
 	.export attacked_by_fix
 	.export players_dead_fix
 	.export bridge_trolls_fix
@@ -100,6 +101,7 @@ dng_check_attacked	= $6cf2
 generate_combat		= $6ea3
 combat_monster_turn	= $7181
 combat_check_sleep	= $714e
+combat_over		= $76d6
 check_awake		= $7daf
 print_object_name	= $8357
 print_creature_name	= $835c
@@ -110,6 +112,7 @@ sfx_toggle_opcode	= $a03e
 
 map_status		= $ac00
 object_tile		= $ac60
+npc_dialogue		= $ace0
 
 monster_sleep		= $ad70
 player_tile		= $ada0
@@ -1100,3 +1103,11 @@ dismount_fix:
 @table = * - 1
 	.byte $08   ;index $01 == mode_world, lowest 8 slots reserved for monsters
 	.byte $00   ;index $02 == mode_towne, all slots are for NPCs, chests, or horses
+
+
+	.segment "LOOTDROP"
+
+loot_drop_fix:
+	lda #$00
+	sta npc_dialogue,x	; loot drop can't talk
+	jmp combat_over

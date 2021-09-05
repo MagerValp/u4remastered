@@ -40,6 +40,7 @@
 	.import combat_immobile
 	.import combat_immobile_size
 	.import attack_ranged
+	.import loot_drop_fix
 	.import attacked_by_fix
 	.import players_dead_fix
 	.import bridge_trolls_fix
@@ -600,6 +601,10 @@ patch_attack:
 	nop
 	nop
 	jmp npc_names
+
+	.byte 3
+	.addr $767b
+	jmp loot_drop_fix
 
 	.byte 8
 	.addr $8036
