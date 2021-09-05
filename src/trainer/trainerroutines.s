@@ -49,6 +49,7 @@
 	.export players_dead_fix
 	.export bridge_trolls_fix
 	.export cmd_volume_sfx
+	.export dismount_fix
 
 
 
@@ -1086,3 +1087,16 @@ cmd_volume_sfx:
 	sta sfx_toggle_opcode
 	sta sfx_play_opcode
 	jmp print_volume
+
+
+	.segment "DISMOUNT"
+
+dismount_fix:
+	ldx game_mode
+	lda @table,x
+	sta $5c3f	;lowest slot @find_empty_slot will check
+	jmp j_primm
+
+@table = * - 1
+	.byte $08   ;index $01 == mode_world, lowest 8 slots reserved for monsters
+	.byte $00   ;index $02 == mode_towne, all slots are for NPCs, chests, or horses

@@ -44,6 +44,7 @@
 	.import players_dead_fix
 	.import bridge_trolls_fix
 	.import cmd_volume_sfx
+	.import dismount_fix
 
 
 	.segment "TRAINER"
@@ -180,6 +181,7 @@ patchchain_lo:
 	.byte <patch_volume
 	.byte <patch_enter_balloon
 	.byte <patch_board_dungeon
+	.byte <patch_dismount
 	.byte <patch_attack
 	.byte <patch_ztats_items
 	.byte <patch_stack
@@ -209,6 +211,7 @@ patchchain_hi:
 	.byte >patch_volume
 	.byte >patch_enter_balloon
 	.byte >patch_board_dungeon
+	.byte >patch_dismount
 	.byte >patch_attack
 	.byte >patch_ztats_items
 	.byte >patch_stack
@@ -558,6 +561,19 @@ patch_board_dungeon:
 	.byte 2
 	.addr $47b1
 	.addr board_ship_check_britannia
+
+	.byte 0
+
+
+patch_dismount:
+	.byte 2
+	.addr $5bfe
+	.addr dismount_fix
+
+	.byte 4
+	.addr $4827		;do_board
+	.byte $10,$e6	;bpl @next
+	.byte $30,$0a	;bmi @done
 
 	.byte 0
 
