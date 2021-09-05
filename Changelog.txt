@@ -1,6 +1,47 @@
 # Ultima IV Remastered Changelog
 
 
+## v2.4.0 (2021-09-05)
+
+More fixes by Sean Gugler.
+
+### Critical Bugs
+
+* Stack overflow when ship sinks with player aboard.
+
+### Other Errors
+
+* Clear keyboard in Shrine mis-copied from Apple II.
+* Better NPC choice for restoring Thevel - pick the unmoving Joe, not one of the mobile ones.
+* Skull use in battlefield should affect combatants, not clear outer world of wandering monsters.
+* Skull use in dungeon only immobilizes wandering monsters, doesn't kill them.
+* Skull cannot be used in *any* dungeon rooms; fixed to behave normally except in abyss, where it is disallowed entirely.
+* Player can be attacked by bridge trolls while drifting across in the balloon.
+* Dismounting horse in certain townes causes a random NPC to vanish.
+* Chests dropped by townespeople can be talked to.
+
+### Cosmetic Mistakes
+
+* Using skull in Britannia is silent.
+* More text revisions.
+* Ankh doesn't immediately update after attacking townsfolk and losing virtues.
+* Animation flicker when attacking an east-facing horse.
+* Original graphics for energy fields restored.
+
+### Enhancements
+
+* Gender question did not support non-binary; add a neutral symbol.
+* Library shelf lettering made one puzzle somewhat awkward.
+* More source code: end_game.s
+* Hard-coded string table offset in Shrine replaced with symbol.
+* Allow player to initiate attack in dungeon, after using trainer to avoid.
+* Teleport trainer only wipes monsters from map, preserve any chests and transports.
+* Proper descriptions for non-human NPCs instead of "phantom".
+* Campfire NPC remains stationary in combat and spits fire.
+* Ctrl+V turns sound effects on and off during play.
+* Balloon trainer can klimb twice to drift, descend to steer again.
+
+
 ## v2.3.0 (2021-03-25)
 
 * Added fixes from Sean Gugler for the following issues.

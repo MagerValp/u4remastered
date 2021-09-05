@@ -189,13 +189,13 @@ pagestart:
 
 page0:
 	screencode "                                        "
-	screencode "       Ultima IV Remastered v2.3.0      "
+	screencode "       Ultima IV Remastered v2.4.0      "
 	screencode "                                        "
 	screencode "      (C) 1985 Origin Systems, Inc.     "
 	screencode "                                        "
 	screencode "              Released by               "
 	screencode "            GENESIS PROJECT             "
-	screencode "               2021-03-25               "
+	screencode "               2021-09-05               "
 	screencode "                                        "
 	screencode "                                        "
 	screencode "     Cracked and fixed by MagerValp     "
