@@ -1,5 +1,11 @@
 # Ultima IV Remastered Changelog
 
+## Unreleased
+
+### Other Errors
+
+* Two ladders in dungeon "Wrong" are mis-matched.
+
 
 ## v2.4.0 (2021-09-05)
 
