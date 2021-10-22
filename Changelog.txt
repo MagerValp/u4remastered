@@ -11,6 +11,7 @@
 * Two ladders in dungeon "Wrong" are mis-matched.
 * Dungeon "Covetous" has a room whose east exit is obstructed.
 * Cooldown timer for Hawkwind's virtue reward should match timer for shrine.
+* Cooldown timer for reagent searches should not reset when search finds non-reagents.
 
 
 ## v2.4.0 (2021-09-05)

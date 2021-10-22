@@ -211,9 +211,9 @@ print_you_find:
 	.byte "You find...", $8d
 	.byte 0
 
-	lda move_counter+3
-	and #$f0
-	sta last_found_reagent
+;	lda move_counter+3
+;	and #$f0
+;	sta last_found_reagent
 	sed
 	clc
 	lda virtues_and_stats+5
@@ -240,6 +240,7 @@ find_mandrake:
 	jmp print_nothing_here
 
 @found:
+	sta last_found_reagent
 	jsr print_you_find
 	jsr j_primm
 	.byte "Mandrake root!", $8d
@@ -275,6 +276,7 @@ find_nightshade:
 	jmp print_nothing_here
 
 @found:
+	sta last_found_reagent
 	jsr print_you_find
 	jsr j_primm
 	.byte "Nightshade!", $8d
