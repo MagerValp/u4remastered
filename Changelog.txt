@@ -9,6 +9,7 @@
 ### Other Errors
 
 * Two ladders in dungeon "Wrong" are mis-matched.
+* Dungeon "Covetous" has a room whose east exit is obstructed.
 
 
 ## v2.4.0 (2021-09-05)

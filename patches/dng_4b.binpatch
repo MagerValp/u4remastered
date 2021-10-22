@@ -1,0 +1,9 @@
+# Patch dungeon room 11 in Covetous.
+
+# NOTE: Only applies to disk image with  SHA1 55de0cd959bbcc356d3545734fe19858956938ff
+# MagerValp used an already-patched one, SHA1 312984d7aa7a0b8df40003a5852e8827c436c724
+
+# Remove wall barring eastern exit; not present in later C64 or DOS editions.
+# offset(00b7)
+#    match(7F 16 16 16 16 16 16 7F 16 16 7F)
+#  replace(7F 16 16 16 16 16 16 16 16 16 7F)
