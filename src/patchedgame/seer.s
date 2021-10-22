@@ -4,7 +4,7 @@
 ; **** ZP ABSOLUTE ADDRESSES **** 
 ;
 last_meditated = $29
-move_counter_lo = $2f
+move_counter_2 = $2e
 console_xpos = $4e
 currplayer = $54
 zptemp = $6a
@@ -125,7 +125,7 @@ input_word:
 	.byte "Quest of", $8d
 	.byte "the Avatar!", $8d
 	.byte 0
-	lda move_counter_lo
+	lda move_counter_2
 	cmp last_meditated
 	beq @done
 	sta last_meditated
