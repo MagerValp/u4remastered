@@ -68,20 +68,20 @@ chrlineaddr_hi = $e198
 
 TMP_ADDR = $ffff
 
-end_graphics  = $4000
-image_addr_00 = $4a20
-image_addr_01 = $4b00
-image_addr_02 = $4c00
-image_addr_03 = $4ce0
-image_addr_04 = $4dc0
-image_addr_05 = $4ea0
-image_addr_06 = $4fc0
-image_addr_07 = $5000
-image_addr_08 = $5270
-image_addr_09 = $5300
-image_addr_0a = $53a0
-image_addr_0b = $5440
-image_addr_0c = $56c0
+end_graphics  = $b000
+image_addr_00 = $ba20
+image_addr_01 = $bb00
+image_addr_02 = $bc00
+image_addr_03 = $bce0
+image_addr_04 = $bdc0
+image_addr_05 = $bea0
+image_addr_06 = $bfc0
+image_addr_07 = $c000
+image_addr_08 = $c270
+image_addr_09 = $c300
+image_addr_0a = $c3a0
+image_addr_0b = $c440
+image_addr_0c = $c6c0
 
 
 
@@ -524,7 +524,7 @@ return_to_world:
 	lda #disk_program
 	jsr insert_disk
 	lda #file_cmd_Load
-	ldx #$5b
+	ldx #$41
 	jsr j_fileio
 	lda #disk_britannia
 	jsr j_request_disk
@@ -541,7 +541,8 @@ return_to_world:
 	lda #mode_world
 	sta game_mode
 	jsr j_player_teleport
-	jmp j_game_init
+;	jmp j_game_init
+	jmp pop_stack_game_init
 
 world_location_x:
 	.byte $e7,$53,$23,$3b,$9e,$69,$17,$ba
@@ -1311,6 +1312,11 @@ string_table:
 	.byte "unyielding", $8d
 	.byte "Courage?", $8d
 	.byte 0
+
+pop_stack_game_init:
+	pla
+	pla
+	jmp j_game_init
 
 junk:
 ;                      "AE10"

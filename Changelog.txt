@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Critical Bugs
+
+* Fix graphics corruption in endgame leading to crash. Introduced with 2.4.0
+
 ### Other Errors
 
 * Two ladders in dungeon "Wrong" are mis-matched.
