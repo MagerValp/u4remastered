@@ -3167,3 +3167,8 @@ strings:
 	msbstring "Honor"
 	msbstring "Spirituality"
 	msbstring "Humility"
+	; BUGFIX: added for special NPCs so they're not "phantoms"
+	msbstring "Water"
+	msbstring "Horse"
+	msbstring "Ankh"
+	msbstring "Campfire"

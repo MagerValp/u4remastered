@@ -1,0 +1,9 @@
+# Patch file 5d, Lycaeum.
+
+# Change letters on library shelves to make
+# one puzzle a little more fair, or at least
+# less awkward.
+offset(0067) match(7c 6d 7a) replace(7c 6e 7a)
+offset(00a7) match(7c 71 7a) replace(7c 73 7a)
+offset(00e3) match(7a 68 7b) replace(7a 69 7b)
+offset(00e7) match(7c 75 7a) replace(7c 79 7a)

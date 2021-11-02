@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 
@@ -7,11 +7,8 @@ import argparse
 import os.path
 
 
-def print8(*args):
-    print " ".join(unicode(x).encode(u"utf-8") for x in args)
-
 def byte(b):
-    return chr(b)
+    return bytes([b])
 
 def word(w):
     return byte(w & 0xff) + byte((w & 0xff00) >> 8)
@@ -26,7 +23,7 @@ def main(argv):
     p.add_argument(u"size", type=int)
     p.add_argument(u"output")
     p.add_argument(u"files", nargs=u"+")
-    args = p.parse_args([x.decode(u"utf-8") for x in argv[1:]])
+    args = p.parse_args(argv[1:])
     
     files = list()
     for filename in args.files:
@@ -35,12 +32,12 @@ def main(argv):
             fileid = int(os.path.basename(filename)[1:], 16)
             files.append(encode_file(fileid, len(data), data))
     
-    data = "".join(files)
-    pad = "\xff"
+    data = b"".join(files)
+    pad = b"\xff"
     size = 0x2000 * args.size
     padded_data = data + pad * (size - len(data))
     with open(args.output, "wb") as f:
-        for offset in xrange(0, size, 0x2000):
+        for offset in range(0, size, 0x2000):
             f.write(padded_data[offset:offset + 0x2000])
             f.write(pad * 0x2000)
     

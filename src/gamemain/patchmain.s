@@ -14,11 +14,15 @@
 	.import trainer_board
 	.import trainer_avoid
 	.import trainer_trolls
+	.import trainer_cmd_attack
+	.import trainer_dng_check_attacked
 	.import trainer_avoid_dungeon
 	.import trainer_balloon_north
 	.import trainer_balloon_south
 	.import trainer_balloon_west
 	.import trainer_balloon_east
+	.import trainer_balloon_klimb
+	.import trainer_balloon_descend
 	.import quit_and_save_dungeon
 	.import load_dungeon
 	.import dirkey_trans_tab
@@ -28,12 +32,20 @@
 	.import active_char_check_command
 	.import enter_balloon
 	.import board_ship_check_britannia
+	.import attack_lost_virtue
 	.import attack_fix
 	.import attack_creature_check
 	.import combat_animate_fix
+	.import npc_names
+	.import combat_immobile
+	.import combat_immobile_size
+	.import attack_ranged
+	.import loot_drop_fix
 	.import attacked_by_fix
-	.import player_dead_fix
+	.import players_dead_fix
 	.import bridge_trolls_fix
+	.import cmd_volume_sfx
+	.import dismount_fix
 
 
 	.segment "TRAINER"
@@ -44,6 +56,16 @@ key_north	= dirkey_trans_tab
 key_south	= dirkey_trans_tab + 1
 key_east	= dirkey_trans_tab + 2
 key_west	= dirkey_trans_tab + 3
+
+
+; By default, value $ff disables the shop price
+;   modification and matches retail behavior, because
+;   "SEC, ADC $ff" is effectively NOP.
+; If trainer for "fair sales" is active,
+;   this value is replaced with decimal 99 to correctly
+;   carry the hundreds-place in BCD arithmetic.
+shop_price_carry:
+	.byte $ff
 
 
 game_startup_patch:
@@ -146,6 +168,7 @@ patchchain_lo:
 	.byte <patch_balloon
 	.byte <patch_keys
 	.byte <patch_pass
+	.byte <patch_price
 	.byte <patch_save_britannia
 	.byte <patch_save_dungeon
 	.byte <patch_shake
@@ -156,9 +179,12 @@ patchchain_lo:
 	.byte <patch_init_new_game
 	.byte <patch_active_char
 	.byte <patch_music
+	.byte <patch_volume
 	.byte <patch_enter_balloon
 	.byte <patch_board_dungeon
+	.byte <patch_dismount
 	.byte <patch_attack
+	.byte <patch_ztats_items
 	.byte <patch_stack
 npatches = < (* - patchchain_lo)
 
@@ -172,6 +198,7 @@ patchchain_hi:
 	.byte >patch_balloon
 	.byte >patch_keys
 	.byte >patch_pass
+	.byte >patch_price
 	.byte >patch_save_britannia
 	.byte >patch_save_dungeon
 	.byte >patch_shake
@@ -182,9 +209,12 @@ patchchain_hi:
 	.byte >patch_init_new_game
 	.byte >patch_active_char
 	.byte >patch_music
+	.byte >patch_volume
 	.byte >patch_enter_balloon
 	.byte >patch_board_dungeon
+	.byte >patch_dismount
 	.byte >patch_attack
+	.byte >patch_ztats_items
 	.byte >patch_stack
 
 
@@ -229,9 +259,17 @@ patch_avoid:
 	.addr trainer_avoid
 
 	.byte 4
-	.addr $62d7
+	.addr $62dc
 	jsr trainer_trolls
 	nop
+
+	.byte 3
+	.addr $46cc
+	jmp trainer_cmd_attack
+
+	.byte 3
+	.addr $6299
+	jsr trainer_dng_check_attacked
 
 	.byte 3
 	.addr $6d15
@@ -241,6 +279,12 @@ patch_avoid:
 
 
 patch_balloon:
+	; MODIFY value meanings of 'movement_mode'
+	;  Trainer  OFF  ON
+	;  Landed   $00 $00
+	;  Drifting $ff $01
+	;  Steering --- $ff
+
 	.byte 2
 	.addr $424e
 	.addr trainer_balloon_north
@@ -257,9 +301,33 @@ patch_balloon:
 	.addr $44f1
 	.addr trainer_balloon_east
 
+	.byte 4
+	.addr $55cc
+	jsr trainer_balloon_klimb
+	nop
+
+	.byte 3
+	.addr $4f45
+	jsr trainer_balloon_descend
+
 	.byte 1
-	.addr $0b15
-	.byte $60
+	.addr $6282	;mobs_act
+	.byte $d0	;bne  (was bmi)
+
+	.byte 1
+	.addr $62b2	;tile_effect (relocated by 15b.binpatch)
+	.byte $f0	;beq  (was bpl)
+
+	.byte 9
+	.addr $0b15 ;update_balloon (wind)
+	nop
+	nop
+	nop
+	nop
+	nop
+	ldx $74	;movement_mode
+	dex
+	.byte $30	;bmi  (was beq)
 
 	.byte 0
 
@@ -284,6 +352,14 @@ patch_pass:
 	.byte 3
 	.addr $70f0
 	jmp $70eb
+
+	.byte 0
+
+
+patch_price:
+	.byte 1
+	.addr shop_price_carry
+	.byte 99
 
 	.byte 0
 
@@ -313,8 +389,7 @@ patch_save_dungeon:
 	.addr $405c
 	jsr load_dungeon
 	nop
-	nop
-	nop
+	lda #0
 
 	.byte 0
 
@@ -323,14 +398,14 @@ patch_shake:
 	.byte 23
 	.addr $85fd
   .org $85fd
-	sta $d07a
+	sta $d07a  ; SuperCPU speed normal
 	lda #$04
 	sta $8614
 	jsr $8645
 	jsr $8616
 	dec $8614
 	bne $8605
-	sta $d07b
+	sta $d07b  ; SuperCPU speed turbo
 	rts
   .reloc
 
@@ -374,9 +449,9 @@ patch_exit_east:
 
 
 patch_init_new_game:
-	.byte 3
-	.addr $404d
-	jmp initiate_new_game
+;	.byte 3
+;	.addr $404d
+;	jmp initiate_new_game
 
 	.byte 0
 
@@ -434,6 +509,47 @@ patch_music:
 	.byte 0
 
 
+patch_volume:
+
+music_volume = $4d
+j_primm = $0821
+cmd_volume = $5b22
+cmd_done = $621e
+
+	.byte 3
+	.addr $408f
+	jsr cmd_volume_sfx
+
+	.byte 3
+	.addr $70eb
+	jsr cmd_volume_sfx
+
+	.byte 44
+	.addr cmd_volume
+;Refactored to share "print_volume" entry point with cmd_volume_sfx
+	lda music_volume
+	eor #$ff
+	sta music_volume
+print_volume:
+	php
+	jsr j_primm
+	.byte "Volume ", 0
+	plp
+	bpl @print_off
+@print_on:
+	jsr j_primm
+	.byte "ON", $8d, 0
+	jmp cmd_done
+@print_off:
+	jsr j_primm
+	.byte "OFF", $8d, 0
+	jmp cmd_done
+	nop
+	nop
+
+	.byte 0
+
+
 patch_enter_balloon:
 	.byte 3
 	.addr $4fda
@@ -450,7 +566,24 @@ patch_board_dungeon:
 	.byte 0
 
 
+patch_dismount:
+	.byte 2
+	.addr $5bfe
+	.addr dismount_fix
+
+	.byte 4
+	.addr $4827		;do_board
+	.byte $10,$e6	;bpl @next
+	.byte $30,$0a	;bmi @done
+
+	.byte 0
+
+
 patch_attack:
+	.byte 3
+	.addr $472e
+	jsr attack_lost_virtue
+
 	.byte 3
 	.addr $4733
 	jsr attack_fix
@@ -463,7 +596,43 @@ patch_attack:
 	.addr $0b6d
 	jsr combat_animate_fix
 
+	.byte 5
+	.addr $8393
+	nop
+	nop
+	jmp npc_names
+
+	.byte 3
+	.addr $767b
+	jmp loot_drop_fix
+
+	.byte 8
+	.addr $8036
+	jsr attack_ranged
+	bcc @attack_fire
+@attack_fire = * + $8093 - $8036 - 5
+	beq @attack_blue
+@attack_blue = * + $809c - $8036 - 7
+	nop
+
+	.byte 14
+	.addr $7325
+	ldx #<combat_immobile_size
+:	dex
+	bmi @continue
+	cmp combat_immobile,x
+	bne :-
+	jmp $73c4	;check_tile_effect
+	nop
+@continue:
+
 	.byte 0
+
+
+patch_ztats_items:
+	.byte 1
+	.addr $60b0
+	.byte 09  ; fix branch offset, was 2C
 
 
 patch_stack:
@@ -473,10 +642,33 @@ patch_stack:
 
 	.byte 2
 	.addr $83e1
-	.addr player_dead_fix
+	.addr players_dead_fix
 
 	.byte 2
-	.addr $62e8
+	.addr $62ed
 	.addr bridge_trolls_fix
+
+	.byte 1
+	.addr $7cea  ; Ztats during combat
+	.byte $4c    ; jmp, was jsr
+
+	.byte 1
+	.addr $4dfc  ; Z-down fail on level 8
+	.byte $4c    ; jmp, was jsr
+
+	.byte 2
+	.addr $7918  ; "All must use the same exit"
+	nop
+	nop
+
+	.byte 10
+	.addr $867b  ; enter moongate
+	pla
+	pla
+	nop
+	lda $22   ; moon_phase_trammel
+	asl a
+	adc $23   ; moon_phase_felucca
+	cmp #$0c  ; uniquely true when both are 4. makes room for pla pla.
 
 	.byte 0

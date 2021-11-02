@@ -14,6 +14,12 @@
 	.import __TRAINERBALLOON_LOAD__
 	.import __TRAINERBALLOON_RUN__
 	.import __TRAINERBALLOON_SIZE__
+	.import __BALLOONDESCEND_LOAD__
+	.import __BALLOONDESCEND_RUN__
+	.import __BALLOONDESCEND_SIZE__
+	.import __LOOTDROP_LOAD__
+	.import __LOOTDROP_RUN__
+	.import __LOOTDROP_SIZE__
 	.import __DRAWVIEW_LOAD__
 	.import __DRAWVIEW_RUN__
 	.import __DRAWVIEW_SIZE__
@@ -57,10 +63,12 @@ init:
 
 	jsr trainer
 
+; black border + background
 	ldx #0
 	stx $d020
 	stx $d021
 
+; copy original load screen into render buffer
 	;ldx #0
 :	lda $9600,x
 	sta $0400,x
@@ -70,6 +78,7 @@ init:
 	sta $0600,x
 	lda $9900,x
 	sta $0700,x
+; wipe the trainer font (why bother?)
 	lda #1
 	sta $d800,x
 	sta $d900,x
@@ -294,6 +303,14 @@ relocation_tab:
 	.addr __TRAINERBALLOON_LOAD__
 	.addr __TRAINERBALLOON_RUN__
 	.addr __TRAINERBALLOON_SIZE__
+
+	.addr __BALLOONDESCEND_LOAD__
+	.addr __BALLOONDESCEND_RUN__
+	.addr __BALLOONDESCEND_SIZE__
+
+	.addr __LOOTDROP_LOAD__
+	.addr __LOOTDROP_RUN__
+	.addr __LOOTDROP_SIZE__
 
 	.addr __DRAWVIEW_LOAD__
 	.addr __DRAWVIEW_RUN__

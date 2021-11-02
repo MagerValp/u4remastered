@@ -401,9 +401,9 @@ clear_view:
 
 light_color:
 	.byte $b0, $c0, $f0, $f0
-	.byte $f0, $f0, $f0, $f0
-	.byte $f0, $f0, $f0, $f0
-	.byte $f0, $f0, $f0, $f0
+	.byte $10, $10, $10, $10
+	.byte $10, $10, $10, $10
+	.byte $10, $10, $10, $10
 
 get_dungeon_tile_type:
 	jsr get_dungeon_tile

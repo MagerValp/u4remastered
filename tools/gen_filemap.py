@@ -1,14 +1,10 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 
 import sys
 import argparse
 import os.path
-
-
-def print8(*args):
-    print " ".join(unicode(x).encode(u"utf-8") for x in args)
 
 
 def decode_hex(s):
@@ -36,7 +32,7 @@ def main(argv):
     p.add_argument(u"filemap")
     p.add_argument(u"output")
     p.add_argument(u"files", nargs=u"+")
-    args = p.parse_args([x.decode(u"utf-8") for x in argv[1:]])
+    args = p.parse_args(argv[1:])
     
     # Enumerate the GAM IFFL files to get each file's index.
     fileindex = dict()
@@ -55,17 +51,17 @@ def main(argv):
     ]
     
     # Read filemap.
-    with open(args.filemap, u"r") as f:
-        headers = f.readline().decode(u"utf-8").rstrip().split(u"\t")
+    with open(args.filemap, u"rt", encoding=u"utf-8") as f:
+        headers = f.readline().rstrip().split(u"\t")
         for line in f:
-            fields = line.decode(u"utf-8").rstrip().split(u"\t")
+            fields = line.rstrip().split(u"\t")
             filenum = decode_hex(fields.pop(0))
             start = decode_hex(fields.pop(0))
             length = decode_hex(fields.pop(0))
             offset = decode_hex(fields.pop(0))
             name = fields.pop(0)
             #iffl = fields.pop(0).lower().strip().startswith(u"y")
-            files = list(decode_fileid(fields.pop(0)) for x in xrange(4))
+            files = list(decode_fileid(fields.pop(0)) for x in range(4))
             comment = fields.pop(0)
             
             for diskindex, fileid in enumerate(f for f in files):
@@ -100,8 +96,8 @@ def main(argv):
             output.append(u"\t.byte $%02x\t; %d%02x" % (filenum, disk + 1, fileid))
     
     output.append(u"")
-    with open(args.output, "w") as f:
-        f.write((u"\n".join(output)).encode(u"utf-8"))
+    with open(args.output, "wt", encoding=u"utf-8") as f:
+        f.write(u"\n".join(output))
     
     return 0
     

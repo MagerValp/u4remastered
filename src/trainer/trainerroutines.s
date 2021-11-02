@@ -11,11 +11,15 @@
 	.export trainer_board
 	.export trainer_avoid
 	.export trainer_trolls
+	.export trainer_cmd_attack
+	.export trainer_dng_check_attacked
 	.export trainer_avoid_dungeon
 	.export trainer_balloon_north
 	.export trainer_balloon_south
 	.export trainer_balloon_west
 	.export trainer_balloon_east
+	.export trainer_balloon_klimb
+	.export trainer_balloon_descend
 	.export quit_and_save_dungeon
 	.export load_dungeon
 	.export supercpu_idle
@@ -33,13 +37,25 @@
 	.export active_char_check_command
 	.export enter_balloon
 	.export board_ship_check_britannia
+	.export attack_lost_virtue
 	.export attack_fix
 	.export attack_creature_check
 	.export combat_animate_fix
+	.export npc_names
+	.export combat_immobile
+	.export combat_immobile_size
+	.export attack_ranged
+	.export loot_drop_fix
 	.export attacked_by_fix
-	.export player_dead_fix
+	.export players_dead_fix
 	.export bridge_trolls_fix
+	.export cmd_volume_sfx
+	.export dismount_fix
 
+
+
+opcode_BIT = $2c
+opcode_STA = $8d
 
 player_xpos		= $10
 player_ypos		= $11
@@ -70,6 +86,8 @@ j_request_disk		= $0842
 j_update_status		= $0845
 j_update_view		= $084b
 
+sfx_play_opcode		= $19ea
+
 cmd_unknown		= $4112
 cmd_error		= $411c
 print_only_on_foot	= $4139
@@ -77,17 +95,24 @@ print_not_here		= $4178
 print_cant		= $4189
 prepare_combat		= $4731
 board_find_object	= $480b
+print_volume		= $5b28
 cmd_done		= $621e
+dng_check_attacked	= $6cf2
 generate_combat		= $6ea3
 combat_monster_turn	= $7181
 combat_check_sleep	= $714e
+combat_over		= $76d6
 check_awake		= $7daf
 print_object_name	= $8357
 print_creature_name	= $835c
 getandprintkey		= $8398
+run_file_dead		= $83c7
+
+sfx_toggle_opcode	= $a03e
 
 map_status		= $ac00
 object_tile		= $ac60
+npc_dialogue		= $ace0
 
 monster_sleep		= $ad70
 player_tile		= $ada0
@@ -160,7 +185,8 @@ askexit:
 
 
 initiate_new_game:
-	jmp *
+;	jmp *
+
 ;	lda #0
 ;	sta game_mode
 ;	lda #1
@@ -297,11 +323,11 @@ trainer_teleport:
 teleport:
 	sta player_xpos
 	sty player_ypos
-	ldx #0
-	txa
-:	sta map_status,x
-	inx
-	bne :-
+	ldx #7
+	lda #$00
+:	sta object_tile,x
+	dex
+	bpl :-
 	jsr j_player_teleport
 	jmp cmd_done
 
@@ -475,18 +501,37 @@ trainer_trolls:
 	rts
 
 
+player_did_attack:
+	.byte 0
+
+trainer_cmd_attack:
+	lda #1
+	sta player_did_attack
+	jsr dng_check_attacked
+	jmp cmd_unknown
+	
+	
+trainer_dng_check_attacked:
+	lda #0
+	sta player_did_attack
+	jmp dng_check_attacked
+
+
 trainer_avoid_dungeon:
-	pha
-	jsr j_primm
-	.byte "Attackd by", $8d, 0
-	pla
 	asl
 	adc #$8c
+	ldx player_did_attack
+	bne @allow
+	pha
+	jsr j_primm
+	.byte "Attacked by", $8d, 0
+	pla
 	pha
 	jsr print_creature_name
 	jsr checkavoid
 	pla
 	bcs plaplarts
+@allow:
 	rts
 
 
@@ -563,39 +608,70 @@ print_west		= $8323
 print_drift_only	= $41f7
 
 
-not_flying:
+not_steering:
 	jmp print_drift_only
 
 
 trainer_balloon_north:
-	lda balloon_flying
-	beq not_flying
+	lda movement_mode
+	bpl not_steering
 	jsr print_north
 	jsr j_move_north
 	jmp cmd_done
 
 
 trainer_balloon_south:
-	lda balloon_flying
-	beq not_flying
+	lda movement_mode
+	bpl not_steering
 	jsr print_south
 	jsr j_move_south
 	jmp cmd_done
 
 
 trainer_balloon_west:
-	lda balloon_flying
-	beq not_flying
+	lda movement_mode
+	bpl not_steering
 	jsr print_west
 	jsr j_move_west
 	jmp cmd_done
 
 
 trainer_balloon_east:
-	lda balloon_flying
-	beq not_flying
+	lda movement_mode
+	bpl not_steering
 	jsr print_east
 	jsr j_move_east
+	jmp cmd_done
+
+
+	.segment "BALLOONKLIMB"
+
+trainer_balloon_klimb:
+	; $00 (no fly) =>  $ff  (steer)
+	; $ff (flying) =>  $01  (drift)
+	lda balloon_flying
+	eor #$ff
+	ora #$01
+	sta movement_mode
+	lda #$ff
+	rts
+
+
+	.segment "BALLOONDESCEND"
+
+trainer_balloon_descend:
+	ldx movement_mode
+	dex
+	bpl @drifting
+	jmp j_primm  ;return to normal "Land Balloon" logic
+@drifting:
+	dex
+	stx movement_mode ;steer
+	jsr j_primm
+	.byte "Descend", $8d
+	.byte "altitude", $8d, 0
+	pla
+	pla
 	jmp cmd_done
 
 
@@ -627,7 +703,6 @@ load_dungeon:
 	beq @dungeon
 	lda $1d			; Restore balloon mode.
 	sta $74
-	lda #0
 	rts
 
 @dungeon:
@@ -865,6 +940,12 @@ board_ship_check_britannia:
 
 	.segment "ATTACKFIX"
 
+attack_lost_virtue:
+	jsr $8472       ; dec_virtue
+	jmp j_update_status   ; BUGFIX: if lost eighth, show that in status icon
+	;rts  implicit in jmp
+
+
 attack_fix:
 	lda object_tile,x
 	cmp #$38		; Sick/sleeping.
@@ -878,6 +959,10 @@ attack_fix:
 	cmp #$1f		; Avatar.
 	bne :+
 	lda #$2a		; Knight.
+:
+	cmp #$15		; Horse East.
+	bne :+
+	lda #$14		; Horse West.
 :
 	rts
 
@@ -902,17 +987,127 @@ combat_animate_fix:
 	rts
 
 
+tile_water_coast	= $01
+tile_horse_west		= $14
+tile_class_mage		= $20
+tile_anhk		= $3d
+tile_camp_fire		= $4b
+tile_lord_british	= $5e
+tile_mimic		= $ac
+tile_reaper		= $b0
+
+string_phantom		= $13
+string_water		= $9e
+string_horse		= $9f
+string_ankh		= $a0
+string_camp_fire	= $a1
+
+npc_names:
+	ldx #4
+:	cmp special_type,x
+	beq :+
+	dex
+	bne :-
+:	lda special_string,x
+	jmp $8366  ;@print
+
+special_type:
+	.byte 0
+	.byte tile_water_coast
+	.byte tile_horse_west
+	.byte tile_anhk
+	.byte tile_camp_fire
+special_string:
+	.byte string_phantom
+	.byte string_water
+	.byte string_horse
+	.byte string_ankh
+	.byte string_camp_fire
+
+
+attack_ranged:
+	cmp #tile_class_mage
+	beq @done   ; C=1, Z=1 : blue
+	cmp #tile_lord_british
+	beq @done   ; C=1, Z=1 : blue
+	cmp #tile_camp_fire		; ADDED
+	bne @done   ; C=1, Z=0 : none, continue
+	clc         ; C=0, Z=1 : fire
+	rts
+@done:
+	sec
+	rts
+
+
 attacked_by_fix:
 	pla
 	pla
 	jmp prepare_combat
 
-player_dead_fix:
-	pla
-	pla
+players_dead_fix:
+; Reset stack. Impossible to know if we should pop 1, 3, or 4 frames
+; because we could have arrived here via any of the following JSR stacks:
+;     check_water_hazards > enter_whirlpool > damage_party, "thy ship sinks"
+;     check_water_hazards > enter_twister > damage_party, "thy ship sinks"
+;     mobs_act > mob_world_take_turn, fire_cannon_pirate > damage_party, "thy ship sinks"
+;     mobs_act > mob_world_take_turn > fire_red_missile > damage_party, "thy ship sinks"
+;     cmd_done > anyone_awake, all dead
+;     cmd_done, next_turn > anyone_awake, all dead
+; However, we do know that cmd_done is the top-most frame from which nothing ever RTS.
+	ldx #$FF
+	txs
 	jmp cmd_done
 
 bridge_trolls_fix:
 	pla
 	pla
 	jmp generate_combat
+
+
+	.segment "IMMOBILE"
+
+combat_immobile:
+	.byte tile_mimic
+	.byte tile_reaper
+	.byte tile_camp_fire	; ADDED
+combat_immobile_size = * - combat_immobile
+
+
+	.segment "SFXVOLUME"
+
+cmd_volume_sfx:
+	jsr j_waitkey
+	cmp #$be    ;Ctrl+V
+	beq @toggle_sfx
+	rts
+@toggle_sfx:
+	pla
+	pla
+	jsr j_primm
+	.byte "FX ", 0
+	lda sfx_toggle_opcode
+	eor #(opcode_STA ^ opcode_BIT)
+	sta sfx_toggle_opcode
+	sta sfx_play_opcode
+	jmp print_volume
+
+
+	.segment "DISMOUNT"
+
+dismount_fix:
+	ldx game_mode
+	lda @table,x
+	sta $5c3f	;lowest slot @find_empty_slot will check
+	jmp j_primm
+
+@table = * - 1
+	.byte $08   ;index $01 == mode_world, lowest 8 slots reserved for monsters
+	.byte $00   ;index $02 == mode_towne, all slots are for NPCs, chests, or horses
+
+
+	.segment "LOOTDROP"
+
+loot_drop_fix:
+	lda #$00
+	sta npc_dialogue,x	; loot drop can't talk
+	jmp combat_over

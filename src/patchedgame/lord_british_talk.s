@@ -118,12 +118,12 @@ check_xp:
 	lda (ptr1),y
 	jsr decode_bcd_value
 	ldx #$01
-@sqrt:
+@log_2:
 	cmp #$00
 	beq @check_level
 	lsr a
 	inx
-	jmp @sqrt
+	jmp @log_2
 
 @check_level:
 	txa
@@ -181,8 +181,8 @@ check_xp:
 @what:
 	jsr j_primm
 	.byte $8d
-	.byte "What would thou", $8d
-	.byte "ask of me?", $8d
+	.byte "What wouldst", $8d
+	.byte "thou ask of me?", $8d
 	.byte 0
 
 	jmp main_prompt
@@ -438,7 +438,7 @@ answer_hone:
 	jsr print_he_says
 	jsr j_primm
 	.byte "The fair towne", $8d
-	.byte "of Moonglow on", $8d
+	.byte "of Moonglow, on", $8d
 	.byte "Verity Isle, is", $8d
 	.byte "where the virtue", $8d
 	.byte "of honesty", $8d
@@ -513,7 +513,7 @@ answer_spir:
 	jsr j_primm
 	.byte "In Skara Brae", $8d
 	.byte "the spiritual", $8d
-	.byte "path is taught,", $8d
+	.byte "path is taught.", $8d
 	.byte "find it on an", $8d
 	.byte "isle near", $8d
 	.byte "Spiritwood!", $8d
@@ -578,7 +578,7 @@ answer_prid:
 answer_avat:
 	jsr print_lb_says
 	jsr j_primm
-	.byte "To be an avatar", $8d
+	.byte "To be an Avatar", $8d
 	.byte "is to be the", $8d
 	.byte "embodiment of", $8d
 	.byte "the eight", $8d
@@ -602,8 +602,8 @@ answer_avat:
 answer_ques:
 	jsr print_lb_says
 	jsr j_primm
-	.byte "The quest of", $8d
-	.byte "the avatar is", $8d
+	.byte "The Quest of", $8d
+	.byte "the Avatar is", $8d
 	.byte "is to know and", $8d
 	.byte "become the", $8d
 	.byte "embodiment of", $8d
@@ -643,8 +643,8 @@ answer_brit:
 	.byte $8d
 	.byte "If but one soul", $8d
 	.byte "could complete", $8d
-	.byte "the quest of the", $8d
-	.byte "avatar, our", $8d
+	.byte "the Quest of the", $8d
+	.byte "Avatar, our", $8d
 	.byte "people would", $8d
 	.byte "have a new hope,", $8d
 	.byte "a new goal for", $8d
@@ -672,9 +672,9 @@ answer_ankh:
 	.byte "The ankh is the", $8d
 	.byte "symbol of one", $8d
 	.byte "who strives for", $8d
-	.byte "virtue, keep it", $8d
+	.byte "virtue. Keep it", $8d
 	.byte "with thee at", $8d
-	.byte "times for by", $8d
+	.byte "all times for by", $8d
 	.byte "this mark thou", $8d
 	.byte "shalt be known!", $8d
 	.byte 0
@@ -695,7 +695,7 @@ answer_abys:
 	.byte "is the darkest", $8d
 	.byte "pocket of evil", $8d
 	.byte "remaining in", $8d
-	.byte "britannia!", $8d
+	.byte "Britannia!", $8d
 	.byte 0
 
 	jsr j_waitkey
@@ -718,7 +718,7 @@ answer_abys:
 	.byte "may enter this", $8d
 	.byte "chamber, one", $8d
 	.byte "such as an", $8d
-	.byte "avatar!!!", $8d
+	.byte "Avatar!!!", $8d
 	.byte 0
 
 	jmp next_question
@@ -752,7 +752,7 @@ answer_virt:
 	jsr j_primm
 	.byte "The eight", $8d
 	.byte "virtues of the", $8d
-	.byte "avatar are:", $8d
+	.byte "Avatar are:", $8d
 	.byte 0
 
 	jsr j_waitkey
@@ -772,7 +772,7 @@ answer_virt:
 lb_intro:
 	jsr j_primm
 	.byte "Lord British", $8d
-	.byte "rises and says", $8d
+	.byte "rises and says:", $8d
 	.byte "at long last!", $8d
 	.byte 0
 
@@ -807,13 +807,13 @@ lb_intro:
 	.byte $8d
 	.byte "A champion of", $8d
 	.byte "virtue is called", $8d
-	.byte "for. Thou may be", $8d
-	.byte "this champion,", $8d
-	.byte "but only time", $8d
-	.byte "shall tell. I", $8d
-	.byte "will aid thee", $8d
-	.byte "any way that I", $8d
-	.byte "can!", $8d
+	.byte "for. Thou mayst", $8d
+	.byte "be this", $8d
+	.byte "champion, but", $8d
+	.byte "only time shall", $8d
+	.byte "tell. I will aid", $8d
+	.byte "thee any way", $8d
+	.byte "that I can!", $8d
 	.byte 0
 
 	jsr j_waitkey

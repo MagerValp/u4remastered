@@ -1,4 +1,3 @@
-import array
 import png
 
 
@@ -21,7 +20,7 @@ class ImageArray(object):
                 raise ValueError
         else:
             raise NotImplementedError
-        self.rows = list(array.array("B", [0] * width * self.bpp) for x in xrange(self.height))
+        self.rows = list(bytearray([0] * width * self.bpp) for x in range(self.height))
     
     @classmethod
     def load(cls, path):
@@ -67,7 +66,7 @@ class ImageArray(object):
         else:
             if len(value) != self.bpp:
                 raise ValueError
-            self.rows[y][x * self.bpp:(x + 1) * self.bpp] = array.array("B", value)
+            self.rows[y][x * self.bpp:(x + 1) * self.bpp] = bytearray(value)
     
     def get_pixel(self, x, y):
         if self.bpp == 1:
@@ -82,7 +81,7 @@ class ImageArray(object):
             width = image.width
         if height is None:
             height = image.height
-        for dy in xrange(height):
+        for dy in range(height):
             self.rows[to_y + dy][to_x:to_x + width] = image.rows[from_y + dy][from_x:from_x + width]
     
     def copy(self, x=0, y=0, width=None, height=None):

@@ -105,10 +105,11 @@ maybe_fight:
 @fight:
 	jmp	start_combat
 
-	jsr	pronoun_says_newline
-	jsr	j_primm
-	.byte "Go away!", $8d
-	.byte 0
+; dead code, unused in original game
+;	jsr	pronoun_says_newline
+;	jsr	j_primm
+;	.byte "Go away!", $8d
+;	.byte 0
 
 talk_prompt:
 	jsr	j_primm
@@ -574,7 +575,7 @@ give_gold_add_virtue:
 	ora	gold
 	bne	@has_gold_left
 	lda	#$03
-	ldy	#$05
+	ldy	#$04  ; cycle 1 at shrine of SACRIFICE recommends this action. Original code awarded HONOR (#$05).
 	jsr	add_virtue
 @has_gold_left:
 	lda	move_counter + 3
@@ -649,6 +650,8 @@ decline_reason:
 	bne	@experienced
 	jsr	j_primm
 	.byte "humble", 0
+
+	rts  ; BUG FIX, this was missing in original code
 
 @experienced:
 	jsr	j_primm

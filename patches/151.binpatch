@@ -14,3 +14,14 @@ offset(03f7) delete(58)
 
 # Fix stack when loading main game.
 offset(000d) match(20) replace(4c)
+
+# Improve text.
+offset(30fb) match("table, they are") replace("table. They are")
+offset(2860) delete("keen. You dare not") insert("ken. You dare not")
+offset(1d6a) delete("thy fortune to thy heirs?") insert("thy fortune to thine heirs?")
+offset(0e08) delete("beast.  When asked") insert("beast. When asked")
+offset(0ccb) delete("Thy friend seeks admittance") insert("Thy friend seeketh admittance")
+offset(0b35) delete("Thou both go out") insert("Ye both go out")
+offset(0a11) delete("thou may deny it") insert("thou mayst deny it")
+offset(09be) delete("thou may") insert("thou mayst")
+offset(0945) delete("Thou has") insert("Thou hast")

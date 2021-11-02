@@ -58,6 +58,7 @@ lt_rwflag		= $0062
 lt_addr_hi		= $0063
 monster_type		= $0066
 game_mode_temp		= $0068
+zp_index		= $006a
 moongate_tile		= $006d
 moongate_xpos		= $006e
 moongate_ypos		= $006f
@@ -157,6 +158,13 @@ map_status		= $ac00
 object_xpos		= $ac20
 object_ypos		= $ac40
 object_tile		= $ac60
+combat_foe_cur_x	= $ad00
+combat_foe_cur_y	= $ad10
+combat_foe_hp		= $ad40
+combat_foe_tile_type	= $ad50
+attack_sprite		= $adfd
+target_x		= $adfe
+target_y		= $adff
 currmap 		= $ae00
 tempmap 		= $ae80
 inbuffer		= $af00
@@ -168,6 +176,11 @@ chrlineaddr_lo		= $e180
 chrlineaddr_hi		= $e198
 tile_color		= $e1b0
 music_init		= $ec00
+
+foes_max = $0f
+sound_damage = $06
+tile_attack_red = $4f
+tile_lord_british = $5e
 
 
 	.segment "OVERLAY"
@@ -405,6 +418,10 @@ use_skull:
 	jsr shake_screen
 	jsr j_invertview
 	jsr shake_screen
+	
+	lda game_mode              ; ENHANCED
+	bmi use_skull_in_combat    ; ENHANCED
+
 	ldx #$07
 	lda #$00
 @clear:
@@ -413,6 +430,7 @@ use_skull:
 	dex
 	bpl @clear
 	jsr j_update_view
+skull_penalty:
 	lda #$07
 	sta $6a
 @next_virtue:
@@ -437,7 +455,7 @@ use_skull_at_abyss:
 	lda #$07
 	sta $6a
 @next_virtue:
-	ldy #$6a
+	ldy $6a ; BUG FIX, was #$6a in original
 	lda #$10
 	jsr inc_virtue
 	dec $6a
@@ -448,6 +466,35 @@ use_skull_at_abyss:
 	jsr j_invertview
 	jsr shake_screen
 	rts
+
+; ENHANCED: skull in combat kills combatants, not out-of-combat mobs
+use_skull_in_combat:
+	ldx #foes_max
+@next:
+	lda combat_foe_tile_type,x
+	beq @skip
+	cmp #tile_lord_british
+	beq @skip
+@kill_foe:
+	stx zp_index
+	lda combat_foe_cur_x,x
+	sta target_x
+	lda combat_foe_cur_y,x
+	sta target_y
+	lda #tile_attack_red
+	sta attack_sprite
+	jsr j_update_view_combat
+	lda #sound_damage
+	jsr j_playsfx
+	ldx zp_index
+	lda #$00
+	sta attack_sprite
+	sta combat_foe_hp,x
+	sta combat_foe_tile_type,x
+@skip:
+	dex
+	bpl @next
+	jmp skull_penalty
 
 get_input:
 	lda #$bf
@@ -563,7 +610,7 @@ shake_down:
 	bne @copy
 	jsr j_rand
 	bmi @skip
-	bit j_togglesnd
+	jsr j_togglesnd  ;BUGFIX: opcode was 'bit'
 @skip:
 	dex
 	bne @next
@@ -591,7 +638,7 @@ shake_up:
 	bne @copy
 	jsr j_rand
 	bmi @skip
-	bit j_togglesnd
+	jsr j_togglesnd  ;BUGFIX: opcode was 'bit'
 @skip:
 	inx
 	cpx #$ae

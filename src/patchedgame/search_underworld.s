@@ -413,7 +413,7 @@ print_color:
 	cmp #$01
 	beq @yellow
 	cmp #$02
-	beq @read
+	beq @red
 	cmp #$03
 	beq @green
 	cmp #$04
@@ -432,7 +432,7 @@ print_color:
 
 	rts
 
-@read:
+@red:
 	jsr j_primm
 	.byte "red", 0
 

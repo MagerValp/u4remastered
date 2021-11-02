@@ -22,7 +22,7 @@ SAVEGAME=untouched
 CRT_BINS=src/easyflash/efs.bin
 
 # Tweak to trade off compressed size for compression speed.
-EXOMIZER_MAX_OFFSET=16384
+EXOMIZER_MAX_OFFSET=65535
 
 
 %.o: %.c
@@ -47,9 +47,9 @@ clean_tools:
 
 # Game files.
 
-MAP_FILES = $(shell python -c 'for x in range(256): print "map_%02x" % x')
-TLK_FILES = $(shell python -c 'for x in range(256): print "tlk_%02x" % x')
-DNG_FILES = $(shell python -c 'for x in range(176): print "dng_%02x" % x')
+MAP_FILES = $(shell python3 -c 'for x in range(256): print("map_%02x" % x)')
+TLK_FILES = $(shell python3 -c 'for x in range(256): print("tlk_%02x" % x)')
+DNG_FILES = $(shell python3 -c 'for x in range(176): print("dng_%02x" % x)')
 
 # Changing these requires a clean rebuild.
 BOOT_FILES = \
@@ -97,7 +97,7 @@ EXTRACTED_MAP_FILES = $(patsubst %,files/extracted/%.bin,$(MAP_FILES))
 EXTRACTED_TLK_FILES = $(patsubst %,files/extracted/%.bin,$(TLK_FILES))
 EXTRACTED_DNG_FILES = $(patsubst %,files/extracted/%.bin,$(DNG_FILES))
 
-EXTRACT_TMP := $(shell mktemp -d -u -t u4remastered)
+EXTRACT_TMP := $(shell mktemp -d -u -t u4remastered_XXXXXXXXXX)
 
 files/extracted: $(DISK_IMAGES) files/filemap.txt tools/extract_files.py
 	rm -rf $(EXTRACT_TMP)
@@ -123,7 +123,7 @@ files/patched: files/extracted
 	touch $@
 
 files/patched/%.prg: src/charcreate/%.koa | files/patched
-	python -c 'import sys; sys.stdout.write("\x00\x40")' > $@
+	python3 -c 'import sys; sys.stdout.write("\x00\x40")' > $@
 	dd if=$< of=$@ bs=1 skip=2    seek=2    count=5888 2> /dev/null
 	dd if=$< of=$@ bs=1 skip=8002 seek=5890 count=768  2> /dev/null
 	dd if=$< of=$@ bs=1 skip=9002 seek=6658 count=768  2> /dev/null
@@ -284,6 +284,7 @@ clean_tiles:
 	rm -f src/tiles/font.bin
 	rm -f src/tiles/tileset.bin
 	rm -f src/tiles/tilebitmap.prg
+	rm -f src/tiles/tilebitmap.map
 
 
 # Character creation.
@@ -369,10 +370,12 @@ clean_talk:
 
 clean_patchedgame: \
 		clean_lord_british \
+		clean_shops \
 		clean_search \
 		clean_use \
 		clean_shrine \
 		clean_camp \
+		clean_end_game \
 		clean_subs \
 		clean_dungeon \
 		clean_peer
@@ -436,6 +439,28 @@ clean_lord_british:
 	rm -f files/patched/287.prg
 	rm -f files/patched/288.prg
 
+# Shops.
+# (Identical to original, except where BUG FIX noted in .s files,
+# reconstructed to allow more bytes for text corrections.)
+
+files/patched/36d.prg: src/patchedgame/shop_weapons.prg | files/patched
+	cp $< $@
+
+files/patched/36e.prg: src/patchedgame/shop_armour.prg | files/patched
+	cp $< $@
+
+files/patched/372.prg: src/patchedgame/shop_healer.prg | files/patched
+	cp $< $@
+
+files/patched/376.prg: src/patchedgame/seer.prg | files/patched
+	cp $< $@
+
+clean_shops:
+	rm -f files/patched/36d.prg
+	rm -f files/patched/36e.prg
+	rm -f files/patched/372.prg
+	rm -f files/patched/376.prg
+
 # Search.
 
 files/patched/279.prg: src/patchedgame/search_britannia.prg | files/patched
@@ -483,6 +508,14 @@ files/patched/285.prg: src/patchedgame/camp.prg | files/patched
 
 clean_camp:
 	rm -f files/patched/285.prg
+
+# End game.
+
+files/patched/49a.prg: src/patchedgame/end_game.prg | files/patched
+	cp $< $@
+
+clean_end_game:
+	rm -f files/patched/49a.prg
 
 # Implicit rule.
 
@@ -968,13 +1001,14 @@ src/easyflash/efs.bin: src/easyflash/menu.bin $(EFS_FILES)
 	cat $^ > $@
 
 src/easyflash/padded.bin: src/easyflash/efs.bin
-	python -c "import sys; sys.stdout.write('\xff' * 0x4000 * $(EASYFLASH_SAVE_BANK))" > $@
+	python3 -c "import sys; sys.stdout.write('\xff' * 0x4000 * $(EASYFLASH_SAVE_BANK))" > $@
 	dd if=$< of=$@ bs=16k conv=notrunc 2> /dev/null
 
 src/easyflash/efssg.bin: $(SAVEGAME_FILES)
 	tools/makeefssg.py $(EASYFLASH_SAVE_SIZE) $@ $(SAVEGAME_FILES)
 
 u4remastered.crt: $(CRT_BINS)
+	@echo "Creating $@"
 	cat $^ > src/easyflash/easyflash.bin
 	tools/gen_ef_crt.py src/easyflash/easyflash.bin $@
 	rm -f src/easyflash/easyflash.bin
@@ -994,6 +1028,12 @@ clean_cartridge:
 	rm -f src/easyflash/efssg.bin
 	rm -f src/easyflash/padded.bin
 	rm -f u4remastered.crt
+
+
+clean_tempfiles:
+	find . -name '*.bak' -delete
+	find . -name '*.orig' -delete
+	find . -name '*.\~*' -delete
 
 
 .PHONY: clean

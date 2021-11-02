@@ -1,0 +1,9 @@
+# Patch misaligned ladder in Wrong level 4.
+
+offset(00da) match(f0 00 00 00 00 00 f0 10) replace(f0 00 00 00 00 00 f0 40)
+offset(00e2) match(f0 00 f0 d2 f0 00 f0 40) replace(f0 00 f0 d2 f0 00 f0 10)
+
+
+# Patch missing ladder in Wrong level 6.
+
+offset(019a) match(f0 00 00 f0 00 00 f0 40) replace(f0 00 00 f0 20 00 f0 40)

@@ -1,5 +1,95 @@
 # Ultima IV Remastered Changelog
 
+## v2.4.1 (2021-10-22)
+
+### Critical Bugs
+
+* Fix graphics corruption in endgame leading to crash. Introduced with 2.4.0
+
+### Other Errors
+
+* Two ladders in dungeon "Wrong" are mis-matched.
+* Dungeon "Covetous" has a room whose east exit is obstructed.
+* Cooldown timer for Hawkwind's virtue reward should match timer for shrine.
+* Cooldown timer for reagent searches should not reset when search finds non-reagents.
+
+
+## v2.4.0 (2021-09-05)
+
+More fixes by Sean Gugler.
+
+### Critical Bugs
+
+* Stack overflow when ship sinks with player aboard.
+
+### Other Errors
+
+* Clear keyboard in Shrine mis-copied from Apple II.
+* Better NPC choice for restoring Thevel - pick the unmoving Joe, not one of the mobile ones.
+* Skull use in battlefield should affect combatants, not clear outer world of wandering monsters.
+* Skull use in dungeon only immobilizes wandering monsters, doesn't kill them.
+* Skull cannot be used in *any* dungeon rooms; fixed to behave normally except in abyss, where it is disallowed entirely.
+* Player can be attacked by bridge trolls while drifting across in the balloon.
+* Dismounting horse in certain townes causes a random NPC to vanish.
+* Chests dropped by townespeople can be talked to.
+
+### Cosmetic Mistakes
+
+* Using skull in Britannia is silent.
+* More text revisions.
+* Ankh doesn't immediately update after attacking townsfolk and losing virtues.
+* Animation flicker when attacking an east-facing horse.
+* Original graphics for energy fields restored.
+
+### Enhancements
+
+* Gender question did not support non-binary; add a neutral symbol.
+* Library shelf lettering made one puzzle somewhat awkward.
+* More source code: end_game.s
+* Hard-coded string table offset in Shrine replaced with symbol.
+* Allow player to initiate attack in dungeon, after using trainer to avoid.
+* Teleport trainer only wipes monsters from map, preserve any chests and transports.
+* Proper descriptions for non-human NPCs instead of "phantom".
+* Campfire NPC remains stationary in combat and spits fire.
+* Ctrl+V turns sound effects on and off during play.
+* Balloon trainer can klimb twice to drift, descend to steer again.
+
+
+## v2.3.0 (2021-03-25)
+
+* Added fixes from Sean Gugler for the following issues.
+
+### Critical Bugs
+
+* Stack overflow every moongate jump.
+* Stack overflow using Ztats during combat.
+* Stack overflow using Z-down spell at bottom of dungeon.
+* Stack underflow if characters attempt to take different exits from dungeon room.
+* Morning after inn wakes sleeping characters with invalid status 'A'.
+
+### Other Errors
+
+* Cannot talk to the healer in Serpent's Hold castle.
+* Enemy strength for non-monsters was calculated wrong.
+* Completion of skull quest grants awards to wrong area of memory.
+* NPC questions worded as humility tests were not flagged to affect virtue: Browning, Aristotle, Santayana, Slysam.
+* Following advice from cycle 1 at shrine of sacrifice mistakenly awards honor points.
+* Trainer improperly initializes "Idle" cheat.
+
+### Cosmetic Mistakes
+
+* Katrina prints both excuses if virtue is too low ("Thou art not humbleexperienced enough").
+* Ztats display of 3-part key is truncated if you have bell or book but not candle.
+* Spells cast by healer shopkeepers are supposed to have the display inversion effect.
+* Spelling, capitalization, and grammar.
+* Added more disassembly to fix text issues that can't be patched in place.
+
+### Enhancements
+
+* Additional torch brightness level in dungeon, full white as in original game.
+* Trainer for fair buy-back prices.
+* Documented zero-page flag "last_meditated".
+
 
 ## v2.2.1 (2015-05-29)
 
